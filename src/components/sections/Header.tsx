@@ -8,6 +8,7 @@ const navLinks = [
   { label: "課題", href: "#problem" },
   { label: "サービス", href: "#services" },
   { label: "進め方", href: "#approach" },
+  { label: "会社情報", href: "#company" },
 ];
 
 export default function Header() {

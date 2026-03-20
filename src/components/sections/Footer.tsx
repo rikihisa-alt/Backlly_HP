@@ -2,9 +2,9 @@ import { siteContent } from "@/data/content";
 
 const navLinks = [
   { label: "課題", href: "#problem" },
-  { label: "導線", href: "#routing" },
   { label: "サービス", href: "#services" },
   { label: "進め方", href: "#approach" },
+  { label: "会社情報", href: "#company" },
   { label: "お問い合わせ", href: "#contact" },
 ];
 

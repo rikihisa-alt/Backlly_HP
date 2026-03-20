@@ -17,7 +17,7 @@ export default function CTA() {
         <SectionLabel color="cyan">CONTACT</SectionLabel>
 
         <motion.h2
-          className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12"
+          className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -25,28 +25,33 @@ export default function CTA() {
           {cta.headline}
         </motion.h2>
 
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+        <motion.p
+          className="text-white/60 text-base md:text-lg mb-12"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          {cta.subline}
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4, duration: 0.5 }}
         >
           <Button variant="primary" size="lg">
             {cta.ctaPrimary}
           </Button>
-          <Button variant="secondary" size="lg">
-            <span className="text-white border-white">{cta.ctaSecondary}</span>
-          </Button>
+          <motion.a
+            href="#contact"
+            className="inline-block px-8 py-4 text-lg font-medium font-sans rounded border border-white/40 text-white hover:bg-white/10 transition-colors duration-200"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            {cta.ctaSecondary}
+          </motion.a>
         </motion.div>
-
-        <motion.p
-          className="text-white/60 text-sm"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          まずはお気軽にご相談ください
-        </motion.p>
       </div>
     </section>
   );

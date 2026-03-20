@@ -47,11 +47,46 @@ export interface ServiceItem {
 }
 
 export interface StrengthItem {
-  text: string;
+  title: string;
+  description: string;
+}
+
+export interface VisionContent {
+  headline: string;
+  body: string[];
+}
+
+export interface FoundingContent {
+  headline: string;
+  body: string[];
+  issues: string[];
+  closing: string;
+}
+
+export interface CEOMessageContent {
+  headline: string;
+  body: string[];
+}
+
+export interface CompanyInfoContent {
+  headline: string;
+  name: string;
+  representative: string;
+  location: string;
+  phone: string;
+  services: string[];
+}
+
+export interface TrustContent {
+  targetHeadline: string;
+  targets: string[];
+  scopeHeadline: string;
+  scopes: string[];
 }
 
 export interface CTAContent {
   headline: string;
+  subline: string;
   ctaPrimary: string;
   ctaSecondary: string;
 }
@@ -74,6 +109,11 @@ export interface SiteContent {
   approach: ApproachContent;
   services: ServiceItem[];
   strengths: StrengthItem[];
+  vision: VisionContent;
+  founding: FoundingContent;
+  ceoMessage: CEOMessageContent;
+  companyInfo: CompanyInfoContent;
+  trust: TrustContent;
   cta: CTAContent;
   footer: FooterContent;
   company: CompanyInfo;
