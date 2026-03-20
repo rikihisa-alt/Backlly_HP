@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { siteContent } from "@/data/content";
 
@@ -25,11 +26,21 @@ export default function Services() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.15, duration: 0.5 }}
             >
-              {/* Left - Label */}
+              {/* Left - Label & Logo */}
               <div className="md:w-1/4 mb-4 md:mb-0 flex-shrink-0">
-                <h3 className="font-serif text-2xl md:text-3xl font-bold text-navy">
-                  {service.name}
-                </h3>
+                {service.logo ? (
+                  <Image
+                    src={service.logo}
+                    alt={service.name}
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto mb-3"
+                  />
+                ) : (
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-navy">
+                    {service.name}
+                  </h3>
+                )}
                 <span className="font-mono text-sm text-cyan tracking-wider">
                   {service.tagline}
                 </span>

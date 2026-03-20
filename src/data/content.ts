@@ -85,12 +85,14 @@ export const siteContent: SiteContent = {
       name: "B-Hall",
       tagline: "バックオフィス基盤",
       description: "申請・管理・可視化を一元化するシステム",
+      logo: "/images/logo-bhall.png",
     },
     {
       id: "bcore",
       name: "B-Core",
       tagline: "個社専用開発",
       description: "自社業務に最適化したシステムを実装する",
+      logo: "/images/logo-bcore.png",
     },
   ],
   strengths: [

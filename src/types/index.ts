@@ -44,6 +44,7 @@ export interface ServiceItem {
   name: string;
   tagline: string;
   description: string;
+  logo?: string;
 }
 
 export interface StrengthItem {

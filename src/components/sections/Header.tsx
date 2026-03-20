@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
@@ -29,8 +30,15 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
         {/* Logo */}
-        <a href="#" className="font-serif text-xl font-bold text-navy">
-          Backlly
+        <a href="#" className="flex items-center">
+          <Image
+            src="/images/logo-backlly.png"
+            alt="Backlly"
+            width={120}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </a>
 
         {/* Desktop nav */}
