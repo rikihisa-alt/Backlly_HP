@@ -42,14 +42,10 @@ export interface ApproachContent {
 export interface ServiceItem {
   id: string;
   name: string;
+  label: string;
   tagline: string;
   description: string;
   logo?: string;
-}
-
-export interface StrengthItem {
-  title: string;
-  description: string;
 }
 
 export interface VisionContent {
@@ -57,11 +53,25 @@ export interface VisionContent {
   body: string[];
 }
 
-export interface FoundingContent {
+export interface MissionContent {
   headline: string;
   body: string[];
-  issues: string[];
-  closing: string;
+}
+
+export interface ValueItem {
+  title: string;
+  description: string;
+}
+
+export interface CaseStudyItem {
+  client: string;
+  description: string;
+  result: string;
+}
+
+export interface StrengthItem {
+  title: string;
+  description: string;
 }
 
 export interface CEOMessageContent {
@@ -78,28 +88,22 @@ export interface CompanyInfoContent {
   services: string[];
 }
 
-export interface TrustContent {
-  targetHeadline: string;
-  targets: string[];
-  scopeHeadline: string;
-  scopes: string[];
+export interface FAQItem {
+  question: string;
+  answer: string;
 }
 
 export interface CTAContent {
   headline: string;
   subline: string;
+  examples: string[];
   ctaPrimary: string;
-  ctaSecondary: string;
 }
 
 export interface FooterContent {
   name: string;
   catchphrase: string;
   copyright: string;
-}
-
-export interface CompanyInfo {
-  name: string;
 }
 
 export interface SiteContent {
@@ -109,13 +113,15 @@ export interface SiteContent {
   solution: SolutionContent;
   approach: ApproachContent;
   services: ServiceItem[];
-  strengths: StrengthItem[];
   vision: VisionContent;
-  founding: FoundingContent;
+  mission: MissionContent;
+  values: ValueItem[];
+  caseStudies: CaseStudyItem[];
+  strengths: StrengthItem[];
   ceoMessage: CEOMessageContent;
   companyInfo: CompanyInfoContent;
-  trust: TrustContent;
+  faq: FAQItem[];
   cta: CTAContent;
   footer: FooterContent;
-  company: CompanyInfo;
+  differentiator: string;
 }

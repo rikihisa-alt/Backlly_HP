@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #F7F8FA;
+  --color-bg: #F8FAFC;
   --color-bg-white: #FFFFFF;
-  --color-navy: #0D1B2A;
-  --color-navy-mid: #1C3352;
-  --color-cyan: #00C2CB;
-  --color-cyan-soft: #E0F7F8;
-  --color-text: #1A1A2E;
-  --color-text-muted: #6B7280;
+  --color-navy: #0F172A;
+  --color-navy-mid: #1E293B;
+  --color-cyan: #06B6D4;
+  --color-cyan-soft: #E0F7FA;
+  --color-text: #0F172A;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
 }
 
 html {
@@ -21,4 +22,9 @@ body {
   color: var(--color-text);
   background: var(--color-bg-white);
   font-family: var(--font-noto-sans-jp), sans-serif;
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: #fff;
 }

@@ -9,19 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#F7F8FA",
+        bg: "#F8FAFC",
         "bg-white": "#FFFFFF",
-        navy: "#0D1B2A",
-        "navy-mid": "#1C3352",
-        cyan: "#00C2CB",
-        "cyan-soft": "#E0F7F8",
-        text: "#1A1A2E",
-        "text-muted": "#6B7280",
+        navy: "#0F172A",
+        "navy-mid": "#1E293B",
+        cyan: "#06B6D4",
+        "cyan-soft": "#E0F7FA",
+        text: "#0F172A",
+        "text-muted": "#64748B",
+        border: "#E2E8F0",
       },
       fontFamily: {
         serif: ["var(--font-noto-serif-jp)", "serif"],
-        sans: ["var(--font-noto-sans-jp)", "sans-serif"],
+        sans: ["var(--font-noto-sans-jp)", "Inter", "sans-serif"],
         mono: ["var(--font-dm-mono)", "monospace"],
+      },
+      spacing: {
+        section: "120px",
       },
     },
   },

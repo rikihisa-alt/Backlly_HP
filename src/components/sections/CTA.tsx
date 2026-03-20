@@ -12,12 +12,20 @@ export default function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-32 bg-navy" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
+    <section id="contact" className="py-section bg-navy relative overflow-hidden" ref={ref}>
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <SectionLabel color="cyan">CONTACT</SectionLabel>
 
         <motion.h2
-          className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+          className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-snug"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -26,7 +34,7 @@ export default function CTA() {
         </motion.h2>
 
         <motion.p
-          className="text-white/60 text-base md:text-lg mb-12"
+          className="text-white/50 text-sm md:text-base mb-10 max-w-xl"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -35,22 +43,30 @@ export default function CTA() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="mb-12 space-y-2"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <p className="text-white/30 text-xs font-mono tracking-wider uppercase mb-3">
+            相談内容例
+          </p>
+          {cta.examples.map((example, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="w-1 h-1 rounded-full bg-cyan/50" />
+              <span className="text-white/60 text-sm">{example}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
           <Button variant="primary" size="lg">
             {cta.ctaPrimary}
           </Button>
-          <motion.a
-            href="#contact"
-            className="inline-block px-8 py-4 text-lg font-medium font-sans rounded border border-white/40 text-white hover:bg-white/10 transition-colors duration-200"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            {cta.ctaSecondary}
-          </motion.a>
         </motion.div>
       </div>
     </section>
