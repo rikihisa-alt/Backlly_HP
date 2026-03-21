@@ -12,7 +12,7 @@ export default function Strengths() {
 
   return (
     <section className="py-section bg-bg-white" ref={ref}>
-      <div className="max-w-3xl mx-auto px-6 md:px-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
         <SectionLabel>STRENGTH</SectionLabel>
 
         <motion.h2
