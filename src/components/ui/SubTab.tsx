@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SubTabItem {
   label: string;
@@ -35,17 +36,17 @@ export default function SubTab({ items, onItemClick }: SubTabProps) {
           />
         </div>
 
-        {/* Tab items — right aligned */}
+        {/* Tab items */}
         <div className="flex items-center gap-8">
           {items.map((item) => (
-            <a
-              key={item.href}
+            <Link
+              key={item.label}
               href={item.href}
               className="text-sm text-text-muted hover:text-navy transition-colors"
               onClick={onItemClick}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

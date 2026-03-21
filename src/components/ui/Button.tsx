@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "ghost" | "light";
@@ -8,6 +9,7 @@ interface ButtonProps {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
+  external?: boolean;
 }
 
 const variantStyles = {
@@ -33,19 +35,31 @@ export default function Button({
   children,
   href,
   onClick,
+  external,
 }: ButtonProps) {
   const className = `inline-block font-sans font-medium rounded-lg transition-all duration-200 ${variantStyles[variant]} ${sizeStyles[size]}`;
 
   if (href) {
+    const isExternal = external || href.startsWith("http");
+    if (isExternal) {
+      return (
+        <motion.a
+          href={href}
+          className={className}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.02, y: -1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          {children}
+        </motion.a>
+      );
+    }
+
     return (
-      <motion.a
-        href={href}
-        className={className}
-        whileHover={{ scale: 1.02, y: -1 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      >
+      <Link href={href} className={className}>
         {children}
-      </motion.a>
+      </Link>
     );
   }
 

@@ -3,30 +3,31 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import SubTab from "@/components/ui/SubTab";
 
 type ActiveTab = "service" | "works" | null;
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Service", href: "#services", tab: "service" as const },
-  { label: "Works", href: "#results", tab: "works" as const },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Company", href: "#company" },
-  { label: "FAQ", href: "#faq" },
+  { label: "About", href: "/company" },
+  { label: "Service", href: "/service", tab: "service" as const },
+  { label: "Works", href: "/works", tab: "works" as const },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Company", href: "/company" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "#contact" },
 ];
 
 const serviceTabItems = [
-  { label: "コンサル", href: "#services" },
-  { label: "B-Hall", href: "#services" },
-  { label: "B-Core", href: "#services" },
+  { label: "コンサル", href: "/service#consulting" },
+  { label: "B-Hall", href: "/service#bhall" },
+  { label: "B-Core", href: "/service#bcore" },
 ];
 
 const worksTabItems = [
-  { label: "導入事例", href: "#results" },
-  { label: "業界別事例", href: "#results" },
+  { label: "導入事例", href: "/works" },
+  { label: "業界別事例", href: "/works#industry" },
 ];
 
 export default function Header() {
@@ -89,32 +90,37 @@ export default function Header() {
     >
       {/* Upper bar */}
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
-        {/* Logo — bigger */}
-        <a href="#" className="flex items-center">
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
           <Image
             src="/images/logo-backlly.png"
             alt="Backlly"
             width={240}
             height={64}
-            className="h-12 md:h-14 w-auto"
+            className="h-14 md:h-16 w-auto"
+            style={{ objectFit: "contain", objectPosition: "left center" }}
             priority
           />
-        </a>
+        </Link>
 
-        {/* Desktop nav — right aligned */}
+        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href + link.label}
-              href={link.href}
-              className="text-sm text-text-muted hover:text-navy transition-colors tracking-wide"
-              onMouseEnter={() => handleNavEnter(link.tab ?? null)}
-              onMouseLeave={handleNavLeave}
-              onFocus={() => handleNavEnter(link.tab ?? null)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isHash = link.href.startsWith("#");
+            const El = isHash ? "a" : Link;
+            return (
+              <El
+                key={link.href + link.label}
+                href={link.href}
+                className="text-sm text-text-muted hover:text-navy transition-colors tracking-wide"
+                onMouseEnter={() => handleNavEnter(link.tab ?? null)}
+                onMouseLeave={handleNavLeave}
+                onFocus={() => handleNavEnter(link.tab ?? null)}
+              >
+                {link.label}
+              </El>
+            );
+          })}
           <Button variant="primary" size="sm" href="#contact">
             無料相談
           </Button>
@@ -147,7 +153,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Desktop SubTab — lower bar */}
+      {/* Desktop SubTab */}
       <AnimatePresence>
         {activeTab && (
           <div
@@ -212,14 +218,14 @@ export default function Header() {
                             >
                               <div className="pl-4 pb-2 flex flex-col gap-1 border-l-2 border-cyan/20 ml-1">
                                 {subItems.map((sub) => (
-                                  <a
+                                  <Link
                                     key={sub.label}
                                     href={sub.href}
                                     className="text-sm text-text-muted hover:text-navy transition-colors py-2"
                                     onClick={() => setMenuOpen(false)}
                                   >
                                     {sub.label}
-                                  </a>
+                                  </Link>
                                 ))}
                               </div>
                             </motion.div>
@@ -227,13 +233,13 @@ export default function Header() {
                         </AnimatePresence>
                       </>
                     ) : (
-                      <a
+                      <Link
                         href={link.href}
                         className="block text-text-muted hover:text-navy transition-colors py-3"
                         onClick={() => setMenuOpen(false)}
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     )}
                   </div>
                 );
