@@ -97,7 +97,7 @@ export default function Header() {
             alt="Backlly"
             width={240}
             height={64}
-            className="h-14 md:h-16 w-auto"
+            className="h-8 md:h-9 w-auto"
             style={{ objectFit: "contain", objectPosition: "left center" }}
             priority
           />
