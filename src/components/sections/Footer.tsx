@@ -4,6 +4,10 @@ import { siteContent } from "@/data/content";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Service", href: "#services" },
+  { label: "Works", href: "#results" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Company", href: "#company" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -18,9 +22,9 @@ export default function Footer() {
             <Image
               src="/images/logo-backlly.png"
               alt="Backlly"
-              width={100}
-              height={28}
-              className="h-7 w-auto mb-4 brightness-0 invert opacity-70"
+              width={120}
+              height={32}
+              className="h-8 w-auto mb-4 brightness-0 invert opacity-70"
             />
             <p className="text-white/25 text-sm">
               {footer.catchphrase}
@@ -30,7 +34,7 @@ export default function Footer() {
           <nav className="flex flex-wrap gap-x-8 gap-y-3">
             {navLinks.map((link) => (
               <a
-                key={link.href}
+                key={link.href + link.label}
                 href={link.href}
                 className="text-white/35 text-sm hover:text-white/60 transition-colors"
               >

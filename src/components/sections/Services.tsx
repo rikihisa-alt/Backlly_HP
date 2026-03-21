@@ -6,46 +6,6 @@ import Image from "next/image";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { siteContent } from "@/data/content";
 
-function BHallMock() {
-  return (
-    <motion.div
-      className="mt-8 mb-4 rounded-lg border border-border bg-bg-white overflow-hidden shadow-sm max-w-md"
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.6, duration: 0.5 }}
-    >
-      {/* Title bar */}
-      <div className="bg-bg px-4 py-3 border-b border-border flex items-center gap-2">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-border" />
-          <div className="w-2.5 h-2.5 rounded-full bg-border" />
-          <div className="w-2.5 h-2.5 rounded-full bg-border" />
-        </div>
-        <span className="text-xs text-text-muted ml-2 font-mono">B-Hall Dashboard</span>
-      </div>
-      {/* Mock content */}
-      <div className="p-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-text-muted">承認待ち</span>
-          <span className="text-xs font-mono text-cyan">3件</span>
-        </div>
-        <div className="h-[1px] bg-border" />
-        <div className="space-y-2">
-          {["経費申請 - 田中", "備品発注 - 佐藤", "休暇申請 - 鈴木"].map((item, i) => (
-            <div key={i} className="flex items-center justify-between py-1.5">
-              <span className="text-xs text-text">{item}</span>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-cyan/10 text-cyan font-medium">
-                対応中
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 function FlowArrowDown() {
   return (
     <div className="flex justify-start pl-[2px] py-3">
@@ -119,9 +79,6 @@ export default function Services() {
                 <p className="text-text-muted text-sm md:text-base leading-relaxed max-w-lg">
                   {service.description}
                 </p>
-
-                {/* B-Hall UI mock */}
-                {service.id === "bhall" && <BHallMock />}
               </motion.div>
 
               {i < services.length - 1 && (

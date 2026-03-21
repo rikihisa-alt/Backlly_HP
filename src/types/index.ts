@@ -65,8 +65,11 @@ export interface ValueItem {
 
 export interface CaseStudyItem {
   client: string;
-  description: string;
+  industry: string;
+  challenge: string;
+  support: string;
   result: string;
+  description: string;
 }
 
 export interface StrengthItem {
@@ -86,6 +89,10 @@ export interface CompanyInfoContent {
   location: string;
   phone: string;
   services: string[];
+  businessDescription: string;
+  supportStructure: string;
+  scope: string;
+  responseTime: string;
 }
 
 export interface FAQItem {
@@ -106,6 +113,16 @@ export interface FooterContent {
   copyright: string;
 }
 
+export interface TrustStat {
+  value: string;
+  label: string;
+}
+
+export interface ConsultTopic {
+  title: string;
+  description: string;
+}
+
 export interface SiteContent {
   hero: HeroContent;
   problem: ProblemContent;
@@ -124,4 +141,6 @@ export interface SiteContent {
   cta: CTAContent;
   footer: FooterContent;
   differentiator: string;
+  trustStats: TrustStat[];
+  consultTopics: ConsultTopic[];
 }

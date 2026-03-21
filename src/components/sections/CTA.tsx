@@ -59,13 +59,18 @@ export default function CTA() {
           ))}
         </motion.div>
 
+        {/* Dual CTA buttons */}
         <motion.div
+          className="flex flex-col sm:flex-row items-start gap-4"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Button variant="primary" size="lg">
+          <Button variant="light" size="lg" href="#contact">
             {cta.ctaPrimary}
+          </Button>
+          <Button variant="ghost" size="lg" href="#download">
+            <span className="text-white/60 hover:text-white">資料をダウンロード</span>
           </Button>
         </motion.div>
       </div>

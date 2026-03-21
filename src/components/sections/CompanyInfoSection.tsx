@@ -10,7 +10,7 @@ export default function CompanyInfoSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const rows = [
+  const basicRows = [
     { label: "会社名", value: companyInfo.name },
     { label: "代表取締役", value: companyInfo.representative },
     { label: "所在地", value: companyInfo.location },
@@ -29,7 +29,7 @@ export default function CompanyInfoSection() {
         </motion.div>
 
         <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-14"
+          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -37,12 +37,23 @@ export default function CompanyInfoSection() {
           {companyInfo.headline}
         </motion.h2>
 
+        {/* Business description */}
+        <motion.p
+          className="text-text-muted text-sm md:text-base leading-relaxed mb-14 max-w-xl"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.25, duration: 0.5 }}
+        >
+          {companyInfo.businessDescription}
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {rows.map((row, i) => (
+          {/* Basic info */}
+          {basicRows.map((row, i) => (
             <div
               key={i}
               className="flex flex-col sm:flex-row border-b border-border py-5"
@@ -56,6 +67,7 @@ export default function CompanyInfoSection() {
             </div>
           ))}
 
+          {/* Services */}
           <div className="flex flex-col sm:flex-row border-b border-border py-5">
             <span className="text-text-muted text-sm w-32 flex-shrink-0 mb-1 sm:mb-0">
               事業内容
@@ -67,6 +79,36 @@ export default function CompanyInfoSection() {
                 </p>
               ))}
             </div>
+          </div>
+
+          {/* Support structure */}
+          <div className="flex flex-col sm:flex-row border-b border-border py-5">
+            <span className="text-text-muted text-sm w-32 flex-shrink-0 mb-1 sm:mb-0">
+              支援体制
+            </span>
+            <span className="text-text text-sm md:text-base leading-relaxed">
+              {companyInfo.supportStructure}
+            </span>
+          </div>
+
+          {/* Scope */}
+          <div className="flex flex-col sm:flex-row border-b border-border py-5">
+            <span className="text-text-muted text-sm w-32 flex-shrink-0 mb-1 sm:mb-0">
+              対応範囲
+            </span>
+            <span className="text-text text-sm md:text-base">
+              {companyInfo.scope}
+            </span>
+          </div>
+
+          {/* Response time */}
+          <div className="flex flex-col sm:flex-row border-b border-border py-5">
+            <span className="text-text-muted text-sm w-32 flex-shrink-0 mb-1 sm:mb-0">
+              返信目安
+            </span>
+            <span className="text-text text-sm md:text-base">
+              {companyInfo.responseTime}
+            </span>
           </div>
         </motion.div>
       </div>
