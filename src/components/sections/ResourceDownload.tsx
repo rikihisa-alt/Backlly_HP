@@ -1,108 +1,133 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import SectionLabel from "@/components/ui/SectionLabel";
+import ResourceCard from "@/components/ui/ResourceCard";
+import DownloadModal from "@/components/ui/DownloadModal";
 
-const resources = [
+export interface ResourceItem {
+  title: string;
+  description: string;
+  buttonLabel: string;
+  type: string;
+  href: string;
+  /** ページ数目安 */
+  pages?: string;
+}
+
+const resources: ResourceItem[] = [
   {
     title: "サービス資料",
-    description: "Backllyのサービス内容・支援範囲・導入フローをまとめた資料です。",
+    description:
+      "Backllyの支援内容、支援範囲、進め方、対応できる課題、導入対象となる企業像までをまとめた資料です。",
+    buttonLabel: "サービス資料をダウンロード",
     type: "PDF",
     href: "/docs/service-guide.pdf",
+    pages: "全12ページ",
   },
   {
     title: "料金資料",
-    description: "各サービスの料金体系・プラン比較をご確認いただけます。",
+    description:
+      "支援内容ごとの料金の考え方、費用帯、見積もりの考え方、導入パターン別の費用感をまとめた資料です。",
+    buttonLabel: "料金資料をダウンロード",
     type: "PDF",
     href: "/docs/pricing-guide.pdf",
+    pages: "全8ページ",
   },
   {
     title: "導入事例資料",
-    description: "業種別の導入事例と具体的な成果をまとめた資料です。",
+    description:
+      "業種別の課題、支援内容、導入後の変化、成果イメージをまとめた資料です。",
+    buttonLabel: "導入事例資料をダウンロード",
     type: "PDF",
     href: "/docs/case-studies.pdf",
+    pages: "全10ページ",
   },
 ];
 
 export default function ResourceDownload() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [modalResource, setModalResource] = useState<ResourceItem | null>(null);
 
   return (
-    <section id="download" className="py-section bg-bg-white" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionLabel>DOWNLOAD</SectionLabel>
-        </motion.div>
+    <>
+      <section id="download" className="py-section bg-bg-white" ref={ref}>
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionLabel>DOWNLOAD</SectionLabel>
+          </motion.div>
 
-        <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.6 }}
-        >
-          資料ダウンロード
-        </motion.h2>
+          <motion.h2
+            className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-4 leading-snug"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1, duration: 0.6 }}
+          >
+            まずは資料で、
+            <br className="hidden md:block" />
+            Backllyの全体像をご確認ください。
+          </motion.h2>
 
-        <motion.p
-          className="text-text-muted text-sm md:text-base mb-16 leading-relaxed"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          各サービスの詳細資料をご用意しております。
-        </motion.p>
+          <motion.p
+            className="text-text-muted text-sm md:text-base mb-16 leading-relaxed max-w-2xl"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            サービス内容、支援範囲、費用感、導入の進み方、実際の導入イメージまで、
+            検討に必要な情報をまとめています。
+          </motion.p>
 
-        <div className="space-y-0">
-          {resources.map((resource, i) => (
-            <motion.div
-              key={i}
-              className="py-8 border-b border-border first:border-t"
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-            >
-              <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="font-serif text-base md:text-lg font-semibold text-navy">
-                      {resource.title}
-                    </h3>
-                    <span className="text-[10px] font-mono text-text-muted px-2 py-0.5 border border-border rounded">
-                      {resource.type}
-                    </span>
-                  </div>
-                  <p className="text-text-muted text-sm leading-relaxed">
-                    {resource.description}
-                  </p>
-                </div>
+          {/* Resource list — vertical, not card grid */}
+          <div className="space-y-0">
+            {resources.map((resource, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+              >
+                <ResourceCard
+                  resource={resource}
+                  onDownload={() => setModalResource(resource)}
+                />
+              </motion.div>
+            ))}
+          </div>
 
-                <a
-                  href={resource.href}
-                  download
-                  className="flex-shrink-0 text-sm text-navy font-medium border border-navy px-5 py-2.5 rounded-lg hover:bg-navy hover:text-white transition-all duration-200"
-                >
-                  ダウンロード
-                </a>
-              </div>
-            </motion.div>
-          ))}
+          {/* Supplementary note */}
+          <motion.div
+            className="mt-12 pt-8 border-t border-border"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.7, duration: 0.5 }}
+          >
+            <p className="text-text-muted text-sm leading-relaxed">
+              資料をご確認のうえ、より具体的なご相談をご希望の場合は、
+              <a
+                href="/contact"
+                className="text-navy font-medium underline underline-offset-4 hover:text-cyan transition-colors"
+              >
+                お問い合わせ
+              </a>
+              よりご連絡ください。
+            </p>
+          </motion.div>
         </div>
+      </section>
 
-        <motion.p
-          className="mt-8 text-xs text-text-muted"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
-          ※ PDFファイルが開きます。
-        </motion.p>
-      </div>
-    </section>
+      {/* Download modal */}
+      <DownloadModal
+        resource={modalResource}
+        onClose={() => setModalResource(null)}
+      />
+    </>
   );
 }
