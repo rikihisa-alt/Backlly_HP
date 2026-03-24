@@ -67,9 +67,10 @@ export default function Services() {
                   <Image
                     src={service.logo}
                     alt={service.name}
-                    width={140}
-                    height={42}
-                    className="h-9 w-auto mb-3"
+                    width={200}
+                    height={60}
+                    className="mb-3"
+                    style={{ height: "36px", width: "auto", maxWidth: "200px", objectFit: "contain" }}
                   />
                 ) : (
                   <h3 className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-3">
