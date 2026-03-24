@@ -20,7 +20,7 @@ const navLinks = [
 ];
 
 const serviceTabItems = [
-  { label: "コンサル", href: "/service#consulting" },
+  { label: "バックオフィスコンサルティング", href: "/service#consulting" },
   { label: "B-Hall", href: "/service#bhall" },
   { label: "B-Core", href: "/service#bcore" },
 ];

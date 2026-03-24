@@ -22,7 +22,7 @@ export const siteContent: SiteContent = {
         target: "業務が属人化していて、整理したい",
         description: "誰が何をやっているか見えない / マニュアルがない / 引き継ぎができない",
         label: "整える",
-        service: "コンサル",
+        service: "バックオフィスコンサルティング",
         href: "/service#consulting",
       },
       {
@@ -82,7 +82,7 @@ export const siteContent: SiteContent = {
   services: [
     {
       id: "consulting",
-      name: "コンサル",
+      name: "バックオフィスコンサルティング",
       label: "整える",
       tagline: "バックオフィスコンサルティング",
       description:
@@ -299,7 +299,7 @@ export const siteContent: SiteContent = {
     copyright: "\u00A9 2025 Backlly Inc.",
   },
   differentiator:
-    "コンサルだけで終わらせません。\n設計し、実装し、運用まで担います。",
+    "コンサルティングだけで終わらせません。\n設計し、実装し、運用まで担います。",
   trustStats: [
     { value: "50+", label: "支援企業数" },
     { value: "96%", label: "継続率" },

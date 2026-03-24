@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — スマートなバックオフィスSaaS</title>
+<meta name="description" content="NEXUS はバックオフィス業務を革新するSaaSプラットフォームです。">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- CDN: GSAP（ヒーローアニメーション用） -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
+<!-- CDN: Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+<style>
+/* ============================
+   デザイントークン
+   ============================ */
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F5FF;
+  --bg-accent-soft: #EEF2FF;
+  --bg-warm: #FFF8F0;
+
+  --accent-primary: #6366F1;
+  --accent-vivid: #8B5CF6;
+  --accent-pop: #EC4899;
+  --accent-fresh: #06B6D4;
+  --accent-warm: #F59E0B;
+  --accent-green: #10B981;
+
+  --text-primary: #1E1B4B;
+  --text-secondary: #4B5563;
+  --text-muted: #9CA3AF;
+
+  --border: rgba(99,102,241,0.15);
+  --shadow-soft: 0 4px 24px rgba(99,102,241,0.12);
+  --shadow-float: 0 20px 60px rgba(99,102,241,0.18);
+
+  --grad-hero: linear-gradient(135deg, #EEF2FF 0%, #F7F5FF 40%, #FFF0F6 100%);
+  --grad-brand: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899);
+  --grad-fresh: linear-gradient(135deg, #06B6D4, #6366F1);
+  --grad-warm: linear-gradient(135deg, #F59E0B, #EC4899);
+  --grad-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(238,242,255,0.6));
+
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --nav-height: 72px;
+}
+
+/* ============================
+   リセット & ベース
+   ============================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: none; border: none; background: none; font-family: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+::selection {
+  background: rgba(99,102,241,0.2);
+  color: var(--text-primary);
+}
+
+/* ============================
+   スクロールプログレスバー
+   ============================ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: var(--grad-brand);
+  z-index: 10001; transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* ============================
+   カスタムカーソル
+   ============================ */
+.cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(99,102,241,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+  will-change: transform;
+}
+.cursor-hover .cursor-dot {
+  width: 12px; height: 12px;
+  background: var(--accent-pop);
+}
+.cursor-hover .cursor-ring {
+  width: 52px; height: 52px;
+  border-color: rgba(236,72,153,0.3);
+}
+
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ============================
+   ローディング画面
+   ============================ */
+.loader {
+  position: fixed; inset: 0; z-index: 100000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--bg-primary);
+}
+.loader-logo {
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 2.5rem;
+  background: var(--grad-brand);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scale(0); opacity: 0;
+  animation: loaderLogoIn 0.6s ease-out 0.2s forwards;
+}
+.loader-bar-track {
+  width: 180px; height: 3px;
+  background: var(--bg-accent-soft);
+  border-radius: 2px; margin-top: 24px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%; width: 0;
+  background: var(--grad-brand);
+  border-radius: 2px;
+  animation: loaderBar 1.2s ease-in-out 0.5s forwards;
+}
+.loader-top, .loader-bottom {
+  position: absolute; left: 0; right: 0; height: 50%;
+  background: var(--bg-primary);
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.loader-top { top: 0; }
+.loader-bottom { bottom: 0; }
+.loader.done .loader-top { transform: translateY(-100%); }
+.loader.done .loader-bottom { transform: translateY(100%); }
+.loader.done .loader-logo, .loader.done .loader-bar-track { opacity: 0; transition: opacity 0.3s; }
+
+@keyframes loaderLogoIn {
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes loaderBar {
+  to { width: 100%; }
+}
+
+/* ============================
+   ナビゲーション
+   ============================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border), var(--shadow-soft);
+}
+.nav-inner {
+  width: min(1200px, 100% - 48px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 1.4rem;
+  background: var(--grad-brand);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-links {
+  display: flex; gap: 32px; align-items: center;
+}
+.nav-links a {
+  font-size: 0.9rem; font-weight: 500;
+  color: var(--text-secondary);
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--accent-primary);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav-links a:hover { color: var(--accent-primary); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-cta {
+  padding: 10px 24px;
+  background: var(--grad-brand);
+  color: #fff; border-radius: 10px;
+  font-weight: 600; font-size: 0.85rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(99,102,241,0.3);
+}
+
+/* ハンバーガー */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  width: 24px; padding: 4px 0;
+}
+.nav-hamburger span {
+  display: block; height: 2px; width: 100%;
+  background: var(--text-primary);
+  border-radius: 2px; transition: all 0.3s;
+}
+.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-menu {
+  position: fixed; inset: 0;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 32px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.mobile-menu.active { opacity: 1; pointer-events: auto; }
+.mobile-menu a {
+  font-family: var(--font-heading);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ============================
+   セクション共通
+   ============================ */
+section {
+  position: relative;
+  overflow: hidden;
+}
+.container {
+  width: min(1200px, 100% - 48px);
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 12px;
+}
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800; line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-secondary);
+  line-height: 1.7; max-width: 600px;
+}
+.section-center { text-align: center; }
+.section-center .section-sub { margin: 0 auto; }
+
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ============================
+   2. ヒーローセクション
+   ============================ */
+.hero {
+  min-height: 100vh;
+  background: var(--grad-hero);
+  display: flex; align-items: center;
+  padding: calc(var(--nav-height) + 40px) 0 80px;
+  position: relative;
+}
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  position: relative; z-index: 2;
+}
+.hero-text { max-width: 560px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  background: rgba(99,102,241,0.08);
+  color: var(--accent-primary);
+  font-size: 0.8rem; font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800; line-height: 1.15;
+  margin-bottom: 20px;
+}
+.hero h1 .word { display: inline-block; opacity: 0; transform: translateY(30px); }
+.grad-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-secondary); line-height: 1.7;
+  margin-bottom: 36px; min-height: 1.7em;
+}
+.hero-sub .typewriter-cursor {
+  display: inline-block; width: 2px; height: 1.1em;
+  background: var(--accent-primary);
+  margin-left: 2px; vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  position: relative; overflow: hidden;
+  padding: 14px 32px; border-radius: 12px;
+  background: var(--grad-brand);
+  color: #fff; font-weight: 600; font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(99,102,241,0.35);
+}
+.btn-primary .ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: scale(0); animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+@keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+.btn-secondary {
+  padding: 14px 32px; border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-weight: 600; font-size: 1rem;
+  color: var(--text-primary);
+  transition: background 0.3s, border-color 0.3s;
+}
+.btn-secondary:hover {
+  background: var(--bg-accent-soft);
+  border-color: var(--accent-primary);
+}
+
+/* ダッシュボードモック */
+.hero-visual {
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+}
+.dashboard-mock {
+  width: 100%; max-width: 480px;
+  background: var(--bg-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-float);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.dash-topbar {
+  height: 40px; background: var(--bg-accent-soft);
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+.dash-dot { width: 8px; height: 8px; border-radius: 50%; }
+.dash-dot:nth-child(1) { background: #F87171; }
+.dash-dot:nth-child(2) { background: var(--accent-warm); }
+.dash-dot:nth-child(3) { background: var(--accent-green); }
+
+.dash-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.dash-row { display: flex; gap: 12px; }
+.dash-stat {
+  flex: 1; padding: 14px;
+  background: var(--bg-accent-soft);
+  border-radius: 10px;
+}
+.dash-stat-label {
+  font-size: 0.65rem; color: var(--text-muted);
+  margin-bottom: 4px; font-weight: 500;
+}
+.dash-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--accent-primary);
+}
+.dash-chart {
+  height: 80px;
+  background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, transparent 100%);
+  border-radius: 10px;
+  position: relative; overflow: hidden;
+}
+.dash-chart-line {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 60px;
+}
+.dash-bars { display: flex; gap: 4px; align-items: flex-end; height: 60px; padding: 0 12px; }
+.dash-bar {
+  flex: 1; border-radius: 4px 4px 0 0;
+  background: var(--grad-brand); opacity: 0.6;
+}
+
+/* ヒーロー装飾 */
+.hero-geo {
+  position: absolute; right: -80px; bottom: -80px;
+  width: 400px; height: 400px;
+  border: 2px solid rgba(99,102,241,0.08);
+  border-radius: 50%;
+  animation: geoRotate 30s linear infinite;
+}
+.hero-geo::before {
+  content: ''; position: absolute;
+  top: 50px; left: 50px; right: 50px; bottom: 50px;
+  border: 2px solid rgba(139,92,246,0.06);
+  border-radius: 50%;
+}
+@keyframes geoRotate { to { transform: rotate(360deg); } }
+
+.scroll-hint {
+  position: absolute; bottom: 32px;
+  left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-muted); font-size: 0.75rem;
+  z-index: 3;
+}
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+
+@media (max-width: 768px) {
+  .hero .container { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { order: -1; }
+  .dashboard-mock { max-width: 360px; }
+}
+
+/* ============================
+   3. ロゴ帯
+   ============================ */
+.logos {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-primary);
+}
+.logos-label {
+  text-align: center; font-size: 0.85rem;
+  color: var(--text-muted); margin-bottom: 28px;
+  font-weight: 500;
+}
+.logos-track {
+  display: flex; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+}
+.logos-slide {
+  display: flex; gap: 48px; align-items: center;
+  animation: marquee 25s linear infinite;
+  flex-shrink: 0; padding-right: 48px;
+}
+.logos-slide span {
+  font-family: var(--font-heading);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--text-muted); opacity: 0.4;
+  white-space: nowrap;
+  transition: opacity 0.3s, color 0.3s;
+}
+.logos-slide span:hover { opacity: 1; color: var(--text-primary); }
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+/* ============================
+   4. 数値実績
+   ============================ */
+.stats {
+  padding: 80px 0;
+  background: var(--bg-accent-soft);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.stat-item { text-align: center; }
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700; color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.stat-bar {
+  width: 40px; height: 3px; margin: 8px auto 10px;
+  border-radius: 2px;
+}
+.stat-item:nth-child(1) .stat-bar { background: var(--accent-primary); }
+.stat-item:nth-child(2) .stat-bar { background: var(--accent-green); }
+.stat-item:nth-child(3) .stat-bar { background: var(--accent-warm); }
+.stat-item:nth-child(4) .stat-bar { background: var(--accent-fresh); }
+.stat-label {
+  font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;
+}
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================
+   5. Bento Grid Features
+   ============================ */
+.features {
+  padding: 100px 0;
+  background: var(--bg-primary);
+}
+.features-header { text-align: center; margin-bottom: 56px; }
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+.bento-card {
+  background: var(--grad-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.4s, box-shadow 0.4s;
+  position: relative; overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.bento-card:hover {
+  box-shadow: var(--shadow-float);
+}
+.bento-card .spotlight {
+  position: absolute; inset: 0;
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(99,102,241,0.06), transparent 40%);
+  pointer-events: none;
+}
+.bento-large { grid-row: span 2; }
+.bento-icon {
+  width: 48px; height: 48px;
+  background: var(--bg-accent-soft);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.bento-icon svg {
+  width: 24px; height: 24px;
+  stroke: var(--accent-primary); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.bento-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 8px;
+}
+.bento-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ミニダッシュボード（大カード内） */
+.mini-dash {
+  margin-top: 24px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 16px; overflow: hidden;
+}
+.mini-dash-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.mini-dash-pill {
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 600;
+}
+.mini-dash-pill.active { background: var(--accent-primary); color: #fff; }
+.mini-dash-pill:not(.active) { background: var(--bg-accent-soft); color: var(--text-muted); }
+.mini-chart-bars {
+  display: flex; gap: 3px; align-items: flex-end; height: 60px;
+}
+.mini-chart-bar {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: var(--accent-primary); opacity: 0.2;
+  transition: opacity 0.3s;
+}
+.mini-chart-bar.lit { opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-large { grid-row: span 1; }
+}
+
+/* ============================
+   6. How it works
+   ============================ */
+.how {
+  padding: 100px 0;
+  background: var(--bg-warm);
+}
+.how-layout {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 60px;
+}
+.how-timeline {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center;
+}
+.how-line {
+  position: absolute; top: 0; bottom: 0;
+  width: 3px; border-radius: 2px;
+  background: rgba(99,102,241,0.1);
+}
+.how-line-fill {
+  width: 100%; background: var(--grad-brand);
+  border-radius: 2px;
+  height: 0; transition: height 0.3s;
+}
+.how-steps { display: flex; flex-direction: column; gap: 64px; }
+.how-step { display: flex; gap: 24px; align-items: flex-start; }
+.how-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: 1rem; color: var(--text-muted);
+  flex-shrink: 0;
+  transition: background 0.4s, color 0.4s, transform 0.4s;
+}
+.how-step.active .how-num {
+  background: var(--grad-brand); color: #fff;
+  transform: scale(1.15);
+}
+.how-step h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 6px;
+}
+.how-step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .how-layout { grid-template-columns: 1fr; gap: 0; }
+  .how-timeline { display: none; }
+}
+
+/* ============================
+   7. 料金プラン
+   ============================ */
+.pricing {
+  padding: 100px 0;
+  background: var(--bg-primary);
+}
+.pricing-toggle {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-bottom: 48px;
+}
+.pricing-toggle span {
+  font-size: 0.9rem; font-weight: 500; color: var(--text-secondary);
+}
+.pricing-toggle span.active-label { color: var(--text-primary); font-weight: 600; }
+.toggle-switch {
+  width: 52px; height: 28px;
+  background: var(--bg-accent-soft);
+  border-radius: 100px; padding: 3px;
+  cursor: pointer; transition: background 0.3s;
+  position: relative;
+}
+.toggle-switch.active { background: var(--accent-primary); }
+.toggle-knob {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.toggle-switch.active .toggle-knob { transform: translateX(24px); }
+.yearly-badge {
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(16,185,129,0.1); color: var(--accent-green);
+  font-size: 0.75rem; font-weight: 600;
+  transform: scale(0); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.yearly-badge.show { transform: scale(1); }
+
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; align-items: start;
+}
+.pricing-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.pricing-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-float);
+}
+.pricing-card.featured {
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg-primary), var(--bg-primary)),
+                    var(--grad-brand);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.pricing-popular {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  padding: 6px 20px; border-radius: 100px;
+  background: var(--grad-brand); color: #fff;
+  font-size: 0.75rem; font-weight: 700;
+  white-space: nowrap;
+}
+.pricing-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem; font-weight: 700;
+  margin-bottom: 8px;
+}
+.pricing-desc {
+  font-size: 0.85rem; color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.pricing-amount {
+  display: flex; align-items: baseline; gap: 4px;
+  margin-bottom: 24px;
+}
+.pricing-currency {
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--text-secondary);
+}
+.pricing-value {
+  font-family: var(--font-mono);
+  font-size: 2.8rem; font-weight: 700;
+  color: var(--text-primary);
+  position: relative; overflow: hidden;
+  display: inline-block;
+}
+.pricing-period {
+  font-size: 0.85rem; color: var(--text-muted);
+  font-weight: 400;
+}
+.pricing-features {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 28px;
+}
+.pricing-feature {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.85rem; color: var(--text-secondary);
+}
+.pricing-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(16,185,129,0.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.pricing-check svg {
+  width: 10px; height: 10px; stroke: var(--accent-green);
+  fill: none; stroke-width: 3;
+}
+.pricing-btn {
+  width: 100%; padding: 12px;
+  border-radius: 10px; font-weight: 600;
+  font-size: 0.9rem; text-align: center;
+  transition: all 0.3s;
+}
+.pricing-btn.primary {
+  background: var(--grad-brand); color: #fff;
+}
+.pricing-btn.primary:hover {
+  box-shadow: 0 8px 30px rgba(99,102,241,0.3);
+  transform: translateY(-2px);
+}
+.pricing-btn.outline {
+  border: 1.5px solid var(--border); color: var(--text-primary);
+}
+.pricing-btn.outline:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-accent-soft);
+}
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+}
+
+/* ============================
+   8. テスティモニアル
+   ============================ */
+.testimonials {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+}
+.testi-track {
+  display: flex; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+.testi-slide {
+  display: flex; gap: 24px;
+  animation: marquee 35s linear infinite;
+  flex-shrink: 0; padding-right: 24px;
+}
+.testi-track:hover .testi-slide { animation-play-state: paused; }
+
+.testi-card {
+  width: 340px; flex-shrink: 0;
+  background: var(--bg-primary);
+  border-radius: 16px; padding: 28px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+.testi-stars { display: flex; gap: 2px; margin-bottom: 14px; }
+.testi-star {
+  width: 16px; height: 16px;
+  background: var(--accent-warm);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.testi-text {
+  font-size: 0.9rem; line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem; color: #fff;
+}
+.testi-name { font-size: 0.85rem; font-weight: 600; }
+.testi-role { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ============================
+   9. FAQ
+   ============================ */
+.faq {
+  padding: 100px 0;
+  background: var(--bg-primary);
+}
+.faq-list {
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.faq-item.open { border-color: var(--accent-primary); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; cursor: pointer;
+  font-weight: 600; font-size: 0.95rem;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s;
+  gap: 16px;
+}
+.faq-item.open .faq-q { border-left-color: var(--accent-primary); }
+.faq-icon {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: var(--text-muted);
+  transition: transform 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg); color: var(--accent-primary);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.faq-a-inner {
+  padding: 0 24px 20px;
+  font-size: 0.9rem; line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ============================
+   10. 最終CTA
+   ============================ */
+.final-cta {
+  padding: 100px 0;
+  background: var(--grad-brand);
+  position: relative;
+  overflow: hidden;
+}
+.final-cta .container { position: relative; z-index: 2; text-align: center; }
+.final-cta .section-label { color: rgba(255,255,255,0.7); }
+.final-cta .section-heading { color: #fff; }
+.final-cta .section-sub { color: rgba(255,255,255,0.8); margin: 0 auto 36px; }
+.cta-form {
+  display: flex; gap: 12px;
+  max-width: 460px; margin: 0 auto;
+}
+.cta-input {
+  flex: 1; padding: 14px 20px;
+  border-radius: 12px; border: none;
+  font-size: 0.95rem; font-family: var(--font-body);
+  outline: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-input:focus {
+  transform: scale(1.01);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.cta-submit {
+  padding: 14px 28px; border-radius: 12px;
+  background: #fff; color: var(--accent-primary);
+  font-weight: 700; font-size: 0.95rem;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  white-space: nowrap;
+}
+.cta-submit:hover {
+  background: var(--bg-warm); transform: scale(1.03);
+}
+.cta-submit.sent {
+  background: var(--accent-green); color: #fff;
+  pointer-events: none;
+}
+.cta-wave {
+  position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 80px;
+}
+.cta-wave svg { width: 100%; height: 100%; }
+/* CTA背景波アニメ */
+.cta-bg-wave {
+  position: absolute; inset: 0;
+  opacity: 0.08;
+}
+.cta-bg-wave svg {
+  width: 200%; height: 100%;
+  animation: waveSlide 12s linear infinite;
+}
+@keyframes waveSlide { to { transform: translateX(-50%); } }
+
+@media (max-width: 768px) {
+  .cta-form { flex-direction: column; }
+}
+
+/* ============================
+   11. フッター
+   ============================ */
+.footer {
+  padding: 64px 0 32px;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 48px;
+}
+.footer-brand {
+  font-family: var(--font-heading);
+  font-size: 1.3rem; font-weight: 800;
+  margin-bottom: 12px;
+}
+.footer-brand .dot {
+  background: var(--grad-brand);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-desc {
+  font-size: 0.85rem; color: var(--text-muted);
+  line-height: 1.6; max-width: 280px;
+}
+.footer-col h4 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem; font-weight: 700;
+  margin-bottom: 16px; color: var(--text-primary);
+}
+.footer-col a {
+  display: block; font-size: 0.85rem;
+  color: var(--text-muted); padding: 4px 0;
+  position: relative; transition: color 0.3s;
+}
+.footer-col a::after {
+  content: ''; position: absolute;
+  bottom: 2px; left: 0; width: 0; height: 1px;
+  background: var(--accent-primary);
+  transition: width 0.3s;
+}
+.footer-col a:hover { color: var(--accent-primary); }
+.footer-col a:hover::after { width: 100%; }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem; color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================
+   ユーティリティ
+   ============================ */
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+<!-- ローディング画面 -->
+<div class="loader" id="loader">
+  <div class="loader-logo">NEXUS</div>
+  <div class="loader-bar-track"><div class="loader-bar"></div></div>
+  <div class="loader-top"></div>
+  <div class="loader-bottom"></div>
+</div>
+
+<!-- スクロールプログレス -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- カスタムカーソル -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ナビゲーション -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">NEXUS<span style="color:var(--accent-pop)">.</span></a>
+    <div class="nav-links">
+      <a href="#features">機能</a>
+      <a href="#how">使い方</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta" class="nav-cta">無料で始める</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- モバイルメニュー -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">機能</a>
+  <a href="#how">使い方</a>
+  <a href="#pricing">料金</a>
+  <a href="#faq">FAQ</a>
+  <a href="#cta">無料で始める</a>
+</div>
+
+<!-- ============================
+     ヒーローセクション
+     ============================ -->
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-geo"></div>
+
+  <div class="container">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        新機能リリース — AI分析ダッシュボード
+      </div>
+      <h1 id="heroHeading">
+        <span class="word">業務を、</span><span class="word grad-text">もっとスマート</span><span class="word">に。</span>
+      </h1>
+      <p class="hero-sub" id="heroSub"></p>
+      <div class="hero-buttons">
+        <button class="btn-primary" id="btnPrimary">無料で始める →</button>
+        <button class="btn-secondary">デモを見る</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dashboard-mock">
+        <div class="dash-topbar">
+          <span class="dash-dot"></span>
+          <span class="dash-dot"></span>
+          <span class="dash-dot"></span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-row">
+            <div class="dash-stat">
+              <div class="dash-stat-label">月間処理件数</div>
+              <div class="dash-stat-value">12,847</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">稼働率</div>
+              <div class="dash-stat-value">99.9%</div>
+            </div>
+          </div>
+          <div class="dash-chart">
+            <div class="dash-bars">
+              <div class="dash-bar" style="height:40%"></div>
+              <div class="dash-bar" style="height:65%"></div>
+              <div class="dash-bar" style="height:45%"></div>
+              <div class="dash-bar" style="height:80%"></div>
+              <div class="dash-bar" style="height:55%"></div>
+              <div class="dash-bar" style="height:90%"></div>
+              <div class="dash-bar" style="height:70%"></div>
+              <div class="dash-bar" style="height:95%"></div>
+              <div class="dash-bar" style="height:60%"></div>
+              <div class="dash-bar" style="height:75%"></div>
+              <div class="dash-bar" style="height:85%"></div>
+              <div class="dash-bar" style="height:100%"></div>
+            </div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-stat" style="flex:2">
+              <div class="dash-stat-label">平均応答速度</div>
+              <div class="dash-stat-value" style="color:var(--accent-green)">42ms</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">満足度</div>
+              <div class="dash-stat-value" style="color:var(--accent-warm)">4.9</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================
+     ロゴ帯（Social Proof）
+     ============================ -->
+<section class="logos">
+  <p class="logos-label">10,000社以上のチームが導入済み</p>
+  <div class="logos-track">
+    <div class="logos-slide">
+      <span>TechCorp</span><span>CloudBase</span><span>DataFlow</span>
+      <span>InnoSys</span><span>NeoWork</span><span>SmartOps</span>
+      <span>FlexTeam</span><span>CoreStack</span><span>SyncHub</span>
+      <span>AutoScale</span><span>DevForce</span><span>PrimePath</span>
+    </div>
+    <div class="logos-slide" aria-hidden="true">
+      <span>TechCorp</span><span>CloudBase</span><span>DataFlow</span>
+      <span>InnoSys</span><span>NeoWork</span><span>SmartOps</span>
+      <span>FlexTeam</span><span>CoreStack</span><span>SyncHub</span>
+      <span>AutoScale</span><span>DevForce</span><span>PrimePath</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     数値実績セクション
+     ============================ -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-value" data-target="10000" data-suffix="+社">0</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">導入企業数</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value" data-target="99.9" data-suffix="%" data-decimal="1">0</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">稼働率</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value" data-target="3" data-suffix="倍" data-prefix="">0</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">生産性向上</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value" data-target="50" data-prefix="<" data-suffix="ms">0</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">応答速度</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     機能紹介 Bento Grid
+     ============================ -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header section-center reveal">
+      <p class="section-label">Features</p>
+      <h2 class="section-heading">すべてを、ひとつのプラットフォームで。</h2>
+      <p class="section-sub">チームの生産性を最大化する、統合バックオフィスソリューション。</p>
+    </div>
+    <div class="bento-grid">
+      <!-- 大カード -->
+      <div class="bento-card bento-large reveal">
+        <div class="spotlight"></div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <h3>リアルタイムダッシュボード</h3>
+        <p>すべてのKPIを一画面で把握。チーム全体の状況がリアルタイムで可視化されます。</p>
+        <div class="mini-dash">
+          <div class="mini-dash-row">
+            <span class="mini-dash-pill active">概要</span>
+            <span class="mini-dash-pill">分析</span>
+            <span class="mini-dash-pill">レポート</span>
+          </div>
+          <div class="mini-chart-bars" id="miniChartBars">
+            <div class="mini-chart-bar" style="height:30%"></div>
+            <div class="mini-chart-bar" style="height:50%"></div>
+            <div class="mini-chart-bar" style="height:35%"></div>
+            <div class="mini-chart-bar lit" style="height:70%"></div>
+            <div class="mini-chart-bar lit" style="height:60%"></div>
+            <div class="mini-chart-bar lit" style="height:85%"></div>
+            <div class="mini-chart-bar lit" style="height:75%"></div>
+            <div class="mini-chart-bar" style="height:90%"></div>
+            <div class="mini-chart-bar" style="height:65%"></div>
+            <div class="mini-chart-bar" style="height:80%"></div>
+          </div>
+        </div>
+      </div>
+      <!-- 右上 -->
+      <div class="bento-card reveal">
+        <div class="spotlight"></div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>ワークフロー自動化</h3>
+        <p>申請・承認・通知を自動化。手動オペレーションを最小限に。</p>
+      </div>
+      <!-- 右下 -->
+      <div class="bento-card reveal">
+        <div class="spotlight"></div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>エンタープライズセキュリティ</h3>
+        <p>SOC2準拠、エンドツーエンド暗号化。大企業の基準を満たすセキュリティ。</p>
+      </div>
+      <!-- 下段左 -->
+      <div class="bento-card reveal">
+        <div class="spotlight"></div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <h3>API連携</h3>
+        <p>Slack、Google、Salesforceなど200+のサービスと連携可能。</p>
+      </div>
+      <!-- 下段右 -->
+      <div class="bento-card reveal">
+        <div class="spotlight"></div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>チームコラボレーション</h3>
+        <p>リアルタイム共同編集、コメント、タスク管理をシームレスに。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     使い方ステップ
+     ============================ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-center reveal" style="margin-bottom:56px">
+      <p class="section-label">How it works</p>
+      <h2 class="section-heading">3ステップで導入完了。</h2>
+      <p class="section-sub">複雑な設定は不要。すぐにチーム全体で使い始められます。</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal" data-step="1">
+        <div class="how-num">01</div>
+        <div>
+          <h3>アカウント作成</h3>
+          <p>メールアドレスだけで30秒で完了。クレジットカード不要で14日間フリートライアル。</p>
+        </div>
+      </div>
+      <div class="how-step reveal" data-step="2">
+        <div class="how-num">02</div>
+        <div>
+          <h3>チームを招待</h3>
+          <p>リンクをシェアするだけ。Slack連携で自動招待も可能。権限設定もかんたん。</p>
+        </div>
+      </div>
+      <div class="how-step reveal" data-step="3">
+        <div class="how-num">03</div>
+        <div>
+          <h3>運用開始</h3>
+          <p>テンプレートから選ぶだけで業務フローが構築。AIが最適な設定を提案します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     料金プラン
+     ============================ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-center reveal" style="margin-bottom:16px">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-heading">シンプルで透明な料金体系。</h2>
+      <p class="section-sub">チームの規模に合わせて最適なプランを。すべてのプランに14日間の無料トライアル付き。</p>
+    </div>
+    <div class="pricing-toggle">
+      <span class="active-label" id="monthlyLabel">月額</span>
+      <div class="toggle-switch" id="pricingToggle">
+        <div class="toggle-knob"></div>
+      </div>
+      <span id="yearlyLabel">年額</span>
+      <span class="yearly-badge" id="yearlyBadge">2ヶ月分無料</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- スターター -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">スターター</div>
+        <div class="pricing-desc">小規模チーム向け</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">¥</span>
+          <span class="pricing-value" data-monthly="2980" data-yearly="2480">2,980</span>
+          <span class="pricing-period">/月</span>
+        </div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>ユーザー5名まで</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>基本ダッシュボード</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>メールサポート</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5GBストレージ</div>
+        </div>
+        <button class="pricing-btn outline">無料で始める</button>
+      </div>
+      <!-- プロ（推奨） -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-popular">最も人気</div>
+        <div class="pricing-name">プロ</div>
+        <div class="pricing-desc">成長中のチームに最適</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">¥</span>
+          <span class="pricing-value" data-monthly="7980" data-yearly="6480">7,980</span>
+          <span class="pricing-period">/月</span>
+        </div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>ユーザー無制限</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>高度な分析</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>優先サポート</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>50GBストレージ</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>API連携</div>
+        </div>
+        <button class="pricing-btn primary">無料で始める</button>
+      </div>
+      <!-- エンタープライズ -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">エンタープライズ</div>
+        <div class="pricing-desc">大規模組織向け</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency"></span>
+          <span class="pricing-value">お問い合わせ</span>
+          <span class="pricing-period"></span>
+        </div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>すべてのPro機能</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>SSO / SAML対応</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>専任カスタマーサクセス</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>SLA保証</div>
+          <div class="pricing-feature"><div class="pricing-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>カスタム開発</div>
+        </div>
+        <button class="pricing-btn outline">営業に相談</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     テスティモニアル
+     ============================ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-center reveal" style="margin-bottom:48px">
+      <p class="section-label">Testimonials</p>
+      <h2 class="section-heading">ユーザーの声。</h2>
+    </div>
+  </div>
+  <div class="testi-track">
+    <div class="testi-slide">
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「NEXUSを導入してから、バックオフィスの工数が60%削減されました。もう手放せません。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-brand)">TK</div>
+          <div><div class="testi-name">田中 健太</div><div class="testi-role">CTO, TechCorp</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「UIが直感的で、チーム全員がすぐに使いこなせました。導入コストがほぼゼロ。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-fresh)">SM</div>
+          <div><div class="testi-name">佐藤 美咲</div><div class="testi-role">COO, CloudBase</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「API連携の柔軟性が素晴らしい。既存のシステムとシームレスに統合できました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-warm)">YN</div>
+          <div><div class="testi-name">山田 直樹</div><div class="testi-role">VPoE, DataFlow</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「サポートの対応が異常に速い。質問から30分以内に解決するのが当たり前になりました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#10B981,#06B6D4)">KI</div>
+          <div><div class="testi-name">木村 一郎</div><div class="testi-role">CEO, InnoSys</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「レポート機能が秀逸。経営会議の準備が30分から5分になりました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#EC4899,#F59E0B)">RA</div>
+          <div><div class="testi-name">鈴木 亮太</div><div class="testi-role">CFO, NeoWork</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-slide" aria-hidden="true">
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「NEXUSを導入してから、バックオフィスの工数が60%削減されました。もう手放せません。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-brand)">TK</div>
+          <div><div class="testi-name">田中 健太</div><div class="testi-role">CTO, TechCorp</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「UIが直感的で、チーム全員がすぐに使いこなせました。導入コストがほぼゼロ。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-fresh)">SM</div>
+          <div><div class="testi-name">佐藤 美咲</div><div class="testi-role">COO, CloudBase</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「API連携の柔軟性が素晴らしい。既存のシステムとシームレスに統合できました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--grad-warm)">YN</div>
+          <div><div class="testi-name">山田 直樹</div><div class="testi-role">VPoE, DataFlow</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「サポートの対応が異常に速い。質問から30分以内に解決するのが当たり前になりました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#10B981,#06B6D4)">KI</div>
+          <div><div class="testi-name">木村 一郎</div><div class="testi-role">CEO, InnoSys</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div></div>
+        <p class="testi-text">「レポート機能が秀逸。経営会議の準備が30分から5分になりました。」</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#EC4899,#F59E0B)">RA</div>
+          <div><div class="testi-name">鈴木 亮太</div><div class="testi-role">CFO, NeoWork</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     FAQ
+     ============================ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-center reveal" style="margin-bottom:48px">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-heading">よくある質問。</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span>無料トライアルの期間はどのくらいですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">すべてのプランで14日間の無料トライアルをご利用いただけます。クレジットカードの登録は不要で、トライアル終了後に自動課金されることはありません。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>既存のツールとの連携は可能ですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。Slack、Google Workspace、Salesforce、HubSpotなど200以上のサービスとAPI連携が可能です。Webhook対応で独自の連携も構築できます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>データのセキュリティはどうなっていますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">SOC2 Type II認証取得済みです。すべてのデータはAES-256で暗号化され、転送時はTLS 1.3で保護されます。日本国内のデータセンターでホスティングしています。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>プランの変更やキャンセルはいつでもできますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">はい、いつでも可能です。アップグレードは即時反映、ダウングレードは次回請求日から適用されます。キャンセル後もデータは30日間保持されます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>導入サポートはありますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">プロプラン以上では専任のカスタマーサクセス担当がつきます。初期設定からチームへの展開まで、オンボーディングを伴走します。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     最終CTA
+     ============================ -->
+<section class="final-cta" id="cta">
+  <div class="cta-bg-wave">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="rgba(255,255,255,0.1)" d="M0,160L48,170.7C96,181,192,203,288,186.7C384,171,480,117,576,112C672,107,768,149,864,170.7C960,192,1056,192,1152,176C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
+      <path fill="rgba(255,255,255,0.1)" d="M1440,160L1392,170.7C1344,181,1248,203,1152,186.7C1056,171,960,117,864,112C768,107,672,149,576,170.7C480,192,384,192,288,176C192,160,96,128,48,112L0,96L0,320L48,320C96,320,192,320,288,320C384,320,480,320,576,320C672,320,768,320,864,320C960,320,1056,320,1152,320C1248,320,1344,320,1392,320L1440,320Z"/>
+    </svg>
+  </div>
+  <div class="container reveal">
+    <p class="section-label">Get Started</p>
+    <h2 class="section-heading">今すぐ、チームを加速させよう。</h2>
+    <p class="section-sub">14日間無料。クレジットカード不要。セットアップは30秒。</p>
+    <form class="cta-form" id="ctaForm" onsubmit="return false">
+      <input type="email" class="cta-input" placeholder="メールアドレスを入力" required>
+      <button type="submit" class="cta-submit" id="ctaSubmit">無料で始める</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================
+     フッター
+     ============================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">NEXUS<span class="dot">.</span></div>
+        <p class="footer-desc">バックオフィス業務を革新する、次世代SaaSプラットフォーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>プロダクト</h4>
+        <a href="#">機能一覧</a>
+        <a href="#">料金</a>
+        <a href="#">セキュリティ</a>
+        <a href="#">ロードマップ</a>
+      </div>
+      <div class="footer-col">
+        <h4>リソース</h4>
+        <a href="#">ドキュメント</a>
+        <a href="#">APIリファレンス</a>
+        <a href="#">ブログ</a>
+        <a href="#">チュートリアル</a>
+      </div>
+      <div class="footer-col">
+        <h4>会社</h4>
+        <a href="#">会社概要</a>
+        <a href="#">採用情報</a>
+        <a href="#">お問い合わせ</a>
+        <a href="#">プライバシー</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 NEXUS Inc. All rights reserved.</span>
+      <span>Made with care in Tokyo.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================
+     JavaScript
+     ============================ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ============================
+     ローディング画面
+     ============================ */
+  const loader = document.getElementById('loader');
+  setTimeout(() => {
+    loader.classList.add('done');
+    setTimeout(() => { loader.style.display = 'none'; }, 800);
+  }, 1800);
+
+  /* ============================
+     カスタムカーソル
+     ============================ */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  if (window.innerWidth > 768) {
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+
+    (function animateCursor() {
+      ringX += (mouseX - ringX) * 0.1;
+      ringY += (mouseY - ringY) * 0.1;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    })();
+
+    document.querySelectorAll('a, button, .toggle-switch, .faq-q').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
+
+  /* ============================
+     スクロールプログレスバー
+     ============================ */
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const p = window.scrollY / h;
+    scrollProgress.style.transform = `scaleX(${p})`;
+  });
+
+  /* ============================
+     ナビゲーション
+     ============================ */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // モバイルメニュー
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+
+  /* ============================
+     ヒーロー：1文字ドロップイン
+     ============================ */
+  // ヒーローワードは HTML 側で .word クラスを付与済み
+
+  // タイプライターサブコピー
+  const subEl = document.getElementById('heroSub');
+  const subText = 'チームの生産性を3倍に。バックオフィスをAIで最適化するプラットフォーム。';
+  let charIdx = 0;
+  subEl.innerHTML = '<span class="typewriter-cursor"></span>';
+  function typeWriter() {
+    if (charIdx < subText.length) {
+      subEl.textContent = subText.slice(0, charIdx + 1);
+      subEl.innerHTML += '<span class="typewriter-cursor"></span>';
+      charIdx++;
+      setTimeout(typeWriter, 40);
+    }
+  }
+
+  /* ============================
+     CTAボタンのRipple
+     ============================ */
+  document.getElementById('btnPrimary').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+
+  /* ============================
+     カウントアップ（数値実績）
+     ============================ */
+  const statValues = document.querySelectorAll('.stat-value[data-target]');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const prefix = el.dataset.prefix || '';
+        const decimal = parseInt(el.dataset.decimal) || 0;
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = eased * target;
+
+          if (decimal > 0) {
+            el.textContent = prefix + current.toFixed(decimal) + suffix;
+          } else {
+            el.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+          }
+
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+        statsObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statValues.forEach(el => statsObserver.observe(el));
+
+  /* ============================
+     Bento Card Tilt + Spotlight
+     ============================ */
+  document.querySelectorAll('.bento-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotateX = (y - cy) / cy * -8;
+      const rotateY = (x - cx) / cx * 8;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+      card.querySelector('.spotlight').style.setProperty('--x', x + 'px');
+      card.querySelector('.spotlight').style.setProperty('--y', y + 'px');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* ============================
+     How it works — ステップ点灯
+     ============================ */
+  const howSteps = document.querySelectorAll('.how-step');
+  const howObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  howSteps.forEach(step => howObserver.observe(step));
+
+  /* ============================
+     料金トグル
+     ============================ */
+  const pricingToggle = document.getElementById('pricingToggle');
+  const yearlyBadge = document.getElementById('yearlyBadge');
+  const monthlyLabel = document.getElementById('monthlyLabel');
+  const yearlyLabel = document.getElementById('yearlyLabel');
+  let isYearly = false;
+
+  pricingToggle.addEventListener('click', () => {
+    isYearly = !isYearly;
+    pricingToggle.classList.toggle('active', isYearly);
+    yearlyBadge.classList.toggle('show', isYearly);
+    monthlyLabel.classList.toggle('active-label', !isYearly);
+    yearlyLabel.classList.toggle('active-label', isYearly);
+
+    document.querySelectorAll('.pricing-value[data-monthly]').forEach(el => {
+      const val = isYearly ? el.dataset.yearly : el.dataset.monthly;
+      el.style.transform = 'translateY(-10px)';
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = parseInt(val).toLocaleString();
+        el.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          el.style.transform = 'translateY(0)';
+          el.style.opacity = '1';
+        }, 50);
+      }, 150);
+    });
+  });
+
+  /* ============================
+     FAQ アコーディオン
+     ============================ */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      // 全部閉じる
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        const answer = item.querySelector('.faq-a');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ============================
+     CTA送信
+     ============================ */
+  document.getElementById('ctaForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('ctaSubmit');
+    btn.textContent = '✓ 登録しました！';
+    btn.classList.add('sent');
+  });
+
+  /* ============================
+     Three.js ヒーローパーティクル
+     ============================ */
+  function initHeroCanvas() {
+    const canvas = document.getElementById('hero-canvas');
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 30 : 60;
+
+    if (typeof THREE === 'undefined') {
+      // Three.js未ロードならCanvasフォールバック
+      initCanvasFallback(canvas, particleCount);
+      return;
+    }
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const particles = [];
+    const colors = [0x6366F1, 0x8B5CF6, 0xEC4899, 0x06B6D4, 0xFFFFFF];
+
+    for (let i = 0; i < particleCount; i++) {
+      const geo = new THREE.SphereGeometry(0.03 + Math.random() * 0.04, 8, 8);
+      const mat = new THREE.MeshBasicMaterial({
+        color: colors[Math.floor(Math.random() * colors.length)],
+        transparent: true,
+        opacity: 0.3 + Math.random() * 0.4
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 8,
+        (Math.random() - 0.5) * 4
+      );
+      mesh.userData = {
+        vx: (Math.random() - 0.5) * 0.005,
+        vy: (Math.random() - 0.5) * 0.005,
+        baseX: mesh.position.x,
+        baseY: mesh.position.y
+      };
+      scene.add(mesh);
+      particles.push(mesh);
+    }
+
+    // 接続線
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x6366F1, transparent: true, opacity: 0.08 });
+
+    let mouseThreeX = 0, mouseThreeY = 0;
+    canvas.parentElement.addEventListener('mousemove', e => {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      mouseThreeX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouseThreeY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // 既存ラインを削除
+      scene.children = scene.children.filter(c => !(c instanceof THREE.Line));
+
+      particles.forEach((p, i) => {
+        p.position.x += p.userData.vx;
+        p.position.y += p.userData.vy;
+
+        // マウス追従
+        p.position.x += (mouseThreeX * 0.3 - (p.position.x - p.userData.baseX)) * 0.01;
+        p.position.y += (mouseThreeY * 0.3 - (p.position.y - p.userData.baseY)) * 0.01;
+
+        // 境界
+        if (Math.abs(p.position.x) > 5) p.userData.vx *= -1;
+        if (Math.abs(p.position.y) > 4) p.userData.vy *= -1;
+
+        // 接続線
+        for (let j = i + 1; j < particles.length; j++) {
+          const dist = p.position.distanceTo(particles[j].position);
+          if (dist < 1.5) {
+            const points = [p.position.clone(), particles[j].position.clone()];
+            const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(lineGeo, lineMat);
+            scene.add(line);
+          }
+        }
+      });
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    });
+  }
+
+  // Canvas2Dフォールバック（モバイル / Three.js未ロード）
+  function initCanvasFallback(canvas, count) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.clientWidth * window.devicePixelRatio;
+    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    const pts = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+      r: 2 + Math.random() * 3,
+      color: ['#6366F1','#8B5CF6','#EC4899','#06B6D4'][Math.floor(Math.random()*4)]
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = 0.3;
+        ctx.fill();
+      });
+      // Lines
+      ctx.globalAlpha = 0.06;
+      ctx.strokeStyle = '#6366F1';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          if (Math.sqrt(dx*dx+dy*dy) < 150) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  /* ============================
+     GSAP ScrollTrigger
+     ============================ */
+  function initAnimations() {
+    // ヒーローワード stagger — GSAP使用（あれば）
+    if (typeof gsap !== 'undefined') {
+      gsap.to('.hero .word', {
+        opacity: 1, y: 0,
+        duration: 0.6, stagger: 0.06,
+        ease: 'power3.out', delay: 2.2,
+        onComplete: () => setTimeout(typeWriter, 300)
+      });
+    } else {
+      document.querySelectorAll('.hero .word').forEach((w, i) => {
+        setTimeout(() => { w.style.opacity = '1'; w.style.transform = 'none'; }, 2200 + i * 60);
+      });
+      setTimeout(typeWriter, 2800);
+    }
+
+    // Reveal — Intersection Observer（GSAP非依存・インラインスタイル方式）
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const siblings = el.parentElement.querySelectorAll('.reveal');
+          let idx = Array.from(siblings).indexOf(el);
+          if (idx < 0) idx = 0;
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            el.classList.add('visible');
+          }, idx * 120);
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  /* ============================
+     初期化 — CDN読み込み待ち
+     ============================ */
+  function waitForLibs(cb, maxWait = 4000) {
+    const start = Date.now();
+    (function check() {
+      if (typeof gsap !== 'undefined' || Date.now() - start > maxWait) {
+        cb();
+      } else {
+        setTimeout(check, 100);
+      }
+    })();
+  }
+
+  waitForLibs(() => {
+    initHeroCanvas();
+    initAnimations();
+  });
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "backlly",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "nexus",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "nexus", "--no-clipboard"],
+      "port": 3457,
+      "autoPort": true
+    }
+  ]
+}
