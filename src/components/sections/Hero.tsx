@@ -130,7 +130,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.6 }}
           >
-            <Button variant="primary" size="lg" href="#contact">
+            <Button variant="primary" size="lg" href="/contact">
               {hero.ctaPrimary}
             </Button>
             <Button variant="secondary" size="lg" href="/service">

@@ -73,7 +73,7 @@ export default function ConsultTopics() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <Button variant="primary" size="lg" href="#contact">
+          <Button variant="primary" size="lg" href="/contact">
             無料相談する
           </Button>
         </motion.div>

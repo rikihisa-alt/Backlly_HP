@@ -313,7 +313,7 @@ export default function Simulator() {
                   詳細な見積をご希望の方は、無料相談にて個別にご案内いたします。
                 </p>
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <Button variant="primary" size="lg" href="#contact">
+                  <Button variant="primary" size="lg" href="/contact">
                     無料相談する
                   </Button>
                   <button

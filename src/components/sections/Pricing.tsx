@@ -175,7 +175,7 @@ export default function Pricing() {
           <p className="text-text-muted text-sm md:text-base mb-8">
             現状の課題を整理し、最適な進め方をご提案します。
           </p>
-          <Button variant="primary" size="lg" href="#contact">
+          <Button variant="primary" size="lg" href="/contact">
             無料相談する
           </Button>
         </motion.div>
