@@ -82,10 +82,10 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-sm ${
         scrolled || activeTab
-          ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_0_#E2E8F0]"
-          : "bg-transparent"
+          ? "bg-white/95 shadow-[0_1px_0_0_#E2E8F0]"
+          : "bg-white/80"
       }`}
     >
       {/* Upper bar */}
