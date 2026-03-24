@@ -19,7 +19,7 @@ export default function CTA() {
         style={{ backgroundImage: "url('/images/bg-team.jpg')" }}
       />
       {/* Navy overlay */}
-      <div className="absolute inset-0 bg-navy/[0.92]" />
+      <div className="absolute inset-0 bg-navy/[0.95]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <SectionLabel color="cyan">CONTACT</SectionLabel>

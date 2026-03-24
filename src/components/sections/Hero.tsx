@@ -77,7 +77,7 @@ export default function Hero() {
         style={{ backgroundImage: "url('/images/bg-desk.jpg')" }}
       />
       {/* White overlay — photo is very subtle */}
-      <div className="absolute inset-0 bg-white/[0.92]" />
+      <div className="absolute inset-0 bg-white/[0.95]" />
 
       {/* Thin grid */}
       <div

@@ -17,7 +17,7 @@ export default function Vision() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/bg-meeting.jpg')" }}
       />
-      <div className="absolute inset-0 bg-white/[0.93]" />
+      <div className="absolute inset-0 bg-white/[0.96]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <motion.div
