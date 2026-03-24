@@ -131,7 +131,7 @@ export default function ContactPage() {
                       </legend>
 
                       <div className="space-y-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-4">
                           <div>
                             <label className={labelClass}>
                               お名前{requiredMark}
@@ -171,7 +171,7 @@ export default function ContactPage() {
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-4">
                           <div>
                             <label className={labelClass}>
                               会社名{requiredMark}
@@ -271,7 +271,7 @@ export default function ContactPage() {
                           />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-4">
                           <div>
                             <label className={labelClass}>
                               電話番号{optionalMark}
@@ -394,7 +394,7 @@ export default function ContactPage() {
                               （複数選択可）
                             </span>
                           </label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <div className="space-y-2">
                             {consultTopics.map((topic) => (
                               <label
                                 key={topic}
