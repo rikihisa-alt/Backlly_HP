@@ -105,38 +105,12 @@ export default function ContactPage() {
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-navy mb-3">
                     無料相談フォーム
                   </h2>
-                  <p className="text-text-muted text-sm md:text-base mb-4 leading-relaxed">
-                    以下のフォームにご記入ください。原則1営業日以内にご返信いたします。
-                    <br />
-                    初回のご相談は無料です。オンライン（Zoom / Google
-                    Meet）または折り返しお電話にて対応いたします。
+                  <p className="text-text-muted text-sm md:text-base mb-2 leading-relaxed">
+                    以下のフォームにご記入ください。初回相談は無料、原則1営業日以内にご返信いたします。
                   </p>
-
-                  {/* Callback notice */}
-                  <div className="flex items-start gap-3 bg-cyan/5 border border-cyan/20 rounded-lg px-4 py-3 mb-10">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      className="flex-shrink-0 mt-0.5"
-                    >
-                      <path
-                        d="M4.5 2.5C4.5 2.5 3 3.5 3 6c0 2.5 3 6 5 8s5.5 2 8-1c0 0 1-1.5-1-3s-3-.5-3-.5-1 1-2 0-2-2-2-2-.5-1-.5-3 1.5-3 1.5-3"
-                        stroke="#06B6D4"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <p className="text-xs text-navy leading-relaxed">
-                      <span className="font-medium">
-                        折り返しお電話いたします。
-                      </span>
-                      <br />
-                      お電話番号をご記入いただいた場合、ご希望の時間帯に担当者より折り返しご連絡いたします。メールのみのご対応も可能です。
-                    </p>
-                  </div>
+                  <p className="text-text-muted text-xs mb-10">
+                    ※ 電話番号をご記入の場合、ご希望の時間帯に折り返しお電話いたします。メールのみでも対応可能です。
+                  </p>
                 </motion.div>
 
                 {!submitted ? (
@@ -316,7 +290,7 @@ export default function ContactPage() {
                               placeholder="06-0000-0000"
                             />
                             <p className="text-[11px] text-text-muted/60 mt-1">
-                              ご記入いただくと、折り返しお電話いたします。
+                              ※ 折り返しご連絡いたします
                             </p>
                           </div>
                           <div>
