@@ -12,14 +12,14 @@ export default function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-section bg-navy relative overflow-hidden" ref={ref}>
+    <section id="contact" className="py-section relative overflow-hidden" ref={ref}>
+      {/* Background photo */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg-team.jpg')" }}
       />
+      {/* Navy overlay */}
+      <div className="absolute inset-0 bg-navy/[0.92]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <SectionLabel color="cyan">CONTACT</SectionLabel>

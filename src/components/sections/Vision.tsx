@@ -11,8 +11,15 @@ export default function Vision() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-section bg-bg-white" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="about" className="py-section relative overflow-hidden" ref={ref}>
+      {/* Background photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg-meeting.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-white/[0.93]" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -30,7 +37,7 @@ export default function Vision() {
           {vision.headline}
         </motion.h2>
 
-        <div className="space-y-6">
+        <div className="space-y-6 max-w-2xl">
           {vision.body.map((paragraph, i) => (
             <motion.p
               key={i}

@@ -34,11 +34,11 @@ function NetworkSVG() {
           y2={y2}
           stroke="#0F172A"
           strokeWidth="0.5"
-          opacity="0.1"
+          opacity="0.08"
         />
       ))}
-      <line x1="250" y1="500" x2="180" y2="650" stroke="#06B6D4" strokeWidth="0.5" opacity="0.1" />
-      <line x1="400" y1="550" x2="350" y2="700" stroke="#06B6D4" strokeWidth="0.5" opacity="0.1" />
+      <line x1="250" y1="500" x2="180" y2="650" stroke="#06B6D4" strokeWidth="0.5" opacity="0.08" />
+      <line x1="400" y1="550" x2="350" y2="700" stroke="#06B6D4" strokeWidth="0.5" opacity="0.08" />
 
       {[
         { cx: 120, cy: 200 },
@@ -57,8 +57,8 @@ function NetworkSVG() {
           cy={node.cy}
           r="3"
           fill={i >= 7 ? "#06B6D4" : "#0F172A"}
-          opacity="0.15"
-          animate={{ opacity: [0.08, 0.2, 0.08], r: [3, 4, 3] }}
+          opacity="0.12"
+          animate={{ opacity: [0.06, 0.15, 0.06], r: [3, 4, 3] }}
           transition={{ duration: 4, repeat: Infinity, delay: i * 0.4 }}
         />
       ))}
@@ -70,10 +70,18 @@ export default function Hero() {
   const { hero } = siteContent;
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-bg-white">
-      {/* Thin grid background */}
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background photo */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg-desk.jpg')" }}
+      />
+      {/* White overlay — photo is very subtle */}
+      <div className="absolute inset-0 bg-white/[0.92]" />
+
+      {/* Thin grid */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
             "linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px)",
@@ -125,7 +133,7 @@ export default function Hero() {
             <Button variant="primary" size="lg" href="#contact">
               {hero.ctaPrimary}
             </Button>
-            <Button variant="secondary" size="lg" href="#services">
+            <Button variant="secondary" size="lg" href="/service">
               {hero.ctaSecondary}
             </Button>
           </motion.div>

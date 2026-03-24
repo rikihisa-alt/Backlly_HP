@@ -12,7 +12,7 @@ interface RowProps {
 
 function InfoRow({ label, children }: RowProps) {
   return (
-    <div className="border-b border-border py-5 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-6 items-baseline">
+    <div className="border-b border-border/80 py-5 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-6 items-baseline">
       <span className="text-text-muted text-sm">{label}</span>
       <div className="text-text text-sm leading-relaxed">{children}</div>
     </div>
@@ -25,8 +25,15 @@ export default function CompanyInfoSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="company" className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="company" className="py-section relative overflow-hidden" ref={ref}>
+      {/* Background photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg-office.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-[#F8FAFC]/[0.95]" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
