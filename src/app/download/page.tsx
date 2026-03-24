@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import ResourceDownload from "@/components/sections/ResourceDownload";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
@@ -13,7 +14,7 @@ export default function DownloadPage() {
     <>
       <Header />
       <main>
-        <div className="h-20" />
+        <PageHero label="DOWNLOAD" title="資料ダウンロード" image="/images/bg-meeting.jpg" />
         <ResourceDownload />
         <CTA />
       </main>

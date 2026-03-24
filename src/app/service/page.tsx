@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import Problem from "@/components/sections/Problem";
 import Routing from "@/components/sections/Routing";
 import Solution from "@/components/sections/Solution";
@@ -19,8 +20,7 @@ export default function ServicePage() {
     <>
       <Header />
       <main>
-        {/* Spacer for fixed header */}
-        <div className="h-20" />
+        <PageHero label="SERVICE" title="サービス紹介" image="/images/bg-desk.jpg" />
         <Problem />
         <Routing />
         <Solution />

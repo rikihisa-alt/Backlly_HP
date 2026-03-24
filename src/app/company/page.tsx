@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import Vision from "@/components/sections/Vision";
 import Mission from "@/components/sections/Mission";
 import Value from "@/components/sections/Value";
@@ -17,7 +18,7 @@ export default function CompanyPage() {
     <>
       <Header />
       <main>
-        <div className="h-20" />
+        <PageHero label="COMPANY" title="会社情報" image="/images/bg-team.jpg" />
         <Vision />
         <Mission />
         <Value />

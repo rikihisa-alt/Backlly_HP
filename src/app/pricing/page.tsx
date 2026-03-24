@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import Pricing from "@/components/sections/Pricing";
 import Simulator from "@/components/sections/Simulator";
 import CTA from "@/components/sections/CTA";
@@ -14,7 +15,7 @@ export default function PricingPage() {
     <>
       <Header />
       <main>
-        <div className="h-20" />
+        <PageHero label="PRICING" title="料金体系" image="/images/bg-office.jpg" />
         <Pricing />
         <Simulator />
         <CTA />

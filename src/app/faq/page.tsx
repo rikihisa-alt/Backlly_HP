@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import FAQ from "@/components/sections/FAQ";
 import ConsultTopics from "@/components/sections/ConsultTopics";
 import CTA from "@/components/sections/CTA";
@@ -14,7 +15,7 @@ export default function FAQPage() {
     <>
       <Header />
       <main>
-        <div className="h-20" />
+        <PageHero label="FAQ" title="よくあるご質問" image="/images/bg-desk.jpg" />
         <FAQ />
         <ConsultTopics />
         <CTA />

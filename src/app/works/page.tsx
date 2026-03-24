@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header";
+import PageHero from "@/components/ui/PageHero";
 import TrustBand from "@/components/sections/TrustBand";
 import CaseStudies from "@/components/sections/CaseStudies";
 import CTA from "@/components/sections/CTA";
@@ -14,7 +15,7 @@ export default function WorksPage() {
     <>
       <Header />
       <main>
-        <div className="h-20" />
+        <PageHero label="WORKS" title="導入事例" image="/images/bg-meeting.jpg" />
         <TrustBand />
         <CaseStudies />
         <CTA />
