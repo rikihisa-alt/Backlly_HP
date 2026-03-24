@@ -10,13 +10,13 @@ import SubTab from "@/components/ui/SubTab";
 type ActiveTab = "service" | "works" | null;
 
 const navLinks = [
-  { label: "About", href: "/company" },
+  { label: "About", href: "/about" },
   { label: "Service", href: "/service", tab: "service" as const },
   { label: "Works", href: "/works", tab: "works" as const },
   { label: "Pricing", href: "/pricing" },
   { label: "Company", href: "/company" },
   { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const serviceTabItems = [
@@ -121,7 +121,7 @@ export default function Header() {
               </El>
             );
           })}
-          <Button variant="primary" size="sm" href="#contact">
+          <Button variant="primary" size="sm" href="/contact">
             無料相談
           </Button>
         </nav>
@@ -245,7 +245,7 @@ export default function Header() {
                 );
               })}
               <div className="pt-2">
-                <Button variant="primary" size="sm" href="#contact">
+                <Button variant="primary" size="sm" href="/contact">
                   無料相談
                 </Button>
               </div>
