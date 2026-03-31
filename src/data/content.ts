@@ -2,8 +2,8 @@ import { SiteContent } from "@/types";
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "バックオフィスを、\n機能させる。",
-    subline: "業務を整え、運用し、実装する",
+    headline: "業務をつなぎ、会社を動かす。",
+    subline: "バックオフィスの業務設計・システム構築・運用定着を一貫支援。",
     ctaPrimary: "無料相談",
     ctaSecondary: "サービスを見る",
   },

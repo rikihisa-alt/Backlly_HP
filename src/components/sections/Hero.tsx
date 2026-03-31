@@ -65,10 +65,7 @@ function NetworkSVG() {
   );
 }
 
-const headlineWords = [
-  { text: "業務をつなぎ、", delay: 0.4 },
-  { text: "会社を動かす。", delay: 0.7 },
-];
+const headline = "業務をつなぎ、会社を動かす。";
 
 export default function Hero() {
   return (
@@ -103,24 +100,14 @@ export default function Hero() {
             <SectionLabel>BACKLLY</SectionLabel>
           </motion.div>
 
-          <h1 className="font-serif text-[40px] md:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-6">
-            {headlineWords.map((word, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: word.delay,
-                  duration: 0.6,
-                  ease: "easeOut",
-                }}
-              >
-                {word.text}
-                {i === 0 && <br />}
-              </motion.span>
-            ))}
-          </h1>
+          <motion.h1
+            className="font-serif text-[40px] md:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+          >
+            {headline}
+          </motion.h1>
 
           {/* Sub copy — what the company does */}
           <motion.p
@@ -129,7 +116,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.5, ease: "easeOut" }}
           >
-            バックオフィスの業務設計・システム構築・運用定着を一貫支援。
+            バックオフィスの業務設計から、システム構築、運用定着まで。
           </motion.p>
 
           <motion.p
