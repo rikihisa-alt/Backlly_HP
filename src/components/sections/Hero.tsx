@@ -101,7 +101,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1
-            className="font-serif text-[40px] md:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-6"
+            className="font-serif text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-6 whitespace-nowrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}

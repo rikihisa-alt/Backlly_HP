@@ -38,7 +38,7 @@ export default function Capabilities() {
           {capabilities.map((item, i) => (
             <motion.div
               key={item.area}
-              className="flex items-baseline gap-6 py-4 border-b border-border/60"
+              className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-4 border-b border-border/60"
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -47,7 +47,7 @@ export default function Capabilities() {
                 ease: "easeOut",
               }}
             >
-              <span className="text-sm font-medium text-navy w-36 flex-shrink-0">
+              <span className="text-sm font-medium text-navy sm:w-36 flex-shrink-0">
                 {item.area}
               </span>
               <span className="text-sm text-text-muted">
