@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
-import { siteContent } from "@/data/content";
 
 function NetworkSVG() {
   return (
@@ -66,9 +65,12 @@ function NetworkSVG() {
   );
 }
 
-export default function Hero() {
-  const { hero } = siteContent;
+const headlineWords = [
+  { text: "業務をつなぎ、", delay: 0.4 },
+  { text: "会社を動かす。", delay: 0.7 },
+];
 
+export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background photo */}
@@ -76,7 +78,7 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/bg-desk.jpg')" }}
       />
-      {/* White overlay — photo is very subtle */}
+      {/* White overlay */}
       <div className="absolute inset-0 bg-white/[0.95]" />
 
       {/* Thin grid */}
@@ -94,47 +96,62 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 w-full relative z-10">
         <div className="max-w-2xl py-section">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
           >
             <SectionLabel>BACKLLY</SectionLabel>
           </motion.div>
 
-          <motion.h1
-            className="font-serif text-[40px] md:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-8"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7 }}
-          >
-            {hero.headline.split("\n").map((line, i) => (
-              <span key={i}>
-                {line}
+          <h1 className="font-serif text-[40px] md:text-[56px] font-bold text-navy leading-[1.3] tracking-[-0.01em] mb-6">
+            {headlineWords.map((word, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: word.delay,
+                  duration: 0.6,
+                  ease: "easeOut",
+                }}
+              >
+                {word.text}
                 {i === 0 && <br />}
-              </span>
+              </motion.span>
             ))}
-          </motion.h1>
+          </h1>
 
+          {/* Sub copy — what the company does */}
           <motion.p
-            className="text-text-muted text-base md:text-lg mb-12"
+            className="text-text-muted text-base md:text-lg leading-relaxed mb-4"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
+            transition={{ delay: 1.0, duration: 0.5, ease: "easeOut" }}
           >
-            {hero.subline}
+            バックオフィスの業務設計・システム構築・運用定着を一貫支援。
+          </motion.p>
+
+          <motion.p
+            className="text-text-muted/70 text-sm md:text-base leading-relaxed mb-12"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.15, duration: 0.5, ease: "easeOut" }}
+          >
+            経理・労務・総務の属人化を解消し、人が変わっても止まらない仕組みをつくります。
           </motion.p>
 
           <motion.div
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.6 }}
+            transition={{ delay: 1.3, duration: 0.5, ease: "easeOut" }}
           >
             <Button variant="primary" size="lg" href="/contact">
-              {hero.ctaPrimary}
+              無料相談
             </Button>
             <Button variant="secondary" size="lg" href="/service">
-              {hero.ctaSecondary}
+              サービスを見る
             </Button>
           </motion.div>
         </div>

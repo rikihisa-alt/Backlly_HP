@@ -3,13 +3,14 @@ import Link from "next/link";
 import { siteContent } from "@/data/content";
 
 const navLinks = [
-  { label: "About", href: "/company" },
+  { label: "About", href: "/about" },
   { label: "Service", href: "/service" },
   { label: "Works", href: "/works" },
   { label: "Pricing", href: "/pricing" },
   { label: "Company", href: "/company" },
   { label: "FAQ", href: "/faq" },
   { label: "Download", href: "/download" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
@@ -29,9 +30,16 @@ export default function Footer() {
                 className="h-10 w-auto mb-4 brightness-0 invert opacity-70"
               />
             </Link>
-            <p className="text-white/25 text-sm">
+            <p className="text-white/25 text-sm mb-6">
               {footer.catchphrase}
             </p>
+
+            {/* Company info */}
+            <div className="text-white/20 text-xs space-y-1">
+              <p>株式会社Backlly</p>
+              <p>代表取締役 力久 凌太郎</p>
+              <p>大阪府大阪市</p>
+            </div>
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3">
