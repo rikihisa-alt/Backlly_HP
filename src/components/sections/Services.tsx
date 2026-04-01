@@ -94,6 +94,47 @@ export default function Services() {
             </div>
           ))}
         </div>
+
+        {/* 支援の柔軟性 */}
+        <motion.div
+          className="max-w-3xl mt-20 pt-16 border-t border-border"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy mb-6">
+            一貫支援も、スポット対応も。
+          </h3>
+
+          <div className="space-y-4 text-text-muted text-sm md:text-base leading-relaxed">
+            <p>
+              Backllyは、企業ごとの状況に合わせて、バックオフィスの設計・システム構築・運用改善までを一貫して支援します。
+            </p>
+            <p>
+              業務が整理されていない段階であれば、コンサルティングから入り、フロー設計・ルール整備・業務整理を行います。そのうえで必要に応じて、B-Hallの導入や、企業専用システムの開発まで対応します。
+            </p>
+            <p>
+              すでに一部が整っている場合は、以下のようなスポット支援も可能です。
+            </p>
+          </div>
+
+          <div className="mt-6 space-y-2">
+            {[
+              "業務整理のみ",
+              "システム開発のみ",
+              "運用改善のみ",
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-cyan flex-shrink-0" />
+                <span className="text-sm text-navy">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-6 text-text-muted text-sm md:text-base leading-relaxed">
+            企業ごとに異なる状態を前提に、最適な範囲と進め方を設計します。
+          </p>
+        </motion.div>
       </div>
     </section>
   );
