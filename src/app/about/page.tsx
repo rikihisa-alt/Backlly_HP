@@ -4,6 +4,7 @@ import Vision from "@/components/sections/Vision";
 import Mission from "@/components/sections/Mission";
 import Value from "@/components/sections/Value";
 import CEOMessage from "@/components/sections/CEOMessage";
+import ServiceSummary from "@/components/sections/ServiceSummary";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
@@ -21,6 +22,7 @@ export default function AboutPage() {
         <Vision />
         <Mission />
         <Value />
+        <ServiceSummary />
         <CEOMessage />
         <CTA />
       </main>

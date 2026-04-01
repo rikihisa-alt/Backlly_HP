@@ -122,6 +122,7 @@ export default function Services() {
             {[
               "業務整理のみ",
               "システム開発のみ",
+              "HP・LP制作のみ",
               "運用改善のみ",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">

@@ -4,6 +4,7 @@ import Vision from "@/components/sections/Vision";
 import Mission from "@/components/sections/Mission";
 import Value from "@/components/sections/Value";
 import Strengths from "@/components/sections/Strengths";
+import ServiceSummary from "@/components/sections/ServiceSummary";
 import CEOMessage from "@/components/sections/CEOMessage";
 import CompanyInfoSection from "@/components/sections/CompanyInfoSection";
 import Footer from "@/components/sections/Footer";
@@ -23,6 +24,7 @@ export default function CompanyPage() {
         <Mission />
         <Value />
         <Strengths />
+        <ServiceSummary />
         <CEOMessage />
         <CompanyInfoSection />
       </main>

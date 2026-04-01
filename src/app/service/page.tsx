@@ -12,7 +12,7 @@ import Footer from "@/components/sections/Footer";
 
 export const metadata = {
   title: "サービス | 株式会社Backlly",
-  description: "バックオフィスの整理・運用・開発まで一貫して対応。バックオフィスコンサルティング、B-Hall、B-Coreの3つのサービスをご紹介します。",
+  description: "バックオフィスの整理・運用・開発・HP制作まで一貫して対応。バックオフィスコンサルティング、B-Hall、B-Core、HP・LP制作のサービスをご紹介します。",
 };
 
 export default function ServicePage() {
