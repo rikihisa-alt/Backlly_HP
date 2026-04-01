@@ -10,7 +10,7 @@ interface PageHeroProps {
 
 export default function PageHero({ label, title, image }: PageHeroProps) {
   return (
-    <section className="relative h-[280px] md:h-[340px] flex items-end overflow-hidden">
+    <section className="relative h-[260px] md:h-[340px] flex items-end overflow-hidden">
       {/* Background photo */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -18,7 +18,7 @@ export default function PageHero({ label, title, image }: PageHeroProps) {
       />
       <div className="absolute inset-0 bg-navy/[0.82]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-10 w-full relative z-10 pb-12 md:pb-16">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 w-full relative z-10 pb-6 md:pb-16">
         <motion.p
           className="font-mono text-xs tracking-[0.2em] uppercase text-cyan mb-3"
           initial={{ opacity: 0, y: 10 }}

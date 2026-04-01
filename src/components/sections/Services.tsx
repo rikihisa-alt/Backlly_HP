@@ -28,12 +28,13 @@ export default function Services() {
         <SectionLabel>SERVICES</SectionLabel>
 
         <motion.h2
-          className="font-serif text-3xl md:text-[36px] font-semibold text-navy mb-4"
+          className="font-serif text-2xl sm:text-3xl md:text-[36px] font-semibold text-navy mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          整える → 回す → 作る → 届ける
+          <span className="hidden sm:inline">整える → 回す → 作る → 届ける</span>
+          <span className="sm:hidden">整える→回す→作る→届ける</span>
         </motion.h2>
 
         <motion.p
