@@ -119,11 +119,33 @@ export default function Hero() {
             バックオフィスの業務設計から、システム構築、運用定着まで。
           </motion.p>
 
+          {/* Service tags */}
+          <motion.div
+            className="flex flex-wrap gap-2 mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.5, ease: "easeOut" }}
+          >
+            {[
+              "バックオフィスコンサル",
+              "システム開発",
+              "HP・LP制作",
+              "業務改善・DX支援",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="text-xs text-navy/70 border border-navy/15 rounded-full px-3 py-1"
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
+
           <motion.p
             className="text-text-muted/70 text-sm md:text-base leading-relaxed mb-12"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.15, duration: 0.5, ease: "easeOut" }}
+            transition={{ delay: 1.2, duration: 0.5, ease: "easeOut" }}
           >
             経理・労務・総務の属人化を解消し、人が変わっても止まらない仕組みをつくります。
           </motion.p>
