@@ -33,7 +33,7 @@ export default function Services() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          整える → 回す → 作る
+          整える → 回す → 作る → 届ける
         </motion.h2>
 
         <motion.p
