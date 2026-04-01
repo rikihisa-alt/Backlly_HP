@@ -48,6 +48,21 @@ export default function Solution() {
             </motion.div>
           ))}
         </div>
+
+        {/* 具体的な実装内容＋スポット対応 */}
+        <motion.div
+          className="max-w-2xl mt-16 pt-12 border-t border-white/10"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8, duration: 0.5 }}
+        >
+          <p className="text-white/80 text-sm md:text-base leading-relaxed">
+            B-Hallによる一元管理の構築や、企業専用システムの開発、ホームページ・LP制作など、業務に直結する仕組みを実装します。
+          </p>
+          <p className="text-white/80 text-sm md:text-base leading-relaxed mt-4">
+            また、全体設計だけでなく、システム開発のみ、業務改善のみといったスポットでの支援にも対応しています。
+          </p>
+        </motion.div>
       </div>
     </section>
   );
