@@ -134,7 +134,7 @@ export default function Hero() {
             ].map((tag) => (
               <span
                 key={tag}
-                className="text-xs text-navy/70 border border-navy/15 rounded-full px-3 py-1"
+                className="text-xs text-navy/70 border border-navy/15 rounded px-3 py-1"
               >
                 {tag}
               </span>

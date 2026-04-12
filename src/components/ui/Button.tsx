@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -14,19 +13,19 @@ interface ButtonProps {
 
 const variantStyles = {
   primary:
-    "bg-navy text-white hover:opacity-90 border border-transparent",
+    "bg-navy text-white border border-navy hover:bg-navy-mid",
   secondary:
-    "bg-transparent text-navy border border-navy hover:bg-navy hover:text-white",
+    "bg-transparent text-navy border border-navy/30 hover:border-navy",
   ghost:
-    "bg-transparent text-navy underline underline-offset-4 border-none hover:text-cyan",
+    "bg-transparent text-navy underline underline-offset-4 decoration-navy/30 border-none hover:decoration-navy",
   light:
-    "bg-white text-navy hover:bg-white/90 border border-transparent",
+    "bg-white text-navy border border-white/20 hover:bg-white/90",
 };
 
 const sizeStyles = {
-  sm: "px-5 py-2.5 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-6 py-4 text-base md:text-lg",
+  sm: "px-5 py-2 text-sm",
+  md: "px-6 py-3 text-sm",
+  lg: "px-8 py-3.5 text-sm md:text-base",
 };
 
 export default function Button({
@@ -37,22 +36,20 @@ export default function Button({
   onClick,
   external,
 }: ButtonProps) {
-  const className = `inline-block font-sans font-medium rounded-lg transition-all duration-200 ${variantStyles[variant]} ${sizeStyles[size]}`;
+  const className = `inline-block font-sans font-medium rounded transition-colors duration-200 ${variantStyles[variant]} ${sizeStyles[size]}`;
 
   if (href) {
     const isExternal = external || href.startsWith("http");
     if (isExternal) {
       return (
-        <motion.a
+        <a
           href={href}
           className={className}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.02, y: -1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {children}
-        </motion.a>
+        </a>
       );
     }
 
@@ -64,13 +61,8 @@ export default function Button({
   }
 
   return (
-    <motion.button
-      className={className}
-      onClick={onClick}
-      whileHover={{ scale: 1.02, y: -1 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-    >
+    <button className={className} onClick={onClick}>
       {children}
-    </motion.button>
+    </button>
   );
 }

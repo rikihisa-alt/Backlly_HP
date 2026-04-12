@@ -31,7 +31,7 @@ const features = [
 
 function MiniDashboard({ activeFeature }: { activeFeature: string }) {
   return (
-    <div className="rounded-lg border border-border bg-bg-white overflow-hidden shadow-sm">
+    <div className="rounded border border-border bg-bg-white overflow-hidden shadow-sm">
       {/* Window chrome */}
       <div className="bg-bg px-4 py-3 border-b border-border flex items-center gap-3">
         <div className="flex gap-1.5">

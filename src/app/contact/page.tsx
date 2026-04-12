@@ -73,7 +73,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full px-4 py-3 border border-border rounded-lg text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all bg-white";
+    "w-full px-4 py-3 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all bg-white";
 
   const labelClass = "block text-xs font-medium text-navy mb-1.5";
   const requiredMark = <span className="text-cyan ml-0.5">*</span>;
@@ -227,7 +227,7 @@ export default function ContactPage() {
                                     size: formData.size === size ? "" : size,
                                   })
                                 }
-                                className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                                className={`px-4 py-2 text-sm rounded border transition-all ${
                                   formData.size === size
                                     ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/20"
                                     : "border-border text-text-muted hover:border-navy/30"
@@ -333,7 +333,7 @@ export default function ContactPage() {
                             {contactMethods.map((method) => (
                               <label
                                 key={method.value}
-                                className={`flex items-center gap-2 px-4 py-2 rounded-lg border cursor-pointer transition-all ${
+                                className={`flex items-center gap-2 px-4 py-2 rounded border cursor-pointer transition-all ${
                                   formData.preferredContact === method.value
                                     ? "border-cyan bg-cyan/5 ring-1 ring-cyan/20"
                                     : "border-border hover:border-navy/30"
@@ -398,7 +398,7 @@ export default function ContactPage() {
                             {consultTopics.map((topic) => (
                               <label
                                 key={topic}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all ${
+                                className={`flex items-center gap-3 px-4 py-3 rounded border cursor-pointer transition-all ${
                                   formData.topics.includes(topic)
                                     ? "border-cyan bg-cyan/5 ring-1 ring-cyan/20"
                                     : "border-border hover:border-navy/30"
@@ -467,7 +467,7 @@ export default function ContactPage() {
                     <div className="pt-4 border-t border-border">
                       <button
                         type="submit"
-                        className="w-full sm:w-auto bg-navy text-white font-medium px-12 py-4 rounded-lg hover:opacity-90 transition-opacity text-sm flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto bg-navy text-white font-medium px-10 py-3.5 rounded hover:bg-navy-mid transition-colors text-sm flex items-center justify-center gap-2"
                       >
                         <svg
                           width="16"
@@ -498,7 +498,7 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="bg-white border border-border rounded-xl px-8 py-12 text-center">
+                    <div className="bg-white border border-border rounded px-8 py-12 text-center">
                       <div className="w-16 h-16 rounded-full bg-cyan/10 flex items-center justify-center mx-auto mb-6">
                         <svg
                           width="32"
@@ -522,7 +522,7 @@ export default function ContactPage() {
                         原則1営業日以内に、ご希望の連絡方法でご連絡いたします。
                       </p>
 
-                      <div className="inline-flex flex-col items-start gap-2 bg-bg rounded-lg px-6 py-4 text-left">
+                      <div className="inline-flex flex-col items-start gap-2 bg-bg rounded px-6 py-4 text-left">
                         <p className="text-xs font-mono tracking-wider uppercase text-text-muted mb-1">
                           今後の流れ
                         </p>

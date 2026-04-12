@@ -238,7 +238,7 @@ export default function Simulator() {
                   return (
                     <button
                       key={option.value}
-                      className={`w-full text-left px-6 py-4 border rounded-lg transition-all duration-200 text-sm md:text-base ${
+                      className={`w-full text-left px-6 py-4 border rounded transition-colors duration-200 text-sm md:text-base ${
                         isSelected
                           ? "border-cyan bg-cyan/5 text-navy"
                           : "border-border hover:border-navy/30 text-text"
