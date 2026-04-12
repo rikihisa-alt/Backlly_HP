@@ -17,7 +17,7 @@ export default function Footer() {
   const { footer } = siteContent;
 
   return (
-    <footer className="bg-[#0A1420] py-16 md:py-20">
+    <footer className="bg-navy py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="flex flex-col md:flex-row justify-between items-start gap-10">
           <div>

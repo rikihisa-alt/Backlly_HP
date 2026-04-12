@@ -17,7 +17,7 @@ export default function FlowLine() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-section bg-white" ref={ref}>
+    <section className="py-section bg-bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}

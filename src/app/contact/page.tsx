@@ -73,7 +73,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full px-4 py-3 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all bg-white";
+    "w-full px-4 py-3 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-1 focus:ring-cyan/20 transition-colors bg-white";
 
   const labelClass = "block text-xs font-medium text-navy mb-1.5";
   const requiredMark = <span className="text-cyan ml-0.5">*</span>;
@@ -227,9 +227,9 @@ export default function ContactPage() {
                                     size: formData.size === size ? "" : size,
                                   })
                                 }
-                                className={`px-4 py-2 text-sm rounded border transition-all ${
+                                className={`px-4 py-2 text-sm rounded border transition-colors ${
                                   formData.size === size
-                                    ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/20"
+                                    ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/15"
                                     : "border-border text-text-muted hover:border-navy/30"
                                 }`}
                               >
@@ -311,9 +311,9 @@ export default function ContactPage() {
                                           : time,
                                     })
                                   }
-                                  className={`px-3 py-1.5 text-xs rounded-md border transition-all ${
+                                  className={`px-3 py-1.5 text-xs rounded border transition-colors ${
                                     formData.preferredTime === time
-                                      ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/20"
+                                      ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/15"
                                       : "border-border text-text-muted hover:border-navy/30"
                                   }`}
                                 >
@@ -335,7 +335,7 @@ export default function ContactPage() {
                                 key={method.value}
                                 className={`flex items-center gap-2 px-4 py-2 rounded border cursor-pointer transition-all ${
                                   formData.preferredContact === method.value
-                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/20"
+                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/15"
                                     : "border-border hover:border-navy/30"
                                 }`}
                               >
@@ -400,7 +400,7 @@ export default function ContactPage() {
                                 key={topic}
                                 className={`flex items-center gap-3 px-4 py-3 rounded border cursor-pointer transition-all ${
                                   formData.topics.includes(topic)
-                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/20"
+                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/15"
                                     : "border-border hover:border-navy/30"
                                 }`}
                               >

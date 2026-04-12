@@ -224,7 +224,7 @@ export default function BHallDetail() {
               {features.map((f) => (
                 <button
                   key={f.id}
-                  className={`w-full text-left px-5 py-4 transition-all duration-200 border-l-2 ${
+                  className={`w-full text-left px-5 py-4 transition-colors duration-200 border-l-2 ${
                     activeFeature === f.id
                       ? "border-l-cyan bg-cyan/5"
                       : "border-l-transparent hover:border-l-border hover:bg-bg/50"

@@ -31,7 +31,7 @@ export default function CompanyInfoSection() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/bg-office.jpg')" }}
       />
-      <div className="absolute inset-0 bg-[#F8FAFC]/[0.97]" />
+      <div className="absolute inset-0 bg-bg/[0.97]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <motion.div
