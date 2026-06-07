@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 /* -------------------------- icons -------------------------- */
@@ -121,92 +122,90 @@ export default function HomeLanding() {
   return (
     <div className="relative bg-bg-white">
       {/* ============ HERO ============ */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-20 pb-4">
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
-            {/* Left copy */}
-            <div className="lg:col-span-7">
-              <motion.h1
-                className="font-serif font-bold text-navy leading-[1.05] tracking-[-0.02em] text-[36px] sm:text-[52px] md:text-[64px] lg:text-[80px] mb-5"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                業務をつなぎ、
-                <br />
-                会社を<span className="text-brand">動かす</span>。
-              </motion.h1>
+      <section className="relative overflow-hidden bg-bg-white">
+        {/* Background image (right side, fades into white on the left) */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
+          {/* Image anchored to the right edge so the man's silhouette stays centered-right */}
+          <div className="absolute top-0 right-0 h-full w-[78%] md:w-[68%] lg:w-[62%]">
+            <Image
+              src="/images/hero-main.png"
+              alt="Backlly hero"
+              fill
+              priority
+              sizes="(max-width: 1024px) 78vw, 62vw"
+              className="object-cover object-right"
+            />
+          </div>
+          {/* Left fade — covers left half completely, then transitions to transparent */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, #ffffff 0%, #ffffff 38%, rgba(255,255,255,0.85) 52%, rgba(255,255,255,0.4) 68%, rgba(255,255,255,0) 85%)",
+            }}
+          />
+          {/* Soft top/bottom fade to blend with neighbouring sections */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.85) 92%, #ffffff 100%)",
+            }}
+          />
+        </motion.div>
 
-              <motion.p
-                className="text-text-muted text-[13px] md:text-[14px] leading-[1.85] mb-6"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-              >
-                バックオフィスの業務設計から、システム構築、運用定着まで。
-                <br />
-                経理・労務・総務の属人化を解消し、
-                <br />
-                人が変わっても止まらない仕組みをつくります。
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row gap-3"
-                initial={{ opacity: 1, y: 0 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-between gap-6 bg-brand hover:bg-brand-dark text-white font-medium text-[14px] rounded px-6 py-3 transition-colors"
-                >
-                  <span>無料相談</span>
-                  <Arrow className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/service"
-                  className="inline-flex items-center justify-between gap-6 bg-white border border-navy/30 hover:border-navy text-navy font-medium text-[14px] rounded px-6 py-3 transition-colors"
-                >
-                  <span>サービスを見る</span>
-                  <Arrow className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* Right image placeholder */}
-            <motion.div
-              className="lg:col-span-5"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-20 pb-4">
+          <div className="max-w-[58%] lg:max-w-[55%]">
+            <motion.h1
+              className="font-serif font-bold text-navy leading-[1.05] tracking-[-0.02em] text-[36px] sm:text-[52px] md:text-[64px] lg:text-[80px] mb-5"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              {/*
-                HERO IMAGE PLACEHOLDER
-                画像が届いたら /public/images/hero-main.jpg に配置し、
-                以下の <Image /> をコメントアウト解除してください。
-              */}
-              <div className="relative w-full aspect-[3/2] lg:aspect-[3/2] rounded-md overflow-hidden border border-navy/40 bg-bg">
-                {/*
-                <Image src="/images/hero-main.jpg" alt="Backlly hero" fill priority className="object-cover" />
-                */}
-                <span className="absolute top-2 left-2 w-3 h-3 border-t border-l border-navy/50" />
-                <span className="absolute top-2 right-2 w-3 h-3 border-t border-r border-navy/50" />
-                <span className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-navy/50" />
-                <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-navy/50" />
-                <svg className="absolute inset-0 w-full h-full text-navy/15" preserveAspectRatio="none">
-                  <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" />
-                  <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center bg-bg/90 backdrop-blur-sm py-2 px-4 rounded">
-                    <div className="font-sans font-bold text-[11px] tracking-[0.25em] text-navy mb-0.5">
-                      HERO IMAGE
-                    </div>
-                    <div className="text-[11px] text-text-muted">
-                      画像が届き次第ここに配置
-                    </div>
-                  </div>
-                </div>
-              </div>
+              業務をつなぎ、
+              <br />
+              会社を<span className="text-brand">動かす</span>。
+            </motion.h1>
+
+            <motion.p
+              className="text-text-muted text-[13px] md:text-[14px] leading-[1.85] mb-6"
+              initial={{ opacity: 0.001, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.5 }}
+            >
+              バックオフィスの業務設計から、システム構築、運用定着まで。
+              <br />
+              経理・労務・総務の属人化を解消し、
+              <br />
+              人が変わっても止まらない仕組みをつくります。
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3"
+              initial={{ opacity: 0.001, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-between gap-6 bg-brand hover:bg-brand-dark text-white font-medium text-[14px] rounded px-6 py-3 transition-colors shadow-sm"
+              >
+                <span>無料相談</span>
+                <Arrow className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/service"
+                className="inline-flex items-center justify-between gap-6 bg-white/95 backdrop-blur-sm border border-navy/30 hover:border-navy text-navy font-medium text-[14px] rounded px-6 py-3 transition-colors"
+              >
+                <span>サービスを見る</span>
+                <Arrow className="w-4 h-4" />
+              </Link>
             </motion.div>
           </div>
         </div>
