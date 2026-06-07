@@ -13,13 +13,13 @@ interface ButtonProps {
 
 const variantStyles = {
   primary:
-    "bg-navy text-white border border-navy hover:bg-navy-mid",
+    "bg-brand text-white border border-brand hover:bg-brand-dark",
   secondary:
     "bg-transparent text-navy border border-navy/30 hover:border-navy",
   ghost:
     "bg-transparent text-navy underline underline-offset-4 decoration-navy/30 border-none hover:decoration-navy",
   light:
-    "bg-white text-navy border border-white/20 hover:bg-white/90",
+    "bg-white text-brand border border-white/20 hover:bg-white/90",
 };
 
 const sizeStyles = {

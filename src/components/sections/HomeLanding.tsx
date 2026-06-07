@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Button from "@/components/ui/Button";
 
 /* -------------------------- icons -------------------------- */
 const IconConsult = (p: { className?: string }) => (
@@ -32,7 +31,7 @@ const IconChart = (p: { className?: string }) => (
   </svg>
 );
 const IconCheck = (p: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={p.className}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={p.className}>
     <path d="M5 12l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -40,6 +39,13 @@ const Arrow = (p: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={p.className}>
     <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
+);
+
+/* ----- section label (BOLD BLACK uppercase tracking) ----- */
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <span className="font-sans font-bold text-[12px] md:text-[13px] tracking-[0.18em] text-navy">
+    {children}
+  </span>
 );
 
 /* -------------------------- data -------------------------- */
@@ -69,9 +75,9 @@ const trustCompanies = [
 
 const trustStats = [
   { value: "50+", label: "支援企業数" },
-  { value: "96%", label: "継続率", unit: "%", val: "96" },
-  { value: "30%", label: "平均工数削減率", unit: "%", val: "30" },
-  { value: "1日", label: "平均レスポンス", unit: "日", val: "1" },
+  { value: "96", unit: "%", label: "継続率" },
+  { value: "30", unit: "%", label: "平均工数削減率" },
+  { value: "1", unit: "日", label: "平均レスポンス" },
 ];
 
 const serviceList = [
@@ -113,26 +119,26 @@ const capabilities = [
 /* -------------------------- page -------------------------- */
 export default function HomeLanding() {
   return (
-    <div className="relative">
+    <div className="relative bg-bg-white">
       {/* ============ HERO ============ */}
-      <section className="relative overflow-hidden bg-bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-20 pb-2">
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-20 pb-4">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             {/* Left copy */}
             <div className="lg:col-span-7">
               <motion.h1
-                className="font-serif font-bold text-navy leading-[1.1] tracking-[-0.01em] text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] mb-4"
+                className="font-serif font-bold text-navy leading-[1.05] tracking-[-0.02em] text-[36px] sm:text-[52px] md:text-[64px] lg:text-[80px] mb-5"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
                 業務をつなぎ、
                 <br />
-                会社を<span className="text-cyan">動かす</span>。
+                会社を<span className="text-brand">動かす</span>。
               </motion.h1>
 
               <motion.p
-                className="text-text-muted text-[13px] md:text-[14px] leading-[1.85] mb-5"
+                className="text-text-muted text-[13px] md:text-[14px] leading-[1.85] mb-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
@@ -149,12 +155,20 @@ export default function HomeLanding() {
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Button variant="primary" size="md" href="/contact">
-                  無料相談 →
-                </Button>
-                <Button variant="secondary" size="md" href="/service">
-                  サービスを見る →
-                </Button>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-between gap-6 bg-brand hover:bg-brand-dark text-white font-medium text-[14px] rounded px-6 py-3 transition-colors"
+                >
+                  <span>無料相談</span>
+                  <Arrow className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/service"
+                  className="inline-flex items-center justify-between gap-6 bg-white border border-navy/30 hover:border-navy text-navy font-medium text-[14px] rounded px-6 py-3 transition-colors"
+                >
+                  <span>サービスを見る</span>
+                  <Arrow className="w-4 h-4" />
+                </Link>
               </motion.div>
             </div>
 
@@ -168,25 +182,23 @@ export default function HomeLanding() {
               {/*
                 HERO IMAGE PLACEHOLDER
                 画像が届いたら /public/images/hero-main.jpg に配置し、
-                以下の <Image /> をコメントアウト解除して背景の枠を消してください。
+                以下の <Image /> をコメントアウト解除してください。
               */}
               <div className="relative w-full aspect-[3/2] lg:aspect-[3/2] rounded-md overflow-hidden border border-navy/40 bg-bg">
                 {/*
                 <Image src="/images/hero-main.jpg" alt="Backlly hero" fill priority className="object-cover" />
                 */}
-                {/* corner ticks */}
                 <span className="absolute top-2 left-2 w-3 h-3 border-t border-l border-navy/50" />
                 <span className="absolute top-2 right-2 w-3 h-3 border-t border-r border-navy/50" />
                 <span className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-navy/50" />
                 <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-navy/50" />
-                {/* diagonal */}
                 <svg className="absolute inset-0 w-full h-full text-navy/15" preserveAspectRatio="none">
                   <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" />
                   <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center px-4 bg-bg/90 backdrop-blur-sm py-2 px-4 rounded">
-                    <div className="font-mono text-[11px] tracking-[0.25em] text-navy mb-0.5">
+                  <div className="text-center bg-bg/90 backdrop-blur-sm py-2 px-4 rounded">
+                    <div className="font-sans font-bold text-[11px] tracking-[0.25em] text-navy mb-0.5">
                       HERO IMAGE
                     </div>
                     <div className="text-[11px] text-text-muted">
@@ -201,33 +213,33 @@ export default function HomeLanding() {
       </section>
 
       {/* ============ Service tiles + FLOW ============ */}
-      <section className="bg-bg-white">
+      <section>
         <div className="max-w-7xl mx-auto px-6 md:px-10 pb-4">
           <div className="grid lg:grid-cols-12 gap-6">
-            {/* Tiles 4 (left 5 cols) */}
+            {/* Tiles 4 */}
             <div className="lg:col-span-5 grid grid-cols-4 gap-3">
               {serviceTiles.map((t) => (
                 <div
                   key={t.label}
-                  className="flex flex-col items-center justify-center text-center bg-bg rounded-md border border-border py-4 px-2 hover:border-navy/30 transition-colors"
+                  className="flex flex-col items-center justify-center text-center bg-bg-white rounded-md border border-border py-5 px-2 hover:border-brand/40 transition-colors"
                 >
-                  <t.Icon className="w-6 h-6 text-navy mb-1.5" />
-                  <span className="text-[11px] leading-snug text-navy whitespace-pre-line">
+                  <t.Icon className="w-7 h-7 text-navy mb-2" />
+                  <span className="text-[11px] font-medium leading-snug text-navy whitespace-pre-line">
                     {t.label}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* FLOW (right 7 cols) */}
+            {/* FLOW */}
             <div className="lg:col-span-7">
-              <div className="flex items-baseline gap-3 mb-2">
-                <span className="font-mono text-[11px] tracking-[0.25em] text-cyan">FLOW</span>
-                <h2 className="font-serif text-xl md:text-[22px] font-semibold text-navy">
+              <div className="flex items-baseline gap-3 mb-1">
+                <Label>FLOW</Label>
+                <h2 className="font-serif text-[18px] md:text-[20px] font-semibold text-navy">
                   業務は、つながって初めて機能する。
                 </h2>
               </div>
-              <p className="text-text-muted text-[12px] md:text-[13px] leading-relaxed mb-4">
+              <p className="text-text-muted text-[12px] leading-relaxed mb-3">
                 入社から月次報告まで、バックオフィスの業務は1本の流れです。
                 <br />
                 どこか1つが止まると、全体が滞る。Backllyはこの流れを設計します。
@@ -237,10 +249,15 @@ export default function HomeLanding() {
                 {flowSteps.map((step, i) => (
                   <div key={step.no} className="relative">
                     <div className="rounded-md border border-border bg-bg-white p-3">
-                      <div className="font-mono text-[11px] text-cyan mb-1">
-                        {step.no}　{step.label}
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="font-sans font-bold text-[13px] text-brand">
+                          {step.no}
+                        </span>
+                        <span className="text-[12px] font-medium text-navy">
+                          {step.label}
+                        </span>
                       </div>
-                      <div className="text-[11px] text-text-muted leading-snug">
+                      <div className="text-[10.5px] text-text-muted leading-snug">
                         {step.desc}
                       </div>
                     </div>
@@ -258,16 +275,14 @@ export default function HomeLanding() {
       </section>
 
       {/* ============ TRUSTED BY ============ */}
-      <section className="bg-bg-white">
+      <section>
         <div className="max-w-7xl mx-auto px-6 md:px-10 pb-4">
-          <div className="rounded-md border border-border bg-bg-white py-5 px-6">
+          <div className="rounded-md border border-border bg-bg-white py-4 px-6">
             <div className="grid lg:grid-cols-12 gap-6 items-center">
               {/* Companies */}
               <div className="lg:col-span-7">
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                  <span className="font-mono text-[11px] tracking-[0.25em] text-navy/70">
-                    TRUSTED BY
-                  </span>
+                  <Label>TRUSTED BY</Label>
                   {trustCompanies.map((c) => (
                     <span key={c} className="text-[12px] text-text-muted">
                       {c}
@@ -279,8 +294,13 @@ export default function HomeLanding() {
               <div className="lg:col-span-5 grid grid-cols-4 gap-3">
                 {trustStats.map((s) => (
                   <div key={s.label} className="text-center">
-                    <div className="font-serif text-navy text-[22px] md:text-[26px] leading-none font-semibold">
-                      {s.value}
+                    <div className="font-serif text-navy leading-none font-bold">
+                      <span className="text-[26px] md:text-[30px]">{s.value}</span>
+                      {s.unit && (
+                        <span className="text-[14px] md:text-[15px] text-text-muted ml-0.5 font-medium">
+                          {s.unit}
+                        </span>
+                      )}
                     </div>
                     <div className="text-[10px] text-text-muted mt-1 leading-tight">
                       {s.label}
@@ -294,20 +314,20 @@ export default function HomeLanding() {
       </section>
 
       {/* ============ VISION + SERVICES + CAPABILITIES/CONTACT ============ */}
-      <section className="bg-bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-6">
+      <section>
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-8">
           <div className="grid lg:grid-cols-12 gap-6">
             {/* VISION */}
             <div className="lg:col-span-3">
-              <div className="font-mono text-[11px] tracking-[0.25em] text-cyan mb-2">
-                VISION
+              <div className="mb-2">
+                <Label>VISION</Label>
               </div>
-              <h3 className="font-serif text-navy font-semibold leading-snug text-[16px] md:text-[17px] mb-3">
+              <h3 className="font-serif text-brand font-bold leading-snug text-[15px] md:text-[16px] mb-3">
                 バックオフィスが機能する会社を、
                 <br />
                 当たり前にする。
               </h3>
-              <p className="text-text-muted text-[12px] leading-[1.75] mb-3">
+              <p className="text-text-muted text-[12px] leading-[1.85] mb-3">
                 業務フローが設計されていないことが根本原因です。
                 Backllyは、業務を1つずつ分解し、フローを設計し、
                 仕組みとして実装する。人が変わっても、拠点が増えても、
@@ -315,7 +335,7 @@ export default function HomeLanding() {
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-1 text-[12px] text-navy hover:text-cyan transition-colors"
+                className="inline-flex items-center gap-1 text-[12px] text-text-muted hover:text-brand transition-colors"
               >
                 もっと見る <Arrow className="w-3 h-3" />
               </Link>
@@ -324,31 +344,28 @@ export default function HomeLanding() {
             {/* SERVICES */}
             <div className="lg:col-span-5">
               <div className="flex items-baseline gap-3 mb-3">
-                <span className="font-mono text-[11px] tracking-[0.25em] text-cyan">
-                  SERVICES
-                </span>
-                <span className="text-[12px] text-navy">
-                  整える <span className="text-cyan">→</span> 回す{" "}
-                  <span className="text-cyan">→</span> 作る{" "}
-                  <span className="text-cyan">→</span> 届ける
+                <Label>SERVICES</Label>
+                <span className="text-[12px] text-text-muted">
+                  整える <span className="text-brand">→</span> 回す{" "}
+                  <span className="text-brand">→</span> 作る{" "}
+                  <span className="text-brand">→</span> 届ける
                 </span>
               </div>
-              <ul className="space-y-1.5">
+              <ul className="space-y-2">
                 {serviceList.map((s) => (
                   <li
                     key={s.title}
-                    className="flex items-start gap-2.5 border-b border-border last:border-b-0 pb-1.5 last:pb-0"
+                    className="flex items-start gap-3"
                   >
-                    <div className="w-6 h-6 rounded bg-bg flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <s.Icon className="w-3 h-3 text-navy" />
+                    <div className="w-8 h-8 rounded bg-bg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <s.Icon className="w-4 h-4 text-brand" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-[12px] leading-tight">
-                        <span className="text-navy font-medium">{s.label}</span>
-                        <span className="text-text-muted/60 mx-2">　</span>
+                      <div className="text-[12.5px] leading-tight flex items-baseline gap-2">
+                        <span className="text-brand font-semibold">{s.label}</span>
                         <span className="text-navy">{s.title}</span>
                       </div>
-                      <div className="text-[10.5px] text-text-muted leading-snug mt-0.5">
+                      <div className="text-[11px] text-text-muted leading-snug mt-0.5">
                         {s.sub}
                       </div>
                     </div>
@@ -359,16 +376,16 @@ export default function HomeLanding() {
 
             {/* CAPABILITIES */}
             <div className="lg:col-span-2">
-              <div className="font-mono text-[11px] tracking-[0.25em] text-cyan mb-2">
-                CAPABILITIES
+              <div className="mb-2">
+                <Label>CAPABILITIES</Label>
               </div>
-              <div className="text-[12px] text-navy mb-3">
+              <div className="text-[12px] text-navy font-medium mb-2.5">
                 Backllyで対応できること
               </div>
               <ul className="space-y-1.5">
                 {capabilities.map((c) => (
                   <li key={c} className="flex items-center gap-2">
-                    <IconCheck className="w-3 h-3 text-cyan flex-shrink-0" />
+                    <IconCheck className="w-3.5 h-3.5 text-navy flex-shrink-0" />
                     <span className="text-[12px] text-navy">{c}</span>
                   </li>
                 ))}
@@ -377,31 +394,33 @@ export default function HomeLanding() {
 
             {/* CONTACT card */}
             <div className="lg:col-span-2">
-              <div className="bg-navy rounded-md p-4 text-white h-full flex flex-col">
-                <div className="font-mono text-[11px] tracking-[0.25em] text-white/60 mb-1.5">
-                  CONTACT
+              <div className="bg-brand rounded-md p-4 text-white h-full flex flex-col">
+                <div className="mb-1.5">
+                  <span className="font-sans font-bold text-[12px] tracking-[0.18em] text-white">
+                    CONTACT
+                  </span>
                 </div>
-                <h4 className="font-serif font-semibold text-[17px] leading-tight mb-1.5">
+                <h4 className="font-serif font-bold text-[17px] leading-tight mb-2">
                   まずは整理から。
                 </h4>
-                <p className="text-[11px] text-white/70 leading-snug mb-3">
+                <p className="text-[11px] text-white/85 leading-relaxed mb-4">
                   現状の課題を可視化し、
                   改善の方向性を明確にします。
                 </p>
-                <div className="flex flex-col gap-1.5 mt-auto">
+                <div className="flex flex-col gap-2 mt-auto">
                   <Link
                     href="/contact"
-                    className="bg-white text-navy text-[12px] font-medium rounded py-1.5 px-3 flex items-center justify-between hover:bg-white/90 transition-colors"
+                    className="bg-white text-brand text-[12px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
                   >
                     <span>無料相談する</span>
-                    <Arrow className="w-3 h-3" />
+                    <Arrow className="w-3.5 h-3.5" />
                   </Link>
                   <Link
                     href="/download"
-                    className="border border-white/30 text-white text-[12px] font-medium rounded py-1.5 px-3 flex items-center justify-between hover:bg-white/10 transition-colors"
+                    className="bg-white text-brand text-[12px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
                   >
                     <span>資料をダウンロード</span>
-                    <Arrow className="w-3 h-3" />
+                    <Arrow className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
