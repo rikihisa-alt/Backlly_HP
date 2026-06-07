@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${notoSerifJP.variable} ${notoSansJP.variable} ${dmMono.variable}`}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased pb-12">
         {children}
       </body>
     </html>

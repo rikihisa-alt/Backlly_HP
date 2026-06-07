@@ -90,18 +90,23 @@ export default function Header() {
     >
       {/* Upper bar */}
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo-backlly.png"
-            alt="Backlly"
-            width={240}
-            height={64}
-            className="h-8 md:h-9 w-auto"
-            style={{ objectFit: "contain", objectPosition: "left center" }}
-            priority
-          />
-        </Link>
+        {/* Logo + Tagline */}
+        <div className="flex items-center gap-4 md:gap-6">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo-backlly.png"
+              alt="Backlly"
+              width={240}
+              height={64}
+              className="h-8 md:h-9 w-auto"
+              style={{ objectFit: "contain", objectPosition: "left center" }}
+              priority
+            />
+          </Link>
+          <span className="hidden md:inline-block text-sm text-text-muted tracking-wide border-l border-border pl-4 md:pl-6">
+            バックオフィスを、機能させる。
+          </span>
+        </div>
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-8">
