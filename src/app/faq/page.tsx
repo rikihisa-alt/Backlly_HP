@@ -15,7 +15,12 @@ export default function FAQPage() {
     <>
       <Header />
       <main>
-        <PageHero label="FAQ" title="よくあるご質問" image="/images/bg-desk.jpg" />
+        <PageHero
+          label="FAQ"
+          title="よくある、ご質問。"
+          subtitle="費用や対応期間、業界の対応範囲など、お問い合わせの多い質問にお答えしています。"
+          image="/images/img-thinker.png"
+        />
         <FAQ />
         <ConsultTopics />
         <CTA />

@@ -41,7 +41,7 @@ export default function Solution() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.15, duration: 0.5 }}
             >
-              <div className="w-2 h-2 rounded-full bg-cyan mt-2.5 flex-shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-brand mt-2.5 flex-shrink-0" />
               <p className="text-white text-lg md:text-xl font-medium">
                 {item}
               </p>

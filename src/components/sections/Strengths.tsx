@@ -33,7 +33,7 @@ export default function Strengths() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
             >
-              <span className="font-mono text-2xl md:text-3xl text-cyan/30 flex-shrink-0 leading-none pt-0.5 tabular-nums">
+              <span className="font-mono text-2xl md:text-3xl text-brand/30 flex-shrink-0 leading-none pt-0.5 tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>

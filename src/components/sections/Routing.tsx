@@ -30,13 +30,13 @@ export default function Routing() {
             <motion.a
               key={i}
               href={item.href}
-              className="group block border-l-2 border-cyan/30 hover:border-cyan pl-8 pr-6 py-8 transition-all duration-300 hover:bg-bg/50"
+              className="group block border-l-2 border-brand/30 hover:border-brand pl-8 pr-6 py-8 transition-all duration-300 hover:bg-bg/50"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.15, duration: 0.5 }}
               whileHover={{ x: 4 }}
             >
-              <span className="font-mono text-xs text-cyan tracking-[0.15em] uppercase">
+              <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase">
                 {item.label}
               </span>
               <h3 className="text-lg md:text-xl font-medium text-navy mt-2">

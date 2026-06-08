@@ -18,7 +18,12 @@ export default function AboutPage() {
     <>
       <Header />
       <main>
-        <PageHero label="ABOUT" title="Backllyについて" image="/images/bg-office.jpg" />
+        <PageHero
+          label="ABOUT"
+          title="Backllyの考え方。"
+          subtitle="人ではなく、業務そのものを設計し直す。私たちの根っこにある思想と、目指す未来をお伝えします。"
+          image="/images/img-stairs.png"
+        />
         <Vision />
         <Mission />
         <Value />

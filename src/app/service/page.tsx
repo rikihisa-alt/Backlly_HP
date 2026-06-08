@@ -20,7 +20,12 @@ export default function ServicePage() {
     <>
       <Header />
       <main>
-        <PageHero label="SERVICE" title="サービス紹介" image="/images/bg-desk.jpg" />
+        <PageHero
+          label="SERVICE"
+          title="整える、回す、作る、届ける。"
+          subtitle="バックオフィスを機能させる4つのサービス。コンサルティング、一元管理システム、業務システム開発、Webサイト制作までを一貫して提供します。"
+          image="/images/img-desk.png"
+        />
         <Problem />
         <Routing />
         <Solution />

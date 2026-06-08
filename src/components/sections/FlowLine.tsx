@@ -50,7 +50,7 @@ export default function FlowLine() {
                 }}
               >
                 <div className="w-10 h-10 rounded-full border border-navy/15 flex items-center justify-center mb-3 bg-white">
-                  <span className="font-mono text-[11px] text-cyan">
+                  <span className="font-mono text-[11px] text-brand">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -113,7 +113,7 @@ export default function FlowLine() {
                 }}
               >
                 <div className="w-8 h-8 rounded-full border border-navy/15 flex items-center justify-center flex-shrink-0 bg-white">
-                  <span className="font-mono text-[10px] text-cyan">
+                  <span className="font-mono text-[10px] text-brand">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>

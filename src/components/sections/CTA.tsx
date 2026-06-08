@@ -53,7 +53,7 @@ export default function CTA() {
           </p>
           {cta.examples.map((example, i) => (
             <div key={i} className="flex items-center gap-3">
-              <div className="w-1 h-1 rounded-full bg-cyan/50" />
+              <div className="w-1 h-1 rounded-full bg-brand/50" />
               <span className="text-white/60 text-sm">{example}</span>
             </div>
           ))}

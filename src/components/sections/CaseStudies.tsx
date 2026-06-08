@@ -65,7 +65,7 @@ export default function CaseStudies() {
 
               {/* Result */}
               <div className="flex items-start gap-2 pl-0 sm:pl-20">
-                <span className="text-cyan text-sm font-medium mt-0.5">→</span>
+                <span className="text-brand text-sm font-medium mt-0.5">→</span>
                 <p className="text-navy text-sm md:text-base font-semibold">
                   {cs.result}
                 </p>

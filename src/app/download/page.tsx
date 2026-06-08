@@ -14,7 +14,13 @@ export default function DownloadPage() {
     <>
       <Header />
       <main>
-        <PageHero label="DOWNLOAD" title="資料ダウンロード" image="/images/bg-meeting.jpg" />
+        <PageHero
+          label="DOWNLOAD"
+          title="資料ダウンロード。"
+          subtitle="サービス概要、料金体系、導入事例などの資料をPDFでまとめてご用意しています。ご検討にご利用ください。"
+          image="/images/img-plaza.png"
+          imagePosition="left"
+        />
         <ResourceDownload />
         <CTA />
       </main>

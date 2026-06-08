@@ -46,7 +46,7 @@ function MiniDashboard({ activeFeature }: { activeFeature: string }) {
         {/* Top summary row */}
         <div className="flex gap-6 mb-5">
           {[
-            { label: "進行中", count: "12", color: "text-cyan" },
+            { label: "進行中", count: "12", color: "text-brand" },
             { label: "承認待ち", count: "3", color: "text-amber-500" },
             { label: "完了", count: "47", color: "text-emerald-500" },
           ].map((item) => (
@@ -66,14 +66,14 @@ function MiniDashboard({ activeFeature }: { activeFeature: string }) {
               <span className="text-xs text-text-muted">総合ステータス</span>
             </div>
             <div className="h-2 bg-bg rounded-full overflow-hidden flex">
-              <div className="bg-cyan w-[40%] h-full" />
+              <div className="bg-brand w-[40%] h-full" />
               <div className="bg-amber-400 w-[15%] h-full" />
               <div className="bg-emerald-400 w-[35%] h-full" />
               <div className="bg-border w-[10%] h-full" />
             </div>
             <div className="flex gap-4 mt-2">
               {[
-                { label: "進行中", color: "bg-cyan" },
+                { label: "進行中", color: "bg-brand" },
                 { label: "待ち", color: "bg-amber-400" },
                 { label: "完了", color: "bg-emerald-400" },
               ].map((item) => (
@@ -99,7 +99,7 @@ function MiniDashboard({ activeFeature }: { activeFeature: string }) {
                   <span className="text-[10px] text-text-muted">{item.deadline}</span>
                 </div>
                 <div className="h-1 bg-bg rounded-full overflow-hidden">
-                  <div className="h-full bg-cyan rounded-full" style={{ width: `${item.pct}%` }} />
+                  <div className="h-full bg-brand rounded-full" style={{ width: `${item.pct}%` }} />
                 </div>
               </div>
             ))}
@@ -115,7 +115,7 @@ function MiniDashboard({ activeFeature }: { activeFeature: string }) {
             ].map((item) => (
               <div key={item.name} className="flex items-center justify-between py-1">
                 <div className="flex items-center gap-2">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium ${item.active ? "bg-cyan/10 text-cyan" : "bg-border text-text-muted"}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium ${item.active ? "bg-brand/10 text-brand" : "bg-border text-text-muted"}`}>
                     {item.name[0]}
                   </div>
                   <div>
@@ -145,7 +145,7 @@ function MiniDashboard({ activeFeature }: { activeFeature: string }) {
                 </div>
                 <span className={`text-[10px] px-2 py-0.5 rounded font-medium ${
                   item.status === "対応中"
-                    ? "bg-cyan/10 text-cyan"
+                    ? "bg-brand/10 text-brand"
                     : item.status === "承認待ち"
                     ? "bg-amber-50 text-amber-600"
                     : "bg-emerald-50 text-emerald-600"
@@ -226,7 +226,7 @@ export default function BHallDetail() {
                   key={f.id}
                   className={`w-full text-left px-5 py-4 transition-colors duration-200 border-l-2 ${
                     activeFeature === f.id
-                      ? "border-l-cyan bg-cyan/5"
+                      ? "border-l-cyan bg-brand/5"
                       : "border-l-transparent hover:border-l-border hover:bg-bg/50"
                   }`}
                   onClick={() => setActiveFeature(f.id)}

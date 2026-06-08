@@ -61,7 +61,7 @@ export default function DownloadModal({
   };
 
   const inputClass =
-    "w-full px-4 py-2.5 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-1 focus:ring-cyan/20 transition-colors";
+    "w-full px-4 py-2.5 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand/20 transition-colors";
 
   return (
     <AnimatePresence>
@@ -88,7 +88,7 @@ export default function DownloadModal({
             <div className="px-8 pt-8 pb-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-cyan mb-2">
+                  <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-brand mb-2">
                     DOWNLOAD
                   </p>
                   <h3 className="font-serif text-xl font-bold text-navy">
@@ -121,7 +121,7 @@ export default function DownloadModal({
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-navy mb-1.5">
-                      お名前 <span className="text-cyan">*</span>
+                      お名前 <span className="text-brand">*</span>
                     </label>
                     <input
                       type="text"
@@ -138,7 +138,7 @@ export default function DownloadModal({
 
                   <div>
                     <label className="block text-xs font-medium text-navy mb-1.5">
-                      会社名 <span className="text-cyan">*</span>
+                      会社名 <span className="text-brand">*</span>
                     </label>
                     <input
                       type="text"
@@ -155,7 +155,7 @@ export default function DownloadModal({
 
                   <div>
                     <label className="block text-xs font-medium text-navy mb-1.5">
-                      メールアドレス <span className="text-cyan">*</span>
+                      メールアドレス <span className="text-brand">*</span>
                     </label>
                     <input
                       type="email"
@@ -203,7 +203,7 @@ export default function DownloadModal({
             ) : (
               <div className="px-8 pb-8 text-center">
                 <div className="py-6">
-                  <div className="w-14 h-14 rounded-full bg-cyan/10 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-14 h-14 rounded-full bg-brand/10 flex items-center justify-center mx-auto mb-4">
                     <svg
                       width="28"
                       height="28"
@@ -213,7 +213,7 @@ export default function DownloadModal({
                       <path
                         d="M7 14l5 5 9-9"
                         stroke="currentColor"
-                        className="text-cyan"
+                        className="text-brand"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"

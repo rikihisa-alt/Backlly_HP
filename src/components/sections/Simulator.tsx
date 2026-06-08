@@ -209,7 +209,7 @@ export default function Simulator() {
           </div>
           <div className="h-[2px] bg-border rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-cyan"
+              className="h-full bg-brand"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -240,7 +240,7 @@ export default function Simulator() {
                       key={option.value}
                       className={`w-full text-left px-6 py-4 border rounded transition-colors duration-200 text-sm md:text-base ${
                         isSelected
-                          ? "border-cyan bg-cyan/5 text-navy"
+                          ? "border-brand bg-brand/5 text-navy"
                           : "border-border hover:border-navy/30 text-text"
                       }`}
                       onClick={() =>
@@ -287,7 +287,7 @@ export default function Simulator() {
               </div>
 
               {/* Recommended plan */}
-              <div className="pl-6 border-l-2 border-cyan/30 mb-8 space-y-3">
+              <div className="pl-6 border-l-2 border-brand/30 mb-8 space-y-3">
                 <div>
                   <span className="text-xs text-text-muted">推奨プラン</span>
                   <p className="text-navy text-sm md:text-base font-medium mt-1">

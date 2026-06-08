@@ -110,7 +110,7 @@ export default function BCoreFlow() {
                 >
                   {/* Node */}
                   <div className="flex-shrink-0 w-10 h-10 rounded-full border-2 border-border bg-bg-white flex items-center justify-center z-10">
-                    <span className="font-mono text-xs text-cyan font-semibold">
+                    <span className="font-mono text-xs text-brand font-semibold">
                       {step.step}
                     </span>
                   </div>

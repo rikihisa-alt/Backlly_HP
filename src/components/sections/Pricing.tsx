@@ -96,7 +96,7 @@ export default function Pricing() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
             >
-              <span className="font-mono text-xs text-cyan tracking-[0.15em] uppercase">
+              <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase">
                 {service.step}
               </span>
               <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy mt-2 mb-3">
@@ -129,7 +129,7 @@ export default function Pricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.7, duration: 0.5 }}
           >
-            <span className="font-mono text-xs text-cyan tracking-[0.15em] uppercase">
+            <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase">
               SUPPORT
             </span>
             <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy mt-2 mb-3">

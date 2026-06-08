@@ -15,7 +15,12 @@ export default function WorksPage() {
     <>
       <Header />
       <main>
-        <PageHero label="WORKS" title="導入事例" image="/images/bg-meeting.jpg" />
+        <PageHero
+          label="WORKS"
+          title="動かした、実例。"
+          subtitle="医療・福祉・IT・士業まで。業界も規模も異なる組織で、業務がどのように整理され、回り始めたかをご紹介します。"
+          image="/images/img-meeting.png"
+        />
         <TrustBand />
         <CaseStudies />
         <CTA />

@@ -15,7 +15,12 @@ export default function PricingPage() {
     <>
       <Header />
       <main>
-        <PageHero label="PRICING" title="料金体系" image="/images/bg-office.jpg" />
+        <PageHero
+          label="PRICING"
+          title="必要なところに、必要な分だけ。"
+          subtitle="業務整理・システム開発・運用保守を、企業の状況に合わせて柔軟に組み合わせ。料金の目安と料金シミュレーターをご確認ください。"
+          image="/images/img-plaza.png"
+        />
         <Pricing />
         <Simulator />
         <CTA />

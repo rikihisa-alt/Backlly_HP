@@ -45,12 +45,12 @@ export default function Approach() {
                 {/* Node dot */}
                 <div className="relative z-10 flex-shrink-0">
                   <div className="w-6 h-6 rounded-full border-2 border-border bg-bg-white flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-cyan" />
+                    <div className="w-2 h-2 rounded-full bg-brand" />
                   </div>
                 </div>
 
                 <div className="pb-2">
-                  <span className="font-mono text-xs text-cyan tracking-[0.15em] uppercase">
+                  <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase">
                     {step.step}
                   </span>
                   <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy mt-1.5">

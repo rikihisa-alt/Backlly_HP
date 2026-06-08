@@ -51,7 +51,7 @@ export default function ConsultTopics() {
               transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
             >
               <div className="flex items-start gap-4">
-                <span className="text-cyan text-sm font-mono mt-0.5">
+                <span className="text-brand text-sm font-mono mt-0.5">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>

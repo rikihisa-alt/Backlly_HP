@@ -45,7 +45,7 @@ export default function Hero() {
             >
               業務をつなぎ、
               <br />
-              会社を<span className="text-cyan">動かす</span>。
+              会社を<span className="text-brand">動かす</span>。
             </motion.h1>
 
             <motion.p
@@ -95,7 +95,7 @@ export default function Hero() {
               画像が届いたら以下のコメントを解除して <img> または <Image fill> に差し替えてください。
               推奨パス: /public/images/hero-main.jpg
             */}
-            <div className="relative w-full aspect-[4/5] lg:aspect-[5/6] rounded-lg overflow-hidden border border-border bg-gradient-to-br from-navy/5 via-white to-cyan/10">
+            <div className="relative w-full aspect-[4/5] lg:aspect-[5/6] rounded-lg overflow-hidden border border-border bg-gradient-to-br from-navy/5 via-white to-brand/10">
               {/* 差し替え用:
               <Image src="/images/hero-main.jpg" alt="Backlly hero" fill priority className="object-cover" />
               */}

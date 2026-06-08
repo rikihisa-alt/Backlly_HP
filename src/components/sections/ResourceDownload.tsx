@@ -113,7 +113,7 @@ export default function ResourceDownload() {
               資料をご確認のうえ、より具体的なご相談をご希望の場合は、
               <a
                 href="/contact"
-                className="text-navy font-medium underline underline-offset-4 hover:text-cyan transition-colors"
+                className="text-navy font-medium underline underline-offset-4 hover:text-brand transition-colors"
               >
                 お問い合わせ
               </a>

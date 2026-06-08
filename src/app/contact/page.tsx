@@ -87,8 +87,10 @@ export default function ContactPage() {
       <main>
         <PageHero
           label="CONTACT"
-          title="無料相談・お問い合わせ"
-          image="/images/bg-team.jpg"
+          title="まずは整理から、はじめましょう。"
+          subtitle="現状のお悩みや課題感をお聞かせください。内容に応じて、最適な進め方をご提案します。費用はかかりません。"
+          image="/images/img-office.png"
+          imagePosition="left"
         />
 
         <section className="py-section bg-bg" ref={ref}>

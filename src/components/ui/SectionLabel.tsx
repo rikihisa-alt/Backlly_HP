@@ -4,11 +4,11 @@ interface SectionLabelProps {
 }
 
 export default function SectionLabel({ children, color = "default" }: SectionLabelProps) {
-  const textColor = color === "cyan" ? "text-cyan" : "text-navy";
+  const textColor = color === "cyan" ? "text-brand" : "text-navy";
 
   return (
     <div className="flex items-center gap-3 mb-6">
-      <div className="w-[2px] h-4 bg-cyan" />
+      <div className="w-[2px] h-4 bg-brand" />
       <span className={`font-mono text-xs tracking-[0.2em] uppercase ${textColor}`}>
         {children}
       </span>

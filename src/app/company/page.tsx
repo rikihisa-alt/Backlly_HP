@@ -19,7 +19,12 @@ export default function CompanyPage() {
     <>
       <Header />
       <main>
-        <PageHero label="COMPANY" title="会社情報" image="/images/bg-team.jpg" />
+        <PageHero
+          label="COMPANY"
+          title="会社情報。"
+          subtitle="バックオフィスを機能させる、その背後にいるチームと組織についてご紹介します。"
+          image="/images/img-office.png"
+        />
         <Vision />
         <Mission />
         <Value />

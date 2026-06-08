@@ -238,7 +238,7 @@ export default function Header() {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden"
                             >
-                              <div className="pl-4 pb-2 flex flex-col gap-1 border-l-2 border-cyan/20 ml-1">
+                              <div className="pl-4 pb-2 flex flex-col gap-1 border-l-2 border-brand/20 ml-1">
                                 {subItems.map((sub) => (
                                   <Link
                                     key={sub.label}

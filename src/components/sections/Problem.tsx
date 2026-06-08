@@ -33,7 +33,7 @@ export default function Problem() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.15, duration: 0.5 }}
             >
-              <div className="w-[2px] h-8 bg-cyan flex-shrink-0 mt-1" />
+              <div className="w-[2px] h-8 bg-brand flex-shrink-0 mt-1" />
               <p className="text-lg md:text-xl text-text font-medium">
                 {item}
               </p>

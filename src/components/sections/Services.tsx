@@ -61,7 +61,7 @@ export default function Services() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + i * 0.2, duration: 0.5 }}
               >
-                <span className="font-mono text-xs text-cyan tracking-[0.15em] uppercase mb-2">
+                <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase mb-2">
                   {service.label} — {service.tagline}
                 </span>
                 {service.logo ? (
@@ -127,7 +127,7 @@ export default function Services() {
               "運用改善のみ",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
                 <span className="text-sm text-navy">{item}</span>
               </div>
             ))}
