@@ -32,6 +32,7 @@ const worksTabItems = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [overHero, setOverHero] = useState(true); // true while header sits over the hero image
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<ActiveTab>(null);
   const [mobileAccordion, setMobileAccordion] = useState<ActiveTab>(null);
@@ -39,9 +40,23 @@ export default function Header() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 50);
+      // detect if we are still within the hero section
+      const hero = document.getElementById("hero");
+      if (hero) {
+        const rect = hero.getBoundingClientRect();
+        // overHero=true while hero bottom is still below the header's bottom edge (~80px)
+        setOverHero(rect.bottom > 80);
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const handleNavEnter = useCallback((tab: ActiveTab) => {
@@ -82,10 +97,12 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-sm ${
-        scrolled || activeTab
-          ? "bg-white/95 shadow-[0_1px_0_0_#E2E8F0]"
-          : "bg-white/80"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        overHero && !menuOpen && !activeTab
+          ? "bg-transparent backdrop-blur-0"
+          : scrolled || activeTab
+          ? "bg-white/85 backdrop-blur-md shadow-[0_1px_0_0_#E2E8F0]"
+          : "bg-white/80 backdrop-blur-sm"
       }`}
     >
       {/* Upper bar */}

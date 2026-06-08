@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Serif_JP, Noto_Sans_JP, DM_Mono } from "next/font/google";
 import "./globals.css";
+import ContactPopup from "@/components/ui/ContactPopup";
 
 const notoSerifJP = Noto_Serif_JP({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html lang="ja" className={`${notoSerifJP.variable} ${notoSansJP.variable} ${dmMono.variable}`}>
       <body className="font-sans antialiased pb-12">
         {children}
+        <ContactPopup />
       </body>
     </html>
   );
