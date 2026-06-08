@@ -160,10 +160,10 @@ export default function HomeLanding() {
         </motion.div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-20 pb-4">
-          <div className="max-w-[58%] lg:max-w-[55%]">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-20 md:pb-24">
+          <div className="max-w-[58%] lg:max-w-[52%]">
             <motion.h1
-              className="font-serif font-bold text-navy leading-[1.05] tracking-[-0.02em] text-[36px] sm:text-[52px] md:text-[64px] lg:text-[80px] mb-5"
+              className="font-serif font-bold text-navy leading-[1.08] tracking-[-0.02em] text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] mb-7"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -174,7 +174,7 @@ export default function HomeLanding() {
             </motion.h1>
 
             <motion.p
-              className="text-text-muted text-[13px] md:text-[14px] leading-[1.85] mb-6"
+              className="text-text-muted text-[14px] md:text-[15px] leading-[2] mb-9"
               initial={{ opacity: 0.001, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
@@ -187,21 +187,21 @@ export default function HomeLanding() {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-3"
+              className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0.001, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-between gap-6 bg-brand hover:bg-brand-dark text-white font-medium text-[14px] rounded px-6 py-3 transition-colors shadow-sm"
+                className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors shadow-sm min-w-[200px]"
               >
                 <span>無料相談</span>
                 <Arrow className="w-4 h-4" />
               </Link>
               <Link
                 href="/service"
-                className="inline-flex items-center justify-between gap-6 bg-white/95 backdrop-blur-sm border border-navy/30 hover:border-navy text-navy font-medium text-[14px] rounded px-6 py-3 transition-colors"
+                className="inline-flex items-center justify-between gap-8 bg-white/95 backdrop-blur-sm border border-navy/30 hover:border-navy text-navy font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px]"
               >
                 <span>サービスを見る</span>
                 <Arrow className="w-4 h-4" />
@@ -213,17 +213,17 @@ export default function HomeLanding() {
 
       {/* ============ Service tiles + FLOW ============ */}
       <section>
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-4">
-          <div className="grid lg:grid-cols-12 gap-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-12">
+          <div className="grid lg:grid-cols-12 gap-8">
             {/* Tiles 4 */}
             <div className="lg:col-span-5 grid grid-cols-4 gap-3">
               {serviceTiles.map((t) => (
                 <div
                   key={t.label}
-                  className="flex flex-col items-center justify-center text-center bg-bg-white rounded-md border border-border py-5 px-2 hover:border-brand/40 transition-colors"
+                  className="flex flex-col items-center justify-center text-center bg-bg-white rounded-md border border-border py-7 px-2 hover:border-brand/40 transition-colors"
                 >
-                  <t.Icon className="w-7 h-7 text-navy mb-2" />
-                  <span className="text-[11px] font-medium leading-snug text-navy whitespace-pre-line">
+                  <t.Icon className="w-8 h-8 text-navy mb-2.5" />
+                  <span className="text-[11.5px] font-medium leading-snug text-navy whitespace-pre-line">
                     {t.label}
                   </span>
                 </div>
@@ -232,13 +232,13 @@ export default function HomeLanding() {
 
             {/* FLOW */}
             <div className="lg:col-span-7">
-              <div className="flex items-baseline gap-3 mb-1">
+              <div className="flex items-baseline gap-4 mb-2">
                 <Label>FLOW</Label>
-                <h2 className="font-serif text-[18px] md:text-[20px] font-semibold text-navy">
+                <h2 className="font-serif text-[19px] md:text-[22px] font-semibold text-navy">
                   業務は、つながって初めて機能する。
                 </h2>
               </div>
-              <p className="text-text-muted text-[12px] leading-relaxed mb-3">
+              <p className="text-text-muted text-[12.5px] leading-relaxed mb-5">
                 入社から月次報告まで、バックオフィスの業務は1本の流れです。
                 <br />
                 どこか1つが止まると、全体が滞る。Backllyはこの流れを設計します。
@@ -247,16 +247,16 @@ export default function HomeLanding() {
               <div className="grid grid-cols-5 gap-2">
                 {flowSteps.map((step, i) => (
                   <div key={step.no} className="relative">
-                    <div className="rounded-md border border-border bg-bg-white p-3">
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <span className="font-sans font-bold text-[13px] text-brand">
+                    <div className="rounded-md border border-border bg-bg-white p-3.5">
+                      <div className="flex items-baseline gap-2 mb-1.5">
+                        <span className="font-sans font-bold text-[14px] text-brand">
                           {step.no}
                         </span>
-                        <span className="text-[12px] font-medium text-navy">
+                        <span className="text-[12.5px] font-medium text-navy">
                           {step.label}
                         </span>
                       </div>
-                      <div className="text-[10.5px] text-text-muted leading-snug">
+                      <div className="text-[11px] text-text-muted leading-snug">
                         {step.desc}
                       </div>
                     </div>
@@ -275,8 +275,8 @@ export default function HomeLanding() {
 
       {/* ============ TRUSTED BY ============ */}
       <section>
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-4">
-          <div className="rounded-md border border-border bg-bg-white py-4 px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-10 md:pb-12">
+          <div className="rounded-md border border-border bg-bg-white py-6 px-8">
             <div className="grid lg:grid-cols-12 gap-6 items-center">
               {/* Companies */}
               <div className="lg:col-span-7">
@@ -294,14 +294,14 @@ export default function HomeLanding() {
                 {trustStats.map((s) => (
                   <div key={s.label} className="text-center">
                     <div className="font-serif text-navy leading-none font-bold">
-                      <span className="text-[26px] md:text-[30px]">{s.value}</span>
+                      <span className="text-[28px] md:text-[34px]">{s.value}</span>
                       {s.unit && (
-                        <span className="text-[14px] md:text-[15px] text-text-muted ml-0.5 font-medium">
+                        <span className="text-[15px] md:text-[17px] text-text-muted ml-0.5 font-medium">
                           {s.unit}
                         </span>
                       )}
                     </div>
-                    <div className="text-[10px] text-text-muted mt-1 leading-tight">
+                    <div className="text-[11px] text-text-muted mt-1.5 leading-tight">
                       {s.label}
                     </div>
                   </div>
@@ -314,19 +314,19 @@ export default function HomeLanding() {
 
       {/* ============ VISION + SERVICES + CAPABILITIES/CONTACT ============ */}
       <section>
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-8">
-          <div className="grid lg:grid-cols-12 gap-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-24">
+          <div className="grid lg:grid-cols-12 gap-8">
             {/* VISION */}
             <div className="lg:col-span-3">
-              <div className="mb-2">
+              <div className="mb-3">
                 <Label>VISION</Label>
               </div>
-              <h3 className="font-serif text-brand font-bold leading-snug text-[15px] md:text-[16px] mb-3">
+              <h3 className="font-serif text-brand font-bold leading-snug text-[16px] md:text-[17px] mb-4">
                 バックオフィスが機能する会社を、
                 <br />
                 当たり前にする。
               </h3>
-              <p className="text-text-muted text-[12px] leading-[1.85] mb-3">
+              <p className="text-text-muted text-[12.5px] leading-[1.95] mb-5">
                 業務フローが設計されていないことが根本原因です。
                 Backllyは、業務を1つずつ分解し、フローを設計し、
                 仕組みとして実装する。人が変わっても、拠点が増えても、
@@ -334,37 +334,37 @@ export default function HomeLanding() {
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-1 text-[12px] text-text-muted hover:text-brand transition-colors"
+                className="inline-flex items-center gap-1.5 text-[12.5px] text-text-muted hover:text-brand transition-colors"
               >
-                もっと見る <Arrow className="w-3 h-3" />
+                もっと見る <Arrow className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             {/* SERVICES */}
             <div className="lg:col-span-5">
-              <div className="flex items-baseline gap-3 mb-3">
+              <div className="flex items-baseline gap-4 mb-5">
                 <Label>SERVICES</Label>
-                <span className="text-[12px] text-text-muted">
+                <span className="text-[12.5px] text-text-muted">
                   整える <span className="text-brand">→</span> 回す{" "}
                   <span className="text-brand">→</span> 作る{" "}
                   <span className="text-brand">→</span> 届ける
                 </span>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-4">
                 {serviceList.map((s) => (
                   <li
                     key={s.title}
-                    className="flex items-start gap-3"
+                    className="flex items-start gap-3.5"
                   >
-                    <div className="w-8 h-8 rounded bg-bg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-9 h-9 rounded bg-bg flex items-center justify-center flex-shrink-0 mt-0.5">
                       <s.Icon className="w-4 h-4 text-brand" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-[12.5px] leading-tight flex items-baseline gap-2">
+                      <div className="text-[13px] leading-tight flex items-baseline gap-2.5">
                         <span className="text-brand font-semibold">{s.label}</span>
                         <span className="text-navy">{s.title}</span>
                       </div>
-                      <div className="text-[11px] text-text-muted leading-snug mt-0.5">
+                      <div className="text-[11.5px] text-text-muted leading-snug mt-1">
                         {s.sub}
                       </div>
                     </div>
@@ -375,17 +375,17 @@ export default function HomeLanding() {
 
             {/* CAPABILITIES */}
             <div className="lg:col-span-2">
-              <div className="mb-2">
+              <div className="mb-3">
                 <Label>CAPABILITIES</Label>
               </div>
-              <div className="text-[12px] text-navy font-medium mb-2.5">
+              <div className="text-[12.5px] text-navy font-medium mb-4">
                 Backllyで対応できること
               </div>
-              <ul className="space-y-1.5">
+              <ul className="space-y-2.5">
                 {capabilities.map((c) => (
                   <li key={c} className="flex items-center gap-2">
                     <IconCheck className="w-3.5 h-3.5 text-navy flex-shrink-0" />
-                    <span className="text-[12px] text-navy">{c}</span>
+                    <span className="text-[12.5px] text-navy">{c}</span>
                   </li>
                 ))}
               </ul>
@@ -393,30 +393,30 @@ export default function HomeLanding() {
 
             {/* CONTACT card */}
             <div className="lg:col-span-2">
-              <div className="bg-brand rounded-md p-4 text-white h-full flex flex-col">
-                <div className="mb-1.5">
+              <div className="bg-brand rounded-md p-5 text-white h-full flex flex-col">
+                <div className="mb-2.5">
                   <span className="font-sans font-bold text-[12px] tracking-[0.18em] text-white">
                     CONTACT
                   </span>
                 </div>
-                <h4 className="font-serif font-bold text-[17px] leading-tight mb-2">
+                <h4 className="font-serif font-bold text-[19px] leading-tight mb-2.5">
                   まずは整理から。
                 </h4>
-                <p className="text-[11px] text-white/85 leading-relaxed mb-4">
+                <p className="text-[11.5px] text-white/85 leading-relaxed mb-6">
                   現状の課題を可視化し、
                   改善の方向性を明確にします。
                 </p>
                 <div className="flex flex-col gap-2 mt-auto">
                   <Link
                     href="/contact"
-                    className="bg-white text-brand text-[12px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
+                    className="bg-white text-brand text-[12.5px] font-semibold rounded py-2.5 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
                   >
                     <span>無料相談する</span>
                     <Arrow className="w-3.5 h-3.5" />
                   </Link>
                   <Link
                     href="/download"
-                    className="bg-white text-brand text-[12px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
+                    className="bg-white text-brand text-[12.5px] font-semibold rounded py-2.5 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
                   >
                     <span>資料をダウンロード</span>
                     <Arrow className="w-3.5 h-3.5" />
