@@ -73,10 +73,10 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full px-4 py-3 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-cyan focus:ring-1 focus:ring-cyan/20 transition-colors bg-white";
+    "w-full px-4 py-3 border border-border rounded text-sm text-navy placeholder:text-text-muted/40 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand/20 transition-colors bg-white";
 
   const labelClass = "block text-xs font-medium text-navy mb-1.5";
-  const requiredMark = <span className="text-cyan ml-0.5">*</span>;
+  const requiredMark = <span className="text-brand ml-0.5">*</span>;
   const optionalMark = (
     <span className="text-text-muted font-normal ml-1">（任意）</span>
   );
@@ -87,8 +87,8 @@ export default function ContactPage() {
       <main>
         <PageHero
           label="CONTACT"
-          title="まずは整理から、はじめましょう。"
-          subtitle="現状のお悩みや課題感をお聞かせください。内容に応じて、最適な進め方をご提案します。費用はかかりません。"
+          title="現状を、お聞かせください。"
+          subtitle="お悩みの段階で大丈夫です。内容に応じて、最適な進め方をご提案します。初回相談は無料です。"
           image="/images/img-office.png"
           imagePosition="left"
         />
@@ -103,8 +103,10 @@ export default function ContactPage() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6 }}
                 >
-                  <SectionLabel>FREE CONSULTATION</SectionLabel>
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-navy mb-3">
+                  <div className="mb-4">
+                    <SectionLabel>FREE CONSULTATION</SectionLabel>
+                  </div>
+                  <h2 className="font-serif font-bold text-navy leading-[1.3] text-[24px] md:text-[32px] mb-3">
                     無料相談フォーム
                   </h2>
                   <p className="text-text-muted text-sm md:text-base mb-2 leading-relaxed">
@@ -125,8 +127,8 @@ export default function ContactPage() {
                   >
                     {/* Section 1: Basic info */}
                     <fieldset>
-                      <legend className="text-xs font-mono tracking-wider uppercase text-text-muted mb-5 flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-navy text-white flex items-center justify-center text-[10px]">
+                      <legend className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-5 flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] font-bold">
                           1
                         </span>
                         お客様情報
@@ -231,7 +233,7 @@ export default function ContactPage() {
                                 }
                                 className={`px-4 py-2 text-sm rounded border transition-colors ${
                                   formData.size === size
-                                    ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/15"
+                                    ? "border-brand bg-brand/5 text-navy ring-1 ring-brand/15"
                                     : "border-border text-text-muted hover:border-navy/30"
                                 }`}
                               >
@@ -245,8 +247,8 @@ export default function ContactPage() {
 
                     {/* Section 2: Contact */}
                     <fieldset>
-                      <legend className="text-xs font-mono tracking-wider uppercase text-text-muted mb-5 flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-navy text-white flex items-center justify-center text-[10px]">
+                      <legend className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-5 flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] font-bold">
                           2
                         </span>
                         ご連絡先
@@ -315,7 +317,7 @@ export default function ContactPage() {
                                   }
                                   className={`px-3 py-1.5 text-xs rounded border transition-colors ${
                                     formData.preferredTime === time
-                                      ? "border-cyan bg-cyan/5 text-navy ring-1 ring-cyan/15"
+                                      ? "border-brand bg-brand/5 text-navy ring-1 ring-brand/15"
                                       : "border-border text-text-muted hover:border-navy/30"
                                   }`}
                                 >
@@ -337,20 +339,20 @@ export default function ContactPage() {
                                 key={method.value}
                                 className={`flex items-center gap-2 px-4 py-2 rounded border cursor-pointer transition-all ${
                                   formData.preferredContact === method.value
-                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/15"
+                                    ? "border-brand bg-brand/5 ring-1 ring-brand/15"
                                     : "border-border hover:border-navy/30"
                                 }`}
                               >
                                 <div
                                   className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center transition-colors ${
                                     formData.preferredContact === method.value
-                                      ? "border-cyan"
+                                      ? "border-brand"
                                       : "border-border"
                                   }`}
                                 >
                                   {formData.preferredContact ===
                                     method.value && (
-                                    <div className="w-1.5 h-1.5 rounded-full bg-cyan" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-brand" />
                                   )}
                                 </div>
                                 <input
@@ -380,8 +382,8 @@ export default function ContactPage() {
 
                     {/* Section 3: Consultation */}
                     <fieldset>
-                      <legend className="text-xs font-mono tracking-wider uppercase text-text-muted mb-5 flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-navy text-white flex items-center justify-center text-[10px]">
+                      <legend className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-5 flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] font-bold">
                           3
                         </span>
                         ご相談内容
@@ -402,14 +404,14 @@ export default function ContactPage() {
                                 key={topic}
                                 className={`flex items-center gap-3 px-4 py-3 rounded border cursor-pointer transition-all ${
                                   formData.topics.includes(topic)
-                                    ? "border-cyan bg-cyan/5 ring-1 ring-cyan/15"
+                                    ? "border-brand bg-brand/5 ring-1 ring-brand/15"
                                     : "border-border hover:border-navy/30"
                                 }`}
                               >
                                 <div
                                   className={`w-4 h-4 rounded border flex-shrink-0 flex items-center justify-center transition-colors ${
                                     formData.topics.includes(topic)
-                                      ? "border-cyan bg-cyan"
+                                      ? "border-brand bg-brand"
                                       : "border-border"
                                   }`}
                                 >
@@ -469,23 +471,23 @@ export default function ContactPage() {
                     <div className="pt-4 border-t border-border">
                       <button
                         type="submit"
-                        className="w-full sm:w-auto bg-navy text-white font-medium px-10 py-3.5 rounded hover:bg-navy-mid transition-colors text-sm flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto bg-brand text-white font-semibold px-7 py-3.5 rounded hover:bg-brand-dark transition-colors text-[15px] inline-flex items-center justify-between gap-8 min-w-[220px]"
                       >
+                        <span>送信する</span>
                         <svg
                           width="16"
                           height="16"
-                          viewBox="0 0 16 16"
+                          viewBox="0 0 24 24"
                           fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
                         >
                           <path
-                            d="M14 2L7 14l-2-5-5-2L14 2z"
-                            stroke="currentColor"
-                            strokeWidth="1.2"
+                            d="M5 12h14M13 6l6 6-6 6"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
                         </svg>
-                        無料相談を申し込む
                       </button>
                       <p className="mt-3 text-[11px] text-text-muted/60">
                         ご入力いただいた情報はご相談対応およびご連絡のみに使用いたします。郵送物の送付はございません。
@@ -501,7 +503,7 @@ export default function ContactPage() {
                     transition={{ duration: 0.5 }}
                   >
                     <div className="bg-white border border-border rounded px-8 py-12 text-center">
-                      <div className="w-16 h-16 rounded-full bg-cyan/10 flex items-center justify-center mx-auto mb-6">
+                      <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center mx-auto mb-6">
                         <svg
                           width="32"
                           height="32"
@@ -510,7 +512,7 @@ export default function ContactPage() {
                         >
                           <path
                             d="M8 16l6 6 10-10"
-                            stroke="#06B6D4"
+                            stroke="#1D4ED8"
                             strokeWidth="2.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -525,23 +527,23 @@ export default function ContactPage() {
                       </p>
 
                       <div className="inline-flex flex-col items-start gap-2 bg-bg rounded px-6 py-4 text-left">
-                        <p className="text-xs font-mono tracking-wider uppercase text-text-muted mb-1">
+                        <p className="font-sans font-bold text-[11.5px] tracking-[0.18em] text-navy mb-1">
                           今後の流れ
                         </p>
                         <div className="flex items-center gap-2 text-sm text-navy">
-                          <span className="text-cyan font-mono text-xs">
+                          <span className="text-brand font-bold text-xs">
                             01
                           </span>
                           日程調整のご連絡（1営業日以内）
                         </div>
                         <div className="flex items-center gap-2 text-sm text-navy">
-                          <span className="text-cyan font-mono text-xs">
+                          <span className="text-brand font-bold text-xs">
                             02
                           </span>
                           オンライン相談（30〜60分）
                         </div>
                         <div className="flex items-center gap-2 text-sm text-navy">
-                          <span className="text-cyan font-mono text-xs">
+                          <span className="text-brand font-bold text-xs">
                             03
                           </span>
                           支援内容と概算のご提案
@@ -565,7 +567,7 @@ export default function ContactPage() {
               >
                 {/* What to expect */}
                 <div className="mb-10">
-                  <p className="text-xs font-mono tracking-wider uppercase text-text-muted mb-4">
+                  <p className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-4">
                     相談の流れ
                   </p>
                   <div className="space-y-4">
@@ -592,7 +594,7 @@ export default function ContactPage() {
                       },
                     ].map((item) => (
                       <div key={item.step} className="flex gap-3">
-                        <span className="font-mono text-xs text-cyan mt-0.5 flex-shrink-0">
+                        <span className="font-bold text-xs text-brand mt-0.5 flex-shrink-0 tabular-nums">
                           {item.step}
                         </span>
                         <div>
@@ -609,7 +611,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="border-t border-border pt-8 mb-8">
-                  <p className="text-xs font-mono tracking-wider uppercase text-text-muted mb-4">
+                  <p className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-4">
                     相談できる内容
                   </p>
                   <div className="space-y-2">
@@ -621,7 +623,7 @@ export default function ContactPage() {
                       "B-Hall / B-Coreの説明",
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-2">
-                        <div className="w-1 h-1 rounded-full bg-cyan" />
+                        <div className="w-1 h-1 rounded-full bg-brand" />
                         <span className="text-sm text-navy">{item}</span>
                       </div>
                     ))}
@@ -630,34 +632,28 @@ export default function ContactPage() {
 
                 {/* Safety note */}
                 <div className="border-t border-border pt-8 mb-8">
-                  <p className="text-xs font-mono tracking-wider uppercase text-text-muted mb-4">
+                  <p className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-4">
                     安心してご相談ください
                   </p>
                   <div className="space-y-3 text-xs text-text-muted leading-relaxed">
                     <div className="flex items-start gap-2">
-                      <span className="text-cyan mt-0.5">&#10003;</span>
-                      <span>
-                        初回相談は無料です。費用は一切かかりません。
-                      </span>
+                      <span className="text-brand mt-0.5">&#10003;</span>
+                      <span>初回相談は無料です。費用は一切かかりません。</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-cyan mt-0.5">&#10003;</span>
-                      <span>
-                        しつこい営業・郵送物はございません。
-                      </span>
+                      <span className="text-brand mt-0.5">&#10003;</span>
+                      <span>しつこい営業・郵送物はございません。</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-cyan mt-0.5">&#10003;</span>
-                      <span>
-                        相談後に契約の義務はありません。
-                      </span>
+                      <span className="text-brand mt-0.5">&#10003;</span>
+                      <span>相談後に契約の義務はありません。</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Company info */}
                 <div className="border-t border-border pt-8 space-y-3 text-sm text-text-muted">
-                  <p className="text-xs font-mono tracking-wider uppercase mb-3">
+                  <p className="font-sans font-bold text-[12px] tracking-[0.18em] text-navy mb-3">
                     COMPANY INFO
                   </p>
                   <p className="text-navy font-medium">株式会社Backlly</p>

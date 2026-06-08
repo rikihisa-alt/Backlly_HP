@@ -88,7 +88,7 @@ export default function DownloadModal({
             <div className="px-8 pt-8 pb-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-brand mb-2">
+                  <p className="font-sans font-bold text-[11.5px] tracking-[0.18em] text-brand mb-2">
                     DOWNLOAD
                   </p>
                   <h3 className="font-serif text-xl font-bold text-navy">
@@ -191,9 +191,9 @@ export default function DownloadModal({
 
                 <button
                   type="submit"
-                  className="mt-6 w-full bg-navy text-white font-medium py-3 rounded hover:bg-navy-mid transition-colors text-sm"
+                  className="mt-6 w-full bg-brand text-white font-semibold py-3 rounded hover:bg-brand-dark transition-colors text-[14px]"
                 >
-                  入力して資料をダウンロード
+                  送信して資料をダウンロード
                 </button>
 
                 <p className="mt-3 text-[11px] text-text-muted/60 text-center">
@@ -228,7 +228,7 @@ export default function DownloadModal({
                   </p>
                   <button
                     onClick={handleDownload}
-                    className="inline-flex items-center gap-2 bg-navy text-white font-medium px-8 py-3 rounded hover:bg-navy-mid transition-colors text-sm"
+                    className="inline-flex items-center gap-2 bg-brand text-white font-semibold px-8 py-3 rounded hover:bg-brand-dark transition-colors text-[14px]"
                   >
                     <svg
                       width="16"

@@ -69,19 +69,19 @@ export default function ContactPopup() {
                 CONTACT
               </div>
               <h4 className="font-serif font-bold text-[18px] leading-tight mb-1.5">
-                まずは整理から。
+                お気軽にご相談ください。
               </h4>
               <p className="text-[11.5px] text-white/85 leading-relaxed mb-4">
-                現状の課題を可視化し、改善の方向性を明確にします。
+                初回相談は無料です。現状をお聞かせください。
               </p>
 
               <div className="flex flex-col gap-2">
                 <Link
-                  href="#contact-form"
+                  href="/contact"
                   onClick={() => setOpen(false)}
                   className="bg-white text-brand text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
                 >
-                  <span>無料相談する</span>
+                  <span>無料相談</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3.5 h-3.5">
                     <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -90,7 +90,7 @@ export default function ContactPopup() {
                   href="/download"
                   className="border border-white/40 text-white text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/10 transition-colors"
                 >
-                  <span>資料をダウンロード</span>
+                  <span>資料ダウンロード</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3.5 h-3.5">
                     <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

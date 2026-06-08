@@ -33,9 +33,8 @@ function PdfIcon() {
         y="21"
         textAnchor="middle"
         fontSize="8"
-        fontFamily="monospace"
-        fontWeight="600"
-        fill="#06B6D4"
+        fontWeight="700"
+        fill="#1D4ED8"
       >
         PDF
       </text>
@@ -56,20 +55,20 @@ export default function ResourceCard({
             <PdfIcon />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 mb-2">
-              <h3 className="font-serif text-lg md:text-xl font-bold text-navy">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+              <h3 className="font-serif text-[18px] md:text-[20px] font-bold text-navy">
                 {resource.title}
               </h3>
-              <span className="text-[10px] font-mono text-text-muted px-2 py-0.5 border border-border rounded tracking-wider">
+              <span className="text-[10.5px] font-semibold text-text-muted px-2 py-0.5 border border-border rounded tracking-wider">
                 {resource.type}
               </span>
               {resource.pages && (
-                <span className="text-[10px] font-mono text-text-muted tracking-wider hidden sm:inline">
+                <span className="text-[10.5px] text-text-muted tracking-wider hidden sm:inline">
                   {resource.pages}
                 </span>
               )}
             </div>
-            <p className="text-text-muted text-sm leading-relaxed">
+            <p className="text-text-muted text-[13.5px] md:text-[14px] leading-[1.95]">
               {resource.description}
             </p>
           </div>

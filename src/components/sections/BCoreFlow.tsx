@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -40,25 +39,25 @@ const flowSteps = [
 ];
 
 export default function BCoreFlow() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="bcore" className="bg-bg border-y border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-4"
         >
           <SectionLabel>B-CORE</SectionLabel>
         </motion.div>
 
         <motion.div
           className="mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
           <Image
             src="/images/logo-bcore.png"
@@ -69,82 +68,60 @@ export default function BCoreFlow() {
           />
         </motion.div>
 
-        <motion.p
-          className="text-text-muted text-sm md:text-base mb-20 max-w-xl leading-relaxed"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
+        <motion.h2
+          className="font-serif text-navy font-bold leading-[1.3] text-[24px] md:text-[32px] lg:text-[36px] mb-5 max-w-3xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          企業ごとの業務に最適化されたシステムを、要件定義から設計・開発・運用まで一貫して構築します。
-          テンプレートではなく、御社専用の仕組みを。
+          企業専用システムを、<span className="text-brand">作る</span>。
+        </motion.h2>
+
+        <motion.p
+          className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+        >
+          要件定義から設計・開発・運用まで一貫対応。テンプレートではなく、御社専用の仕組みを構築します。
         </motion.p>
 
-        {/* Development flow — visual timeline */}
-        <div className="max-w-3xl">
-          <motion.p
-            className="text-xs text-text-muted font-mono tracking-wider uppercase mb-10"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
+        <div className="mb-5">
+          <span className="font-sans font-bold text-[12px] tracking-[0.18em] text-brand">
             DEVELOPMENT FLOW
-          </motion.p>
+          </span>
+        </div>
 
-          <div className="relative">
-            {/* Vertical line */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {flowSteps.map((step, i) => (
             <motion.div
-              className="absolute left-[19px] top-0 bottom-0 w-[1px] bg-border origin-top"
-              initial={{ scaleY: 0 }}
-              animate={isInView ? { scaleY: 1 } : {}}
-              transition={{ delay: 0.4, duration: 1.2, ease: "easeOut" }}
-            />
-
-            <div className="space-y-0">
-              {flowSteps.map((step, i) => (
-                <motion.div
-                  key={step.step}
-                  className="relative flex gap-6 pb-10 last:pb-0"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.4 + i * 0.12, duration: 0.5 }}
-                >
-                  {/* Node */}
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full border-2 border-border bg-bg-white flex items-center justify-center z-10">
-                    <span className="font-mono text-xs text-brand font-semibold">
-                      {step.step}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="pt-1.5 pb-2">
-                    <h3 className="font-serif text-base md:text-lg font-semibold text-navy mb-1">
-                      {step.title}
-                      {step.note && (
-                        <span className="text-xs text-text-muted font-normal ml-2">
-                          {step.note}
-                        </span>
-                      )}
-                    </h3>
-                    <p className="text-text-muted text-sm leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Arrow at bottom */}
-            <motion.div
-              className="absolute left-[15px] bottom-[-16px]"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 1.4, duration: 0.5 }}
+              key={step.step}
+              className="bg-bg-white rounded-md border border-border p-6 md:p-7 hover:border-brand/40 transition-colors h-full"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: 0.05 + i * 0.05, ease: "easeOut" }}
             >
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-                <path d="M5 12L0 6H10L5 12Z" fill="#E2E8F0" />
-              </svg>
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="font-sans font-bold text-[14px] text-brand tabular-nums">
+                  {step.step}
+                </span>
+                <h3 className="text-navy font-bold text-[16px] md:text-[17px] leading-snug">
+                  {step.title}
+                  {step.note && (
+                    <span className="text-[11px] text-text-muted font-normal ml-2">
+                      {step.note}
+                    </span>
+                  )}
+                </h3>
+              </div>
+              <p className="text-text-muted text-[13px] leading-[1.95]">
+                {step.description}
+              </p>
             </motion.div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

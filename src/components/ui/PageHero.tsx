@@ -67,7 +67,7 @@ export default function PageHero({
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-24">
         <div
           className={`max-w-[58%] lg:max-w-[52%] ${
-            isRight ? "" : "ml-auto text-right"
+            isRight ? "" : "ml-auto"
           }`}
         >
           <motion.div

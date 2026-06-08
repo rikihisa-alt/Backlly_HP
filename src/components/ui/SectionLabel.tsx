@@ -1,17 +1,34 @@
 interface SectionLabelProps {
   children: React.ReactNode;
-  color?: "default" | "cyan";
+  /** "default" = navy, "accent" = brand, "light" = white(/85) */
+  color?: "default" | "accent" | "light" | "cyan";
 }
 
-export default function SectionLabel({ children, color = "default" }: SectionLabelProps) {
-  const textColor = color === "cyan" ? "text-brand" : "text-navy";
+/**
+ * 共通セクションラベル
+ * 例: <SectionLabel>VISION</SectionLabel>
+ *
+ * 仕様(統一):
+ *   font-sans / font-bold / text-[12px] md:text-[13px]
+ *   tracking-[0.18em] / 色は navy (デフォルト)
+ *   先頭の縦バー等の装飾は持たない（必要な場面では個別に組む）
+ */
+export default function SectionLabel({
+  children,
+  color = "default",
+}: SectionLabelProps) {
+  const colorClass =
+    color === "accent" || color === "cyan"
+      ? "text-brand"
+      : color === "light"
+      ? "text-white/85"
+      : "text-navy";
 
   return (
-    <div className="flex items-center gap-3 mb-6">
-      <div className="w-[2px] h-4 bg-brand" />
-      <span className={`font-mono text-xs tracking-[0.2em] uppercase ${textColor}`}>
-        {children}
-      </span>
-    </div>
+    <span
+      className={`font-sans font-bold text-[12px] md:text-[13px] tracking-[0.18em] ${colorClass}`}
+    >
+      {children}
+    </span>
   );
 }

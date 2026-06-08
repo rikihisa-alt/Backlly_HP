@@ -1,47 +1,50 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { siteContent } from "@/data/content";
 
 export default function Mission() {
   const { mission } = siteContent;
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="mission" className="bg-bg border-y border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-6"
         >
           <SectionLabel>MISSION</SectionLabel>
         </motion.div>
 
         <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-12 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-10 max-w-4xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
           {mission.headline}
         </motion.h2>
 
-        <div className="space-y-6">
-          {mission.body.map((paragraph, i) => (
-            <motion.p
-              key={i}
-              className="text-text-muted text-sm md:text-base leading-[2]"
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + i * 0.12, duration: 0.5 }}
-            >
-              {paragraph}
-            </motion.p>
-          ))}
+        <div className="grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-8 space-y-6">
+            {mission.body.map((paragraph, i) => (
+              <motion.p
+                key={i}
+                className="text-text-muted text-[14px] md:text-[15px] leading-[2.05]"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: "easeOut" }}
+              >
+                {paragraph}
+              </motion.p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

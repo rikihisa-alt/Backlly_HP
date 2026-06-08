@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
-import Button from "@/components/ui/Button";
 
 interface Question {
   id: string;
@@ -60,7 +60,6 @@ interface Result {
 function calcResult(answers: Record<string, string>): Result {
   const { purpose, scale, development } = answers;
 
-  // Pattern 3: Development needed
   if (development === "yes") {
     if (scale === "large") {
       return {
@@ -86,7 +85,6 @@ function calcResult(answers: Record<string, string>): Result {
     };
   }
 
-  // Pattern 2: SaaS (optimize)
   if (purpose === "optimize") {
     if (scale === "large") {
       return {
@@ -104,7 +102,6 @@ function calcResult(answers: Record<string, string>): Result {
     };
   }
 
-  // Pattern 1: Consulting
   if (scale === "large") {
     return {
       rangeMin: "50万",
@@ -130,9 +127,6 @@ function calcResult(answers: Record<string, string>): Result {
 }
 
 export default function Simulator() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
@@ -162,171 +156,161 @@ export default function Simulator() {
       100;
 
   return (
-    <section className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="simulator" className="bg-bg border-y border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-4"
         >
           <SectionLabel>SIMULATION</SectionLabel>
         </motion.div>
 
         <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-3 max-w-3xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
-          概算見積シミュレーション
+          概算費用、いますぐ<span className="text-brand">シミュレーション</span>。
         </motion.h2>
 
         <motion.p
-          className="text-text-muted text-sm md:text-base mb-12"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-10 max-w-2xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
           いくつかの質問に答えるだけで、おおよその費用感をご確認いただけます。
         </motion.p>
 
-        {/* Progress bar */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-text-muted font-mono">
-              {showResult
-                ? "完了"
-                : `${currentStep + 1} / ${questions.length}`}
-            </span>
-            <span className="text-xs text-text-muted font-mono">
-              {Math.round(progress)}%
-            </span>
+        <div className="max-w-3xl bg-bg-white rounded-md border border-border p-7 md:p-10">
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[12px] text-text-muted font-medium tabular-nums">
+                {showResult ? "完了" : `${currentStep + 1} / ${questions.length}`}
+              </span>
+              <span className="text-[12px] text-text-muted font-medium tabular-nums">
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div className="h-[3px] bg-border rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-brand"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
           </div>
-          <div className="h-[2px] bg-border rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-brand"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-        </motion.div>
 
-        {/* Questions */}
-        <AnimatePresence mode="wait">
-          {!showResult && (
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.25 }}
-            >
-              <h3 className="font-serif text-lg md:text-xl font-semibold text-navy mb-8">
-                {questions[currentStep].label}
-              </h3>
+          <AnimatePresence mode="wait">
+            {!showResult && (
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.25 }}
+              >
+                <h3 className="font-serif text-navy font-bold text-[18px] md:text-[20px] mb-6">
+                  {questions[currentStep].label}
+                </h3>
 
-              <div className="space-y-3">
-                {questions[currentStep].options.map((option) => {
-                  const isSelected =
-                    answers[questions[currentStep].id] === option.value;
-                  return (
-                    <button
-                      key={option.value}
-                      className={`w-full text-left px-6 py-4 border rounded transition-colors duration-200 text-sm md:text-base ${
-                        isSelected
-                          ? "border-brand bg-brand/5 text-navy"
-                          : "border-border hover:border-navy/30 text-text"
-                      }`}
-                      onClick={() =>
-                        handleSelect(
-                          questions[currentStep].id,
-                          option.value
-                        )
-                      }
-                    >
-                      {option.text}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Back button */}
-              {currentStep > 0 && (
-                <button
-                  className="mt-6 text-sm text-text-muted hover:text-navy transition-colors"
-                  onClick={() => setCurrentStep(currentStep - 1)}
-                >
-                  ← 前の質問に戻る
-                </button>
-              )}
-            </motion.div>
-          )}
-
-          {/* Result */}
-          {showResult && result && (
-            <motion.div
-              key="result"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Estimate range */}
-              <div className="mb-10">
-                <p className="text-xs text-text-muted font-mono tracking-wider uppercase mb-4">
-                  想定費用レンジ
-                </p>
-                <p className="font-serif text-2xl md:text-3xl font-semibold text-navy">
-                  約 {result.rangeMin} 〜 {result.rangeMax}
-                </p>
-              </div>
-
-              {/* Recommended plan */}
-              <div className="pl-6 border-l-2 border-brand/30 mb-8 space-y-3">
-                <div>
-                  <span className="text-xs text-text-muted">推奨プラン</span>
-                  <p className="text-navy text-sm md:text-base font-medium mt-1">
-                    {result.plan}
-                  </p>
+                <div className="space-y-2.5">
+                  {questions[currentStep].options.map((option) => {
+                    const isSelected =
+                      answers[questions[currentStep].id] === option.value;
+                    return (
+                      <button
+                        key={option.value}
+                        className={`w-full text-left px-5 py-3.5 border rounded transition-colors duration-200 text-[14px] md:text-[14.5px] ${
+                          isSelected
+                            ? "border-brand bg-brand/5 text-navy"
+                            : "border-border hover:border-navy/30 text-navy"
+                        }`}
+                        onClick={() =>
+                          handleSelect(
+                            questions[currentStep].id,
+                            option.value
+                          )
+                        }
+                      >
+                        {option.text}
+                      </button>
+                    );
+                  })}
                 </div>
-                <div>
-                  <span className="text-xs text-text-muted">コメント</span>
-                  <p className="text-text-muted text-sm mt-1">
-                    {result.comment}
-                  </p>
-                </div>
-              </div>
 
-              {/* Social proof */}
-              <p className="text-text-muted text-xs mb-10 pl-6 border-l-2 border-border">
-                約80%の企業がこの段階で課題を抱えています
-              </p>
-
-              {/* CTA */}
-              <div className="pt-10 border-t border-border">
-                <p className="text-text-muted text-sm mb-6 leading-relaxed">
-                  詳細な見積をご希望の方は、無料相談にて個別にご案内いたします。
-                </p>
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <Button variant="primary" size="lg" href="/contact">
-                    無料相談する
-                  </Button>
+                {currentStep > 0 && (
                   <button
-                    className="text-sm text-text-muted hover:text-navy transition-colors py-3"
+                    className="mt-5 text-[13px] text-text-muted hover:text-navy transition-colors"
+                    onClick={() => setCurrentStep(currentStep - 1)}
+                  >
+                    ← 前の質問に戻る
+                  </button>
+                )}
+              </motion.div>
+            )}
+
+            {showResult && result && (
+              <motion.div
+                key="result"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="mb-8">
+                  <p className="font-sans font-bold text-[12px] tracking-[0.18em] text-brand mb-3">
+                    想定費用レンジ
+                  </p>
+                  <p className="font-serif text-navy font-bold text-[26px] md:text-[32px] leading-[1.3]">
+                    約 {result.rangeMin} 〜 {result.rangeMax}
+                  </p>
+                </div>
+
+                <div className="bg-bg rounded-md border border-border p-5 md:p-6 mb-6">
+                  <div className="mb-4">
+                    <span className="text-[12px] text-text-muted">推奨プラン</span>
+                    <p className="text-navy text-[14.5px] font-semibold mt-1">
+                      {result.plan}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[12px] text-text-muted">コメント</span>
+                    <p className="text-text-muted text-[13.5px] leading-[1.95] mt-1">
+                      {result.comment}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-text-muted text-[12.5px] mb-8">
+                  ※ 上記はあくまで概算です。正式な見積は無料相談にて個別にご案内します。
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px]"
+                  >
+                    <span>無料相談</span>
+                    <span aria-hidden>→</span>
+                  </Link>
+                  <button
+                    className="text-[13px] text-text-muted hover:text-navy transition-colors py-3"
                     onClick={handleReset}
                   >
                     もう一度やり直す
                   </button>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

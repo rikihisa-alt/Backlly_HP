@@ -326,7 +326,7 @@ export const siteContent: SiteContent = {
       "費用感の確認（予算内で何ができるか知りたい）",
       "他社事例の紹介（同業種の導入事例を聞きたい）",
     ],
-    ctaPrimary: "無料相談する",
+    ctaPrimary: "無料相談",
   },
   footer: {
     name: "株式会社Backlly",

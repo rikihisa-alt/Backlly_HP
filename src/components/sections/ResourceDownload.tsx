@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ResourceCard from "@/components/ui/ResourceCard";
 import DownloadModal from "@/components/ui/DownloadModal";
@@ -47,75 +47,72 @@ const resources: ResourceItem[] = [
 ];
 
 export default function ResourceDownload() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [modalResource, setModalResource] = useState<ResourceItem | null>(null);
 
   return (
     <>
-      <section id="download" className="py-section bg-bg-white" ref={ref}>
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          {/* Header */}
+      <section id="download" className="bg-bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mb-4"
           >
             <SectionLabel>DOWNLOAD</SectionLabel>
           </motion.div>
 
           <motion.h2
-            className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-4 leading-snug"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.6 }}
+            className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-3 max-w-3xl"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
           >
-            まずは資料で、
-            <br className="hidden md:block" />
-            Backllyの全体像をご確認ください。
+            まずは資料で、全体像を確認する。
           </motion.h2>
 
           <motion.p
-            className="text-text-muted text-sm md:text-base mb-16 leading-relaxed max-w-2xl"
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           >
-            サービス内容、支援範囲、費用感、導入の進み方、実際の導入イメージまで、
-            検討に必要な情報をまとめています。
+            サービス内容、支援範囲、費用感、導入の進み方、導入イメージまで、
+            検討に必要な情報をPDFにまとめています。
           </motion.p>
 
-          {/* Resource list — vertical, not card grid */}
-          <div className="space-y-0">
-            {resources.map((resource, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              >
-                <ResourceCard
-                  resource={resource}
-                  onDownload={() => setModalResource(resource)}
-                />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Supplementary note */}
           <motion.div
-            className="mt-12 pt-8 border-t border-border"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.7, duration: 0.5 }}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           >
-            <p className="text-text-muted text-sm leading-relaxed">
-              資料をご確認のうえ、より具体的なご相談をご希望の場合は、
+            {resources.map((resource) => (
+              <ResourceCard
+                key={resource.title}
+                resource={resource}
+                onDownload={() => setModalResource(resource)}
+              />
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="mt-10 max-w-3xl bg-bg rounded-md border border-border p-6 md:p-7"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="text-text-muted text-[13.5px] md:text-[14px] leading-[1.95]">
+              資料をご確認のうえ、具体的なご相談をご希望の場合は、
               <a
                 href="/contact"
-                className="text-navy font-medium underline underline-offset-4 hover:text-brand transition-colors"
+                className="text-navy font-semibold border-b border-navy/30 hover:border-navy transition-colors mx-1"
               >
-                お問い合わせ
+                無料相談
               </a>
               よりご連絡ください。
             </p>
@@ -123,7 +120,6 @@ export default function ResourceDownload() {
         </div>
       </section>
 
-      {/* Download modal */}
       <DownloadModal
         resource={modalResource}
         onClose={() => setModalResource(null)}

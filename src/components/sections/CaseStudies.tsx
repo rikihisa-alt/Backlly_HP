@@ -1,77 +1,109 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { siteContent } from "@/data/content";
 
+/**
+ * 事例。固有名詞は出さず、業界・規模・テーマで匿名化。
+ * 仮名は HomeLanding の TRUSTED BY と整合させ「医療法人A / 株式会社B / 社会福祉法人C」を使う。
+ */
+const aliasByIndustry: Record<string, string> = {
+  "医療・ヘルスケア": "医療法人A",
+  "IT・SaaS": "株式会社B",
+  "介護・福祉": "社会福祉法人C",
+};
+
 export default function CaseStudies() {
   const { caseStudies } = siteContent;
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="results" className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <SectionLabel>RESULTS</SectionLabel>
+    <section id="results" className="bg-bg-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-4"
+        >
+          <SectionLabel>RESULTS</SectionLabel>
+        </motion.div>
 
         <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-3 max-w-3xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
-          導入事例
+          数字で見る、<span className="text-brand">変化</span>。
         </motion.h2>
 
-        <div className="max-w-3xl space-y-0">
-          {caseStudies.map((cs, i) => (
-            <motion.div
-              key={i}
-              className="py-10 border-b border-border last:border-b-0"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
-            >
-              {/* Header row */}
-              <div className="flex items-baseline gap-4 mb-4">
-                <h3 className="font-serif text-lg md:text-xl font-semibold text-navy">
-                  {cs.client}
-                </h3>
-                <span className="text-xs text-text-muted font-mono">
-                  {cs.industry}
-                </span>
-              </div>
+        <motion.p
+          className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+        >
+          業種・規模の異なる組織で、業務の流れを再設計し、運用が回り始めた実例をご紹介します。
+        </motion.p>
 
-              {/* Detail rows */}
-              <div className="space-y-3 mb-5">
-                <div className="flex flex-col sm:flex-row gap-1 sm:gap-4">
-                  <span className="text-xs text-text-muted w-16 flex-shrink-0 pt-0.5">
-                    課題
+        <div className="space-y-5 md:space-y-6">
+          {caseStudies.map((cs, i) => {
+            const alias = aliasByIndustry[cs.industry] ?? cs.client;
+            return (
+              <motion.article
+                key={i}
+                className="bg-bg rounded-md border border-border p-6 md:p-8 hover:border-brand/40 transition-colors"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.05 + i * 0.05, ease: "easeOut" }}
+              >
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4">
+                  <h3 className="text-navy font-bold text-[18px] md:text-[20px]">
+                    {alias}
+                  </h3>
+                  <span className="text-[12px] text-text-muted">
+                    {cs.industry}
                   </span>
-                  <p className="text-text text-sm leading-relaxed">
-                    {cs.challenge}
+                  <span className="text-[12px] text-text-muted">
+                    {cs.description}
+                  </span>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-5 md:gap-8 mb-5">
+                  <div>
+                    <span className="font-sans font-bold text-[11.5px] tracking-[0.18em] text-brand mb-2 block">
+                      課題
+                    </span>
+                    <p className="text-navy text-[13.5px] md:text-[14px] leading-[1.95]">
+                      {cs.challenge}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-sans font-bold text-[11.5px] tracking-[0.18em] text-brand mb-2 block">
+                      支援内容
+                    </span>
+                    <p className="text-navy text-[13.5px] md:text-[14px] leading-[1.95]">
+                      {cs.support}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-bg-white border-l-[3px] border-brand pl-5 pr-4 py-4 rounded-r">
+                  <span className="font-sans font-bold text-[11.5px] tracking-[0.18em] text-brand mb-1.5 block">
+                    成果
+                  </span>
+                  <p className="text-navy text-[14px] md:text-[15px] font-semibold leading-[1.85]">
+                    {cs.result}
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-1 sm:gap-4">
-                  <span className="text-xs text-text-muted w-16 flex-shrink-0 pt-0.5">
-                    支援内容
-                  </span>
-                  <p className="text-text text-sm leading-relaxed">
-                    {cs.support}
-                  </p>
-                </div>
-              </div>
-
-              {/* Result */}
-              <div className="flex items-start gap-2 pl-0 sm:pl-20">
-                <span className="text-brand text-sm font-medium mt-0.5">→</span>
-                <p className="text-navy text-sm md:text-base font-semibold">
-                  {cs.result}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

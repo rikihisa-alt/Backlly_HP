@@ -1,82 +1,69 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
-import Button from "@/components/ui/Button";
 import { siteContent } from "@/data/content";
 
 export default function ConsultTopics() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   const { consultTopics } = siteContent;
 
   return (
-    <section className="py-section bg-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="consult" className="bg-bg border-y border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-4"
         >
           <SectionLabel>CONSULT</SectionLabel>
         </motion.div>
 
         <motion.h2
-          className="font-serif text-2xl md:text-3xl font-semibold text-navy mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-3 max-w-3xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
-          相談できる内容
+          こんなことが、相談できます。
         </motion.h2>
 
         <motion.p
-          className="text-text-muted text-sm md:text-base mb-16 leading-relaxed"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          以下のようなご相談に対応しています。まずはお気軽にご連絡ください。
+          以下のようなご相談に対応しています。お悩み段階のご相談からで大丈夫です。
         </motion.p>
 
-        <div className="space-y-0">
+        <div className="grid md:grid-cols-2 gap-5 md:gap-6">
           {consultTopics.map((topic, i) => (
             <motion.div
               key={i}
-              className="py-8 border-b border-border first:border-t"
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+              className="bg-bg-white rounded-md border border-border p-6 md:p-7 hover:border-brand/40 transition-colors h-full"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: 0.05 + i * 0.05, ease: "easeOut" }}
             >
-              <div className="flex items-start gap-4">
-                <span className="text-brand text-sm font-mono mt-0.5">
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="font-sans font-bold text-[14px] text-brand tabular-nums">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <div>
-                  <h3 className="font-serif text-lg font-semibold text-navy mb-2">
-                    {topic.title}
-                  </h3>
-                  <p className="text-text-muted text-sm leading-relaxed">
-                    {topic.description}
-                  </p>
-                </div>
+                <h3 className="text-navy font-bold text-[16px] md:text-[17px] leading-snug">
+                  {topic.title}
+                </h3>
               </div>
+              <p className="text-text-muted text-[13px] leading-[1.95]">
+                {topic.description}
+              </p>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          className="mt-12"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
-          <Button variant="primary" size="lg" href="/contact">
-            無料相談する
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

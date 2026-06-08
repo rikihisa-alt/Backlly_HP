@@ -1,68 +1,68 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { siteContent } from "@/data/content";
 
 export default function Approach() {
   const { approach } = siteContent;
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-section bg-bg-white" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <SectionLabel>APPROACH</SectionLabel>
+    <section id="approach" className="bg-bg border-y border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-4"
+        >
+          <SectionLabel>APPROACH</SectionLabel>
+        </motion.div>
 
         <motion.h2
-          className="font-serif text-3xl md:text-[36px] font-semibold text-navy mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          className="font-serif text-navy font-bold leading-[1.3] text-[28px] md:text-[36px] lg:text-[42px] mb-3 max-w-3xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.05, ease: "easeOut" }}
         >
           {approach.headline}
         </motion.h2>
 
-        <div className="max-w-2xl relative">
-          {/* Vertical connecting line */}
-          <motion.div
-            className="absolute left-[11px] top-4 bottom-4 w-[1.5px] bg-border origin-top"
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.5, delay: 0.3 }}
-          />
+        <motion.p
+          className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+        >
+          ヒアリングから運用定着まで、原則5つのステップで進めます。
+        </motion.p>
 
-          <div className="space-y-12">
-            {approach.steps.map((step, i) => (
-              <motion.div
-                key={i}
-                className="flex gap-8 relative"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.15, duration: 0.5 }}
-              >
-                {/* Node dot */}
-                <div className="relative z-10 flex-shrink-0">
-                  <div className="w-6 h-6 rounded-full border-2 border-border bg-bg-white flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-brand" />
-                  </div>
-                </div>
-
-                <div className="pb-2">
-                  <span className="font-mono text-xs text-brand tracking-[0.15em] uppercase">
-                    {step.step}
-                  </span>
-                  <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy mt-1.5">
-                    {step.title}
-                  </h3>
-                  <p className="text-text-muted mt-2 text-sm md:text-base leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {approach.steps.map((step, i) => (
+            <motion.div
+              key={i}
+              className="bg-bg-white rounded-md border border-border p-6 md:p-7 hover:border-brand/40 transition-colors h-full"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: 0.05 + i * 0.05, ease: "easeOut" }}
+            >
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="font-sans font-bold text-[13px] text-brand tracking-wide">
+                  {step.step}
+                </span>
+                <h3 className="text-navy font-bold text-[16px] md:text-[17px] leading-snug">
+                  {step.title}
+                </h3>
+              </div>
+              <p className="text-text-muted text-[13px] leading-[1.95]">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
