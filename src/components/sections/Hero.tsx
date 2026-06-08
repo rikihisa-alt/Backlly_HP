@@ -43,9 +43,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
             >
-              業務をつなぎ、
-              <br />
-              会社を<span className="text-brand">動かす</span>。
+              <span className="block">業務をつなぎ、</span>
+              <span className="block">
+                会社を<span className="text-brand">動かす</span>。
+              </span>
             </motion.h1>
 
             <motion.p
@@ -64,7 +65,6 @@ export default function Hero() {
               transition={{ delay: 1.1, duration: 0.5, ease: "easeOut" }}
             >
               経理・労務・総務の属人化を解消し、
-              <br className="hidden sm:inline" />
               人が変わっても止まらない仕組みをつくります。
             </motion.p>
 

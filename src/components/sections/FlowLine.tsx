@@ -29,9 +29,8 @@ export default function FlowLine() {
             業務は、つながって初めて機能する。
           </h2>
           <p className="text-text-muted text-sm md:text-base mb-14 max-w-xl leading-relaxed">
-            入社から月次報告まで、バックオフィスの業務は1本の流れです。
-            <br />
-            どこか1つが止まると、全体が滞る。Backllyはこの流れを設計します。
+            入社から月次報告まで、<span className="inline-block">バックオフィスの業務</span>は1本の流れです。
+            どこか1つが止まると、全体が滞る。<span className="inline-block">Backllyはこの流れを設計します。</span>
           </p>
         </motion.div>
 

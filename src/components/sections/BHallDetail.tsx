@@ -227,7 +227,7 @@ export default function BHallDetail() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
         >
-          業務の可視化・進行管理・担当管理・一元化を1画面に集約し、日々の運用を安定させます。
+          <span className="inline-block">業務の可視化・進行管理・担当管理・一元化</span>を1画面に集約し、日々の運用を安定させます。
         </motion.p>
 
         <motion.p
@@ -286,7 +286,7 @@ export default function BHallDetail() {
                 href="https://b-hall.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-navy text-[13.5px] font-semibold border-b border-navy/30 pb-0.5 hover:border-navy transition-colors"
+                className="inline-flex items-center gap-2 text-navy text-[13.5px] font-semibold border-b border-navy/30 pb-0.5 hover:border-navy transition-colors whitespace-nowrap"
               >
                 <span>B-Hallを詳しく見る</span>
                 <span aria-hidden>→</span>

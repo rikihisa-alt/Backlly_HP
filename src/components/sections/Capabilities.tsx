@@ -12,6 +12,7 @@ const capabilities = [
   { area: "入退社手続き", detail: "チェックリストで抜け漏れなく自動進行" },
   { area: "会計・SaaS連携", detail: "freee・マネーフォワード等とAPI接続" },
 ];
+// 一覧テキストは短く文節境界に向くため、グローバルCSSの auto-phrase に任せる。
 
 export default function Capabilities() {
   const ref = useRef(null);

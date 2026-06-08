@@ -68,7 +68,7 @@ export default function Routing() {
                 <p className="text-text-muted text-[13px] leading-[1.85] mb-4">
                   {item.description}
                 </p>
-                <span className="inline-flex items-center gap-2 text-navy text-[13px] font-semibold border-b border-navy/30 pb-0.5 group-hover:border-navy transition-colors">
+                <span className="inline-flex items-center gap-2 text-navy text-[13px] font-semibold border-b border-navy/30 pb-0.5 group-hover:border-navy transition-colors whitespace-nowrap">
                   <span>詳しく見る</span>
                   <span aria-hidden>→</span>
                 </span>

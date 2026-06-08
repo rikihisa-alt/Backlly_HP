@@ -109,8 +109,9 @@ export default function Services() {
             一貫支援も、スポット対応も。
           </h3>
           <p className="text-text-muted text-[13.5px] md:text-[14px] leading-[1.95] mb-5">
-            業務が整理されていない段階であれば、コンサルティングから入り、フロー設計・ルール整備・業務整理を行います。
-            そのうえで必要に応じて、B-Hallの導入や、企業専用システムの開発まで対応します。すでに一部が整っている場合は、以下のようなスポット支援も可能です。
+            業務が整理されていない段階であれば、<span className="inline-block">コンサルティングから入り</span>、フロー設計・ルール整備・業務整理を行います。
+            そのうえで必要に応じて、<span className="inline-block">B-Hallの導入</span>や、<span className="inline-block">企業専用システムの開発</span>まで対応します。
+            すでに一部が整っている場合は、以下のようなスポット支援も可能です。
           </p>
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
             {[

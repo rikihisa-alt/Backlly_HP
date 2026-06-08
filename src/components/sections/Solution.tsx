@@ -49,8 +49,8 @@ export default function Solution() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          属人化していた業務を構造化し、システムで支える。
-          その結果として、現場に生まれる変化です。
+          属人化していた業務を構造化し、<span className="inline-block">システムで支える。</span>
+          その結果として、<span className="inline-block">現場に生まれる変化です。</span>
         </motion.p>
 
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
@@ -81,7 +81,7 @@ export default function Solution() {
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
         >
           <p className="text-text-muted text-[13.5px] md:text-[14px] leading-[1.95]">
-            B-Hallによる一元管理の構築、企業専用システムの開発、HP・LP制作など、業務に直結する仕組みを実装します。
+            <span className="inline-block">B-Hallによる一元管理の構築</span>、<span className="inline-block">企業専用システムの開発</span>、<span className="inline-block">HP・LP制作</span>など、業務に直結する仕組みを実装します。
             全体設計だけでなく、システム開発のみ、業務改善のみといったスポット支援も可能です。
           </p>
         </motion.div>

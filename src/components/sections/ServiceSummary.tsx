@@ -68,7 +68,7 @@ export default function ServiceSummary() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          バックオフィスを機能させるための4つのサービス。
+          <span className="inline-block">バックオフィスを機能させる</span>ための4つのサービス。
           コンサルティング、一元管理システム、業務システム開発、Webサイト制作までを一貫してご提供します。
         </motion.p>
 
@@ -106,7 +106,7 @@ export default function ServiceSummary() {
         >
           <Link
             href="/service"
-            className="inline-flex items-center gap-3 text-navy text-[14px] font-semibold border-b border-navy/30 hover:border-navy pb-1 transition-colors"
+            className="inline-flex items-center gap-3 text-navy text-[14px] font-semibold border-b border-navy/30 hover:border-navy pb-1 transition-colors whitespace-nowrap"
           >
             <span>サービスの詳細を見る</span>
             <span aria-hidden>→</span>

@@ -85,7 +85,8 @@ export default function BCoreFlow() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
         >
-          要件定義から設計・開発・運用まで一貫対応。テンプレートではなく、御社専用の仕組みを構築します。
+          <span className="inline-block">要件定義から設計・開発・運用まで一貫対応</span>。
+          テンプレートではなく、<span className="inline-block">御社専用の仕組み</span>を構築します。
         </motion.p>
 
         <div className="mb-5">

@@ -471,7 +471,7 @@ export default function ContactPage() {
                     <div className="pt-4 border-t border-border">
                       <button
                         type="submit"
-                        className="w-full sm:w-auto bg-brand text-white font-semibold px-7 py-3.5 rounded hover:bg-brand-dark transition-colors text-[15px] inline-flex items-center justify-between gap-8 min-w-[220px]"
+                        className="w-full sm:w-auto bg-brand text-white font-semibold px-7 py-3.5 rounded hover:bg-brand-dark transition-colors text-[15px] inline-flex items-center justify-between gap-8 min-w-[220px] whitespace-nowrap"
                       >
                         <span>送信する</span>
                         <svg

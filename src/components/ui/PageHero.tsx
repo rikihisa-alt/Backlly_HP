@@ -90,7 +90,7 @@ export default function PageHero({
           </motion.h1>
           {subtitle && (
             <motion.p
-              className="mt-6 text-text-muted text-[14px] md:text-[15px] leading-[1.95] max-w-xl"
+              className="mt-6 text-text-muted text-[14px] md:text-[15px] leading-[1.95] max-w-lg"
               initial={{ opacity: 0.001, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}

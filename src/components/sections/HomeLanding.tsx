@@ -77,6 +77,8 @@ const serviceTiles = [
   { label: "HP・LP制作", Icon: IconHP },
   { label: "業務改善・\nDX支援", Icon: IconChart },
 ];
+// note: serviceTiles.label の \n は意図的な行ブロック分け。
+// whitespace-pre-line で改行を反映するため残す。
 
 const flowSteps = [
   { no: "01", label: "入社", desc: "手続き・アカウント発行" },
@@ -192,16 +194,20 @@ export default function HomeLanding() {
             </motion.h1>
 
             <motion.p
-              className="text-text-muted text-[14px] md:text-[15px] leading-[2] mb-9"
+              className="text-text-muted text-[14px] md:text-[15px] leading-[2] mb-9 max-w-md"
               initial={{ opacity: 0.001, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
             >
-              バックオフィスの業務設計から、システム構築、運用定着まで。
-              <br />
-              経理・労務・総務の属人化を解消し、
-              <br />
-              人が変わっても止まらない仕組みをつくります。
+              <span className="block">
+                <span className="inline-block">バックオフィスの業務設計</span>から、
+                <span className="inline-block">システム構築</span>、
+                <span className="inline-block">運用定着まで。</span>
+              </span>
+              <span className="block">
+                経理・労務・総務の属人化を解消し、
+                人が変わっても止まらない仕組みをつくります。
+              </span>
             </motion.p>
 
             <motion.div
@@ -212,14 +218,14 @@ export default function HomeLanding() {
             >
               <Link
                 href="#contact-form"
-                className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors shadow-sm min-w-[200px]"
+                className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors shadow-sm min-w-[200px] whitespace-nowrap"
               >
                 <span>無料相談</span>
                 <Arrow className="w-4 h-4" />
               </Link>
               <Link
                 href="/service"
-                className="inline-flex items-center justify-between gap-8 bg-white/95 backdrop-blur-sm border border-navy/30 hover:border-navy text-navy font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px]"
+                className="inline-flex items-center justify-between gap-8 bg-white/95 backdrop-blur-sm border border-navy/30 hover:border-navy text-navy font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px] whitespace-nowrap"
               >
                 <span>サービスを見る</span>
                 <Arrow className="w-4 h-4" />
@@ -255,9 +261,8 @@ export default function HomeLanding() {
                 </h2>
               </div>
               <p className="text-text-muted text-[12.5px] leading-relaxed mb-5">
-                入社から月次報告まで、バックオフィスの業務は1本の流れです。
-                <br />
-                どこか1つが止まると、全体が滞る。Backllyはこの流れを設計します。
+                入社から月次報告まで、<span className="inline-block">バックオフィスの業務</span>は1本の流れです。
+                どこか1つが止まると、全体が滞る。<span className="inline-block">Backllyはこの流れを設計します。</span>
               </p>
 
               <div className="grid grid-cols-5 gap-2">
@@ -336,20 +341,18 @@ export default function HomeLanding() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-serif text-brand font-bold leading-[1.35] text-[28px] md:text-[40px] lg:text-[48px] mb-10 max-w-4xl">
-              バックオフィスが機能する会社を、
-              <br className="hidden md:block" />
-              当たり前にする。
+              <span className="block">バックオフィスが機能する会社を、</span>
+              <span className="block">当たり前にする。</span>
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-12 gap-10">
             <Reveal delay={0.1} className="md:col-span-7">
               <p className="text-navy text-[15px] md:text-[16px] leading-[2.05]">
                 業務が止まる根本原因は、人ではなく
-                <span className="text-brand font-semibold">「設計されていないフロー」</span>
+                <span className="text-brand font-semibold inline-block">「設計されていないフロー」</span>
                 にあります。
-                <br />
-                Backllyは、業務を1つずつ分解し、フローを設計し、仕組みとして実装します。
-                人が変わっても、拠点が増えても、業務が止まらない状態をつくる
+                Backllyは、業務を1つずつ分解し、フローを設計し、<span className="inline-block">仕組みとして実装します。</span>
+                人が変わっても、拠点が増えても、<span className="inline-block">業務が止まらない状態</span>をつくる
                 ── それが私たちが目指す&quot;当たり前&quot;です。
               </p>
             </Reveal>
@@ -410,6 +413,11 @@ export default function HomeLanding() {
                     </span>
                   </div>
                   <h3 className="text-navy font-bold text-[17px] md:text-[18px] leading-snug mb-2.5">
+                    {/*
+                      タイトルは見出し用のtext-wrap (balance + auto-phrase) が効くため
+                      そのまま流す。「B-Hall」「B-Core」前後の不自然な切れは
+                      auto-phrase に任せ、ここで余計なinline-blockは付けない。
+                    */}
                     {s.title}
                   </h3>
                   <p className="text-text-muted text-[13px] leading-[1.85] flex-1">
@@ -437,7 +445,7 @@ export default function HomeLanding() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-text-muted text-[14px] md:text-[15px] leading-[1.95] mb-12 max-w-2xl">
-              バックオフィス領域に必要な機能・連携を、状況に合わせて組み合わせます。
+              バックオフィス領域に必要な機能・連携を、<span className="inline-block">状況に合わせて</span>組み合わせます。
               既存の業務システムや会計SaaSとも接続可能です。
             </p>
           </Reveal>
@@ -487,8 +495,8 @@ export default function HomeLanding() {
           <Reveal delay={0.1}>
             <p className="text-white/85 text-[14px] md:text-[15px] leading-[2] mb-12 max-w-2xl">
               現状の業務課題やお悩みをお聞かせください。
-              <br />
-              内容に応じて、最適な進め方をご提案します。費用はかかりません。
+              内容に応じて、<span className="inline-block">最適な進め方をご提案します。</span>
+              費用はかかりません。
             </p>
           </Reveal>
 

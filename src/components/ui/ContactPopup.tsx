@@ -79,7 +79,7 @@ export default function ContactPopup() {
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="bg-white text-brand text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors"
+                  className="bg-white text-brand text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/95 transition-colors whitespace-nowrap"
                 >
                   <span>無料相談</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3.5 h-3.5">
@@ -88,7 +88,7 @@ export default function ContactPopup() {
                 </Link>
                 <Link
                   href="/download"
-                  className="border border-white/40 text-white text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/10 transition-colors"
+                  className="border border-white/40 text-white text-[12.5px] font-semibold rounded py-2 px-3 flex items-center justify-between hover:bg-white/10 transition-colors whitespace-nowrap"
                 >
                   <span>資料ダウンロード</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3.5 h-3.5">

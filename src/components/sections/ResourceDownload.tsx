@@ -81,7 +81,7 @@ export default function ResourceDownload() {
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           >
             サービス内容、支援範囲、費用感、導入の進み方、導入イメージまで、
-            検討に必要な情報をPDFにまとめています。
+            <span className="inline-block">検討に必要な情報をPDFにまとめています。</span>
           </motion.p>
 
           <motion.div

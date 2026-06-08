@@ -295,7 +295,7 @@ export default function Simulator() {
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px]"
+                    className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px] whitespace-nowrap"
                   >
                     <span>無料相談</span>
                     <span aria-hidden>→</span>

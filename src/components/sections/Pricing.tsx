@@ -139,8 +139,8 @@ export default function Pricing() {
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
         >
           <p className="text-text-muted text-[13.5px] md:text-[14px] leading-[1.95]">
-            本サービスは単発ではなく「整理 → 運用 → 開発」まで一貫して対応します。
-            コンサルのみ、システム開発のみのご依頼も可能ですが、業務整理からの実施を推奨しています。
+            本サービスは単発ではなく<span className="inline-block">「整理 → 運用 → 開発」</span>まで一貫して対応します。
+            コンサルのみ、システム開発のみのご依頼も可能ですが、<span className="inline-block">業務整理からの実施</span>を推奨しています。
           </p>
         </motion.div>
 
@@ -159,7 +159,7 @@ export default function Pricing() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px]"
+            className="inline-flex items-center justify-between gap-8 bg-brand hover:bg-brand-dark text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[200px] whitespace-nowrap"
           >
             <span>無料相談</span>
             <span aria-hidden>→</span>

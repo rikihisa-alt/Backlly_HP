@@ -28,3 +28,30 @@ body {
   background: var(--color-cyan);
   color: #fff;
 }
+
+/* ------------------------------------------------------------------ */
+/* 日本語の改行品質を整える共通ルール                                 */
+/*  - 見出し: balance + auto-phrase で文節境界に寄せる                */
+/*  - 段落  : pretty で末尾1-2文字残りを抑制                          */
+/*  - line-break: strict は禁則の最も厳しいレベル                     */
+/*  - word-break: auto-phrase は Chrome 119+/Safari 17+ 対応          */
+/*  - 未対応ブラウザでは normal の折返しにフォールバックする          */
+/* ------------------------------------------------------------------ */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    word-break: auto-phrase;
+    line-break: strict;
+    overflow-wrap: anywhere;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+    word-break: auto-phrase;
+    line-break: strict;
+  }
+}

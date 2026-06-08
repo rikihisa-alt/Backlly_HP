@@ -42,8 +42,9 @@ export default function VisionBrief() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          人が変わっても、拠点が増えても、業務が止まらない状態をつくる。
-          それがBacklly全社で共有する&quot;当たり前&quot;です。理念・ミッション・行動指針の詳細はAboutページで詳しくご紹介しています。
+          人が変わっても、拠点が増えても、<span className="inline-block">業務が止まらない状態</span>をつくる。
+          それがBacklly全社で共有する&quot;当たり前&quot;です。
+          理念・ミッション・行動指針の詳細はAboutページで詳しくご紹介しています。
         </motion.p>
 
         <motion.div
@@ -54,7 +55,7 @@ export default function VisionBrief() {
         >
           <Link
             href="/about"
-            className="inline-flex items-center gap-3 text-navy text-[14px] font-semibold border-b border-navy/30 hover:border-navy pb-1 transition-colors"
+            className="inline-flex items-center gap-3 text-navy text-[14px] font-semibold border-b border-navy/30 hover:border-navy pb-1 transition-colors whitespace-nowrap"
           >
             <span>Backllyの考え方を詳しく見る</span>
             <span aria-hidden>→</span>

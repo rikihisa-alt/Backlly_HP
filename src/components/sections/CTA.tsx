@@ -55,9 +55,9 @@ export default function CTA() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          初回相談は無料です。まずは課題を伺い、最適な進め方をご提案します。
+          初回相談は無料です。まずは課題を伺い、<span className="inline-block">最適な進め方をご提案します。</span>
           資料だけ先に確認したい方は、サービス・料金・事例をまとめた資料を
-          PDFでお渡ししています。
+          <span className="inline-block">PDFでお渡ししています。</span>
         </motion.p>
 
         <motion.div
@@ -69,14 +69,14 @@ export default function CTA() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-between gap-8 bg-white text-brand font-semibold text-[15px] rounded px-7 py-3.5 transition-colors hover:bg-white/95 min-w-[220px]"
+            className="inline-flex items-center justify-between gap-8 bg-white text-brand font-semibold text-[15px] rounded px-7 py-3.5 transition-colors hover:bg-white/95 min-w-[220px] whitespace-nowrap"
           >
             <span>無料相談</span>
             <Arrow className="w-4 h-4" />
           </Link>
           <Link
             href="/download"
-            className="inline-flex items-center justify-between gap-8 border border-white/40 hover:border-white text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[220px]"
+            className="inline-flex items-center justify-between gap-8 border border-white/40 hover:border-white text-white font-medium text-[15px] rounded px-7 py-3.5 transition-colors min-w-[220px] whitespace-nowrap"
           >
             <span>資料ダウンロード</span>
             <Arrow className="w-4 h-4" />

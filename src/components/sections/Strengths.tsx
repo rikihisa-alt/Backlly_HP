@@ -37,7 +37,7 @@ export default function Strengths() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          設計・実装・運用を、ひとつのチームで担います。
+          設計・実装・運用を、<span className="inline-block">ひとつのチームで担います。</span>
           外部パートナーへの丸投げをしないからこそ実現できる4つの強みです。
         </motion.p>
 

@@ -37,7 +37,7 @@ export default function ConsultTopics() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
-          以下のようなご相談に対応しています。お悩み段階のご相談からで大丈夫です。
+          以下のようなご相談に対応しています。<span className="inline-block">お悩み段階のご相談からで大丈夫です。</span>
         </motion.p>
 
         <div className="grid md:grid-cols-2 gap-5 md:gap-6">
