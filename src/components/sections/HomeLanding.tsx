@@ -145,7 +145,10 @@ export default function HomeLanding() {
   return (
     <div className="relative bg-bg-white">
       {/* ============ HERO ============ */}
-      <section id="hero" className="relative overflow-hidden bg-bg-white">
+      <section
+        id="hero"
+        className="relative overflow-hidden bg-bg-white min-h-[calc(100vh-3rem)] flex"
+      >
         <motion.div
           className="absolute inset-0 pointer-events-none"
           initial={{ opacity: 0 }}
@@ -178,8 +181,8 @@ export default function HomeLanding() {
           />
         </motion.div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-20 md:pb-24">
-          <div className="max-w-[58%] lg:max-w-[52%]">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-24 md:pb-28 flex items-center">
+          <div className="max-w-[58%] lg:max-w-[52%] w-full">
             <motion.h1
               className="font-serif font-bold text-navy tracking-[-0.02em] text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] mb-7"
               initial={{ opacity: 0, y: 16 }}
