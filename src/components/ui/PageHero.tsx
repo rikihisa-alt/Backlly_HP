@@ -86,7 +86,11 @@ export default function PageHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
           >
-            {title}
+            {title.split("\n").map((line, i) => (
+              <span key={i} className="block">
+                {line}
+              </span>
+            ))}
           </motion.h1>
           {subtitle && (
             <motion.p

@@ -16,7 +16,6 @@ const navLinks = [
   { label: "Pricing", href: "/pricing" },
   { label: "Company", href: "/company" },
   { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const serviceTabItems = [
