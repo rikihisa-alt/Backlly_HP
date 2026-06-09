@@ -23,7 +23,7 @@ export default function PageHero({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-bg-white"
+      className="relative overflow-hidden bg-bg-white min-h-[calc(100vh-3rem)] flex"
     >
       {/* Background image */}
       <motion.div
@@ -64,9 +64,9 @@ export default function PageHero({
         />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-24 md:pb-28 flex items-center">
         <div
-          className={`max-w-[58%] lg:max-w-[52%] ${
+          className={`max-w-[58%] lg:max-w-[52%] w-full ${
             isRight ? "" : "ml-auto"
           }`}
         >
