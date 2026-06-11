@@ -9,7 +9,7 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata = {
-  title: "Backllyについて | 株式会社Backlly",
+  title: "Backllyについて",
   description:
     "株式会社Backllyの考え方。ビジョン・ミッション・大切にしている姿勢、そして代表メッセージをご紹介します。",
 };
@@ -32,7 +32,7 @@ export default function AboutPage() {
           label="ABOUT"
           title="Backllyの、考え方。"
           subtitle={`人ではなく、業務そのものを設計し直す。私たちの根っこにある思想と、目指す"当たり前"をお伝えします。`}
-          image="/images/img-stairs.png"
+          image="/images/img-stairs.jpg"
         />
         <Vision />
         <Mission />

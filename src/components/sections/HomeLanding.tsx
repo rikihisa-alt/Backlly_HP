@@ -157,7 +157,7 @@ export default function HomeLanding() {
         >
           <div className="absolute top-0 right-0 h-full w-[78%] md:w-[68%] lg:w-[62%]">
             <Image
-              src="/images/hero-main.png"
+              src="/images/hero-main.jpg"
               alt="Backlly hero"
               fill
               priority
@@ -179,10 +179,12 @@ export default function HomeLanding() {
                 "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 78%, rgba(255,255,255,0.85) 92%, #ffffff 100%)",
             }}
           />
+          {/* モバイルではテキストを全幅にするため、画像を白でやわらかく覆う */}
+          <div className="absolute inset-0 bg-white/55 sm:hidden" />
         </motion.div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-24 md:pb-28 flex items-center">
-          <div className="max-w-[58%] lg:max-w-[52%] w-full">
+          <div className="max-w-full sm:max-w-[58%] lg:max-w-[52%] w-full">
             <motion.h1
               className="font-serif font-bold text-navy tracking-[-0.02em] text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] mb-7"
               initial={{ opacity: 0, y: 16 }}

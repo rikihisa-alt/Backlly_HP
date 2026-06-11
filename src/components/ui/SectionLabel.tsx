@@ -1,7 +1,7 @@
 interface SectionLabelProps {
   children: React.ReactNode;
   /** "default" = navy, "accent" = brand, "light" = white(/85) */
-  color?: "default" | "accent" | "light" | "cyan";
+  color?: "default" | "accent" | "light";
 }
 
 /**
@@ -18,7 +18,7 @@ export default function SectionLabel({
   color = "default",
 }: SectionLabelProps) {
   const colorClass =
-    color === "accent" || color === "cyan"
+    color === "accent"
       ? "text-brand"
       : color === "light"
       ? "text-white/85"

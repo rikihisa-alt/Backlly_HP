@@ -89,7 +89,7 @@ export default function ContactPage() {
           label="CONTACT"
           title={"現状を、\nお聞かせください。"}
           subtitle="お悩みの段階で大丈夫です。内容に応じて、最適な進め方をご提案します。初回相談は無料です。"
-          image="/images/img-office.png"
+          image="/images/img-office.jpg"
           imagePosition="left"
         />
 

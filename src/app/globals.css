@@ -7,8 +7,7 @@
   --color-bg-white: #FFFFFF;
   --color-navy: #0F172A;
   --color-navy-mid: #1E293B;
-  --color-cyan: #06B6D4;
-  --color-cyan-soft: #E0F7FA;
+  --color-brand: #1D4ED8;
   --color-text: #0F172A;
   --color-text-muted: #64748B;
   --color-border: #E2E8F0;
@@ -16,6 +15,15 @@
 
 html {
   scroll-behavior: smooth;
+  /* 固定ヘッダー(80px)分、アンカー遷移先が隠れないようにする */
+  scroll-padding-top: 96px;
+}
+
+/* OSで「視差効果を減らす」を選んだユーザーにはスムーススクロールを無効化 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -25,8 +33,14 @@ body {
 }
 
 ::selection {
-  background: var(--color-cyan);
+  background: var(--color-brand);
   color: #fff;
+}
+
+/* キーボード操作時のフォーカスリングをブランド色で統一 */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 /* ------------------------------------------------------------------ */

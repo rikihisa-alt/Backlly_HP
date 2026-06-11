@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STORAGE_KEY = "backlly:contact-popup-dismissed";
 
 export default function ContactPopup() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState(true); // start true to avoid flicker SSR
 
@@ -39,6 +41,11 @@ export default function ContactPopup() {
       /* ignore */
     }
   };
+
+  // 問い合わせページ自体では誘導ポップアップを出さない
+  if (pathname === "/contact") {
+    return null;
+  }
 
   return (
     <>

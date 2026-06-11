@@ -62,11 +62,13 @@ export default function PageHero({
               "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 78%, rgba(255,255,255,0.85) 92%, #ffffff 100%)",
           }}
         />
+        {/* モバイルではテキストを全幅にするため、画像を白でやわらかく覆う */}
+        <div className="absolute inset-0 bg-white/55 sm:hidden" />
       </motion.div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-24 md:pb-28 flex items-center">
         <div
-          className={`max-w-[58%] lg:max-w-[52%] w-full ${
+          className={`max-w-full sm:max-w-[58%] lg:max-w-[52%] w-full ${
             isRight ? "" : "ml-auto"
           }`}
         >

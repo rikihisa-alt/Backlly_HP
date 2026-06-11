@@ -5,7 +5,7 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata = {
-  title: "資料ダウンロード | 株式会社Backlly",
+  title: "資料ダウンロード",
   description: "サービス資料・料金資料・導入事例資料をダウンロードいただけます。",
 };
 
@@ -18,7 +18,7 @@ export default function DownloadPage() {
           label="DOWNLOAD"
           title="資料ダウンロード。"
           subtitle="サービス概要、料金体系、導入事例などの資料をPDFでまとめてご用意しています。ご検討にご利用ください。"
-          image="/images/img-plaza.png"
+          image="/images/img-plaza.jpg"
           imagePosition="left"
         />
         <ResourceDownload />

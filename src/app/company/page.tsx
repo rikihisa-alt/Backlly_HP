@@ -8,7 +8,7 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata = {
-  title: "会社情報 | 株式会社Backlly",
+  title: "会社情報",
   description:
     "株式会社Backllyの会社概要、強み、代表メッセージなど、会社情報をご紹介します。",
 };
@@ -28,7 +28,7 @@ export default function CompanyPage() {
           label="COMPANY"
           title="会社情報。"
           subtitle="バックオフィスを機能させる、その背後にいるチームと組織。事業概要・支援体制・代表からのメッセージをまとめています。"
-          image="/images/img-office.png"
+          image="/images/img-office.jpg"
         />
         <VisionBrief />
         <Strengths />

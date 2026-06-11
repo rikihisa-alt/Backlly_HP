@@ -16,8 +16,6 @@ const config: Config = {
         brand: "#1D4ED8",
         "brand-dark": "#1E40AF",
         "brand-light": "#3B82F6",
-        cyan: "#06B6D4",
-        "cyan-soft": "#E0F7FA",
         text: "#0F172A",
         "text-muted": "#64748B",
         border: "#E2E8F0",
@@ -25,7 +23,6 @@ const config: Config = {
       fontFamily: {
         serif: ["var(--font-noto-serif-jp)", "serif"],
         sans: ["var(--font-noto-sans-jp)", "Inter", "sans-serif"],
-        mono: ["var(--font-dm-mono)", "monospace"],
       },
       spacing: {
         section: "120px",
